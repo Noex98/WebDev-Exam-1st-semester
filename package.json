@@ -1,0 +1,9 @@
+{
+  "name": "eksamen1sem",
+  "version": "1.0.0",
+  "scripts": {
+    "frontend": "npm run --prefix ./frontend start",
+    "backend": "php -S 127.0.0.1:4000 -t backend"
+  },
+  "author": "Noex98"
+}

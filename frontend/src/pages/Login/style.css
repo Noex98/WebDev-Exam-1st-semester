@@ -1,0 +1,28 @@
+.loginPage {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.loginPage h1 {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.loginPage input {
+    width: 100%; 
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.loginPage form {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+/* .button {
+    text-align: center;
+} */

@@ -1,0 +1,24 @@
+header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:12px;
+    padding:24px;
+    border-bottom: 1px solid grey;
+}
+
+header ul {
+    display: flex;
+    list-style: none;
+    gap: 12px;
+}
+
+.header__logoutBtn {
+    height: fit-content;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.header-h1 {
+    margin: 20px auto !important;
+}
