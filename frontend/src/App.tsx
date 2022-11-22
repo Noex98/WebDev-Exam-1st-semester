@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { apiService } from './service/apiService';
-import './global.css';
+import './global.scss';
 
 import { 
     Login,
