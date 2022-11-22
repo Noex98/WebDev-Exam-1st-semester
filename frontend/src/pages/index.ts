@@ -1,4 +1,6 @@
 export * from './Login';
-export * from './Matchlist';
 export * from './Profile';
 export * from './Signup';
+export * from './Resturant';
+export * from './Reservations';
+export * from './Explore';

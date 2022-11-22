@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { Header } from '../../components';
-import { apiModel } from '../../models/apiModel';
+import { apiService } from '../../service/apiService';
 import './style.css'
 
 export const Signup = () => {
@@ -27,7 +26,7 @@ export const Signup = () => {
 
     function submitHandler(e: React.FormEvent) {
         e.preventDefault();
-        apiModel.signup(username, password, firstname, lastname, height, gender, birthday)
+        apiService.signup(username, password, firstname, lastname, height, gender, birthday)
             .then((res) => {
                 if (res.succes === false) {
                     setError(res.errMessage);
@@ -39,7 +38,6 @@ export const Signup = () => {
 
     return (
         <>
-            <Header />
             <div className='signupPage'>
                 <h1>Signup</h1>
                 <form onSubmit={e => submitHandler(e)}>

@@ -1,12 +1,15 @@
 import React, { useState, useContext } from 'react'
-import { apiModel } from '../../models/apiModel';
-import { Header, userContext } from '../../components';
+import { apiService } from '../../service/apiService';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
+import { IUser } from '../../types';
 
-export const Login = () => {
+type Props = {
+    setUser: React.Dispatch<React.SetStateAction<IUser | null>>
+}
 
-    const user = useContext(userContext);
+export const Login = ({setUser}: Props) => {
+
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
@@ -16,9 +19,9 @@ export const Login = () => {
     function submitHandler(e: React.FormEvent){
         e.preventDefault();
         
-        apiModel.login(username, password).then(res => {
-            if(res.succes && user?.set){
-                    user.set(res.data);
+        apiService.login(username, password).then(res => {
+            if(res.succes){
+                    setUser(res.data);
                     navigate('/profile');
             } else {
                 setErrMessage(res.errMessage);
@@ -28,7 +31,6 @@ export const Login = () => {
 
     return (
         <>
-            <Header />
             <div className='loginPage'>
                 <h1>Login</h1>
                 <form onSubmit={e =>submitHandler(e)}>

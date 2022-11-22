@@ -1,11 +1,11 @@
-import { ICurrentUser, IRes, IUser } from "../types";
+import { IRes, IUser } from "../types";
 
-export class apiModel {
+export class apiService {
 
     static login = async (
         username: string, 
         password: string
-    ): Promise<IRes<ICurrentUser>> => {
+    ): Promise<IRes<IUser>> => {
         const url = '/api//login'
         const res = await fetch(url, {
             method: "POST",
@@ -21,7 +21,7 @@ export class apiModel {
         return await res.json();
     }
 
-    static continueSession = async (): Promise<IRes<ICurrentUser>> => {
+    static continueSession = async (): Promise<IRes<IUser>> => {
         const url = '/api/continueSession'
         const res = await fetch(url, {
             method: "POST",

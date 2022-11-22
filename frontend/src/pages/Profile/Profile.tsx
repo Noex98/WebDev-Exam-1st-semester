@@ -1,20 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Header, userContext } from '../../components';
+import React, {useEffect, useState } from 'react'
 import { Image } from './components'
-import { apiModel } from '../../models/apiModel';
+import { apiService } from '../../service/apiService';
 import './style.css';
+import { IUser } from '../../types';
 
-export const Profile = () => {
+type Props = {
+    user: IUser,
+}
+
+export const Profile = ({user}: Props) => {
+
+    /*
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [height, setHeight] = useState(0);
     const [gender, setGender] = useState<"male" | "female">("male");
     const [birthday, setBirthday] = useState("");
 
-    const user = useContext(userContext);
-
     useEffect(() => {
-        if (user?.data) {
+        if (user) {
             setFirstname(user.data.firstname);
             setLastname(user.data.lastname);
             setHeight(user.data.height);
@@ -36,16 +40,14 @@ export const Profile = () => {
 
     function submitHandler(e: React.FormEvent){
         e.preventDefault();
-        apiModel.editUser(firstname, lastname, height, gender, birthday).then(res => {
+        apiService.editUser(firstname, lastname, height, gender, birthday).then(res => {
             console.log(res);
-
         })
     }
-
+    
     return (
         <>
-            <Header />
-
+            
             <Image />
 
             <form onSubmit={e => submitHandler(e)}>
@@ -84,4 +86,8 @@ export const Profile = () => {
             </form>
         </>
     )
+    */
+   return (
+    <>Profile</>
+   )
 }

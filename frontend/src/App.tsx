@@ -1,33 +1,53 @@
-import { useContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { userContext } from './components';
+import { apiService } from './service/apiService';
 import './global.css';
 
 import { 
     Login,
     Profile,
-    Matchlist,
+    Explore,
+    Reservations,
+    Resturant,
     Signup 
 } from './pages';
+import { useEffect, useState } from 'react';
+import { IUser } from './types';
+import { Spinner } from './components';
 
 function App() {
 
-    const user = useContext(userContext);
+    const [user, setUser] = useState<IUser | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        apiService.continueSession().then(res =>{
+            if(res.succes){
+                setUser(res.data)
+            }
+            setLoading(false);
+        })
+    }, [])
+    
+    if (loading){
+        return (<Spinner/>)
+    }
 
     return (
         <BrowserRouter>
-            {!user?.data && (
+            {!user && (
                 <Routes>
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/login" element={<Login/>} />
+                    <Route path="/login" element={<Login setUser={setUser}/>} />
                     <Route path="/*" element={<Navigate to={'/login'}/>} />
                 </Routes>
             )}
-            
-            {user?.data && (
+
+            {user && (
                 <Routes>
-                    <Route path="/matchlist" element={<Matchlist />} />
-                    <Route path="/" element={<Profile />} />
+                    <Route path="/" element={<Explore />} />
+                    <Route path="/reservations" element={<Reservations />} />
+                    <Route path="/resturant" element={<Resturant />} />
+                    <Route path="/profile" element={<Profile user={user}/>} />
                     <Route path="/*" element={<Navigate to={'/'}/>} />
                 </Routes>
             )}
