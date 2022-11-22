@@ -1,4 +1,5 @@
 <?php
+/*
 include($_SERVER['DOCUMENT_ROOT'] . '/models/AuthModel.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/api/signup/utils.php');
@@ -54,3 +55,4 @@ if (!$allParamsExist) {
         }
     }
 }
+*/

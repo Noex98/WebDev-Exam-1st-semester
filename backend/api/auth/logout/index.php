@@ -1,4 +1,5 @@
 <?php 
+    /*
     include($_SERVER['DOCUMENT_ROOT'] . '/models/AuthModel.php');
 
     $authModel->logout();
@@ -8,4 +9,5 @@
         'succes' => true,
         'errMessage' => ''
     ]);
+    */
 ?>

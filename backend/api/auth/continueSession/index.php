@@ -1,4 +1,5 @@
 <?php 
+/*
     include($_SERVER['DOCUMENT_ROOT'] . '/models/UsersModel.php');
     include($_SERVER['DOCUMENT_ROOT'] . '/models/AuthModel.php');
 
@@ -17,5 +18,5 @@
             'errMessage' => 'Not logged in'
         ]);
     }
-
+    */
 ?>

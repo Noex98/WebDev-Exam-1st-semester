@@ -1,11 +1,11 @@
-<?php
-include_once($_SERVER['DOCUMENT_ROOT'] . "/sqlConfig.php");
+<?php declare(strict_types=1);
+include_once($_SERVER['DOCUMENT_ROOT'] . "/classes/Database.php");
 
-class AuthModel{
+class AuthService {
     private $mySQL;
 
-    public function __construct($mySQLConnection){
-        $this->mySQL = $mySQLConnection;
+    public function __construct(){
+        $this->mySQL = new Database;
     }
 
     function registerUser(
@@ -60,5 +60,3 @@ class AuthModel{
         return isset($_SESSION['authToken']) ? $_SESSION['authToken'] : false;
     }
 }
-
-$authModel = new AuthModel($mySQL);
