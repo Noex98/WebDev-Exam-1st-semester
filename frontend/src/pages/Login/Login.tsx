@@ -52,6 +52,7 @@ export const Login = ({setUser}: Props) => {
             <CtaButton text={'Login'} type={'positive'} onclick={function (): void {
                 throw new Error('Function not implemented.');
             } } />
+            <div className="registerText"><p>New to this app?</p> <a href=""> Register new user</a></div>
         </div>
     )
 }
