@@ -1,13 +1,10 @@
 <?php 
     function doesParamsExist($req){
         return (
-            !empty($req['username']) &&
-            !empty($req['password']) &&
-            !empty($req['firstname']) &&
-            !empty($req['lastname']) &&
-            !empty($req['height']) &&
-            !empty($req['birthday']) &&
-            !empty($req['gender'])
+            !empty($req['name']) &&
+            !empty($req['phonenumber']) &&
+            !empty($req['email']) &&
+            !empty($req['password']) 
         );
     }
 
