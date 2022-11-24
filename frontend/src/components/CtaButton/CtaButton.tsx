@@ -10,9 +10,9 @@ type Props = {
 
 const CtaButton = ({ text, type, onclick }: Props) => {
     return (
-        <span className='components__CtaButton'>
+        <div className='components__CtaButton'>
             <button className={type} onClick={onclick}>{text}</button>
-        </span>
+        </div>
     )
 }
 
