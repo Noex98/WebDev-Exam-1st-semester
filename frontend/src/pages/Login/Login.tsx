@@ -22,7 +22,7 @@ export const Login = ({setUser}: Props) => {
         apiService.login(username, password).then(res => {
             if(res.succes){
                     setUser(res.data);
-                    navigate('/profile');
+                    navigate('/Explore');
             } else {
                 setErrMessage(res.errMessage);
             }
@@ -31,17 +31,17 @@ export const Login = ({setUser}: Props) => {
 
     return (
         <div className='pages__login'>
-            <h1>Login</h1>
+            <h2>Login</h2>
             <form onSubmit={e =>submitHandler(e)}>
                 <div>
                     <label>
-                        <div>Username: </div>
+                        <h3>Email</h3>
                         <input type="text" onChange={e => setUsername(e.target.value)} />
                     </label>
                 </div>
                 <div>
                     <label>
-                        <div>Password: </div>
+                        <h3>Password</h3>
                         <input type="password" onChange={e => setPassword(e.target.value)} />
                     </label>
                 </div>
