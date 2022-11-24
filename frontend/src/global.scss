@@ -14,35 +14,32 @@ html, body, #root {
     flex-direction: column;
 }
 
+h1, h2, h3, p {
+    color: white;
+}
+h1, h2, h3 {
+    font-weight: 500;
+}
+p {
+    font-weight: 400;
+    font-size: 16px;
+}
+h1 {
+    font-size: 32px;
+    
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 20px;
+}
+
+}
 body {
-    background-color: rgb(245, 245, 245);
-    color: rgb(10, 10, 10);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-
-a {
-    text-decoration: inherit;
-    color: rgb(0, 0, 87);
-}
-
-a:hover {
-    color: rgb(0, 0, 156);
-}
-
-button, .button {
-    background-color: rgb(233, 233, 233);
-}
-
-.button {
-    margin-top: 15px;
-}
-
-input, button, select {
-    padding:8px;
-    border-radius: 5px;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background: rgb(2,9,28);
+    background: linear-gradient(90deg, rgba(2,9,28,1) 0%, rgba(3,12,33,1) 50%, rgba(2,9,28,1) 100%);
+    font-family: 'Inter', sans-serif;
+    padding: 25;
 }
 
 
