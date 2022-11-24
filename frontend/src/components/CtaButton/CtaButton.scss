@@ -1,0 +1,19 @@
+.components__CtaButton {
+  button {
+    width: 225px;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    color: blacK;
+    box-shadow: none;
+  }
+  .positive {
+    background-color: #5cff58;
+  }
+  .negative {
+    background-color: #ff3f3f;
+  }
+  .neutral {
+    background-color: #ffffff;
+  }
+}
