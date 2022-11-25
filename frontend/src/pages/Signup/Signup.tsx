@@ -1,28 +1,35 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { TextInput } from '../../components/formElements';
 import { apiService } from '../../service/apiService';
+import { ReactComponent as EyeOpen } from '../../assets/icons/eye_open.svg'
+import { ReactComponent as EyeClosed } from '../../assets/icons/eye_closed.svg'
 import './style.scss';
 
 export const Signup = () => {
     const navigate = useNavigate();
     const [error, setError] = useState("")
+    const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordRepeat, setShowPasswordRepeat] = useState(false);
+    const [data, setData] = useState({
+        name: "",
+        phoneNumber: "",
+        email: "",
+        password: "",
+        passwordRepeat: ""
+    })
 
-    const [name, setName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordRepeat, setPasswordRepeat] = useState("");
 
 
     function submitHandler(e: React.FormEvent) {
         e.preventDefault();
 
-        if(password !== passwordRepeat){
+        if(data.password !== data.passwordRepeat){
             setError('Password dont match');
             return;
         }
 
-        apiService.signup(name, phoneNumber, email, password)
+        apiService.signup(data.name, data.phoneNumber, data.email, data.password)
             .then((res) => {
                 if (res.succes === false) {
                     setError(res.errMessage);
@@ -33,32 +40,46 @@ export const Signup = () => {
     }
 
     return (
-        <div className='pages__Signup'>
+        <div className='pages__signup'>
             <h1>Register new user</h1>
             <form onSubmit={e => submitHandler(e)}>
                 <div>
                     <label>Name:</label>
-                    <input type="text" onChange={e => setName(e.target.value)} />
+                    <TextInput  value={data.name} onChange={e => setData(prev => {return {...prev, name: e.target.value}})} />
                 </div>
 
                 <div>
                     <label>Phone Number:</label>
-                    <input type="text" onChange={e => setPhoneNumber(e.target.value)} />
+                    <TextInput value={data.phoneNumber} onChange={e => setData(prev => {return {...prev, phoneNumber: e.target.value}})} />
                 </div>
 
                 <div>
                     <label>Email:</label>
-                    <input type="text" onChange={e => setEmail(e.target.value)} />
+                    <TextInput value={data.email} onChange={e => setData(prev => {return {...prev, email: e.target.value}})} />
                 </div>
 
                 <div>
                     <label>Password:</label>
-                    <input type="text" onChange={e => setPassword(e.target.value)} />
+                    <TextInput 
+                        value={data.password} 
+                        type={showPassword ? "text" : "password"} 
+                        onChange={e => setData(prev => {return {...prev, password: e.target.value}})}
+                    >
+                        {showPassword && <EyeClosed onClick={() => setShowPassword(prev => !prev)}/>}
+                        {!showPassword && <EyeOpen onClick={() => setShowPassword(prev => !prev)}/>}
+                    </TextInput>
                 </div>
 
                 <div>
                     <label>Repeat password:</label>
-                    <input type="text" onChange={e => setPasswordRepeat(e.target.value)} />
+                    <TextInput 
+                        value={data.passwordRepeat} 
+                        type={showPasswordRepeat ? "text" : "password"} 
+                        onChange={e => setData(prev => {return {...prev, passwordRepeat: e.target.value}})} 
+                    >
+                        {showPasswordRepeat && <EyeClosed onClick={() => setShowPasswordRepeat(prev => !prev)}/>}
+                        {!showPasswordRepeat && <EyeOpen onClick={() => setShowPasswordRepeat(prev => !prev)}/>}
+                    </TextInput>
                 </div>
 
                 <input type="submit" value="Sign Up" className='button' />
