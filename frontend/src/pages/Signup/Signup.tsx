@@ -82,16 +82,19 @@ export const Signup = () => {
                     </TextInput>
                 </div>
 
-                <CtaButton className='btn' type='submit' color='positive'>
-                    <>Register</>
-                </CtaButton>
+                <span className='btnContainer'>
+                    <CtaButton type='submit' color='positive'>
+                        <>Register</>
+                    </CtaButton>
+                </span>
+                {error}
             </form>
             <div>
                 <Link to="/login">
                     Already have an account? <strong>Sign in here</strong>
                 </Link>
             </div>
-            {error}
+            
         </div>
     )
 }
