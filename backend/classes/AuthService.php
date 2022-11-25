@@ -9,22 +9,20 @@ class AuthService {
     }
 
     function registerUser(
-        $username,
+        $name,
         $password,
-        $firstname,
-        $lastname,
-        $height,
-        $birthday,
-        $gender
+        $email,
+        $phonenumber
+
     ){
 
         $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $q = "SELECT * FROM userLogin WHERE username = '$username'";
+        $q = "SELECT * FROM users WHERE email = '$email'";
         $res = $this->mySQL->query($q);
         $row = mysqli_num_rows($res);
         if ($row < 1) {
-            $q = "CALL RegisterUser('$username', '$encryptedPassword', '$firstname', '$lastname', '$height', '$birthday', '$gender')";
+            $q = "CALL RegisterUser('$name', '$encryptedPassword', '$email', '$phonenumber')";
             $this->mySQL->query($q);
             return true;
         } else {
@@ -40,8 +38,8 @@ class AuthService {
         session_regenerate_id(true);
     }
 
-    function authorize($username, $password){
-        $q = "SELECT * FROM userLogin WHERE username = '$username'";
+    function authorize($email, $password){
+        $q = "SELECT * FROM users WHERE email = '$email'";
         $res = $this->mySQL->query($q);
         $user = $res->fetch_object();
 
