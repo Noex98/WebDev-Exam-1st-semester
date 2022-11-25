@@ -7,22 +7,17 @@
         text-align: center;
     }
 
-    div {
-        display: flex;
-        flex-direction: column;
-        
-        gap: 7px;
-    }
-    
     form {
         display: flex;
         flex-direction: column;
         margin-bottom: 50px;
         gap: 15px;
-    }
-    
-    label {
-        margin-top: 30px;
+
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
     }
 
 }
