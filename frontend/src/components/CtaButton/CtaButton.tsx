@@ -9,7 +9,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const CtaButton = ({ color = 'neutral' ,children, ...rest}: Props) => {
     return (
         <div className='components__CtaButton'>
-            <button className={color} {...rest}>{children}</button>
+            <button {...rest} className={color + ' ' + rest.className}>{children}</button>
         </div>
     )
 }
