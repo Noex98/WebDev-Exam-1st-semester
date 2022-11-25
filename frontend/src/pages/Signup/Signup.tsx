@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { TextInput } from '../../components';
+import { Link, useNavigate } from "react-router-dom";
 import { apiService } from '../../service/apiService';
 import { ReactComponent as EyeOpen } from '../../assets/icons/eye_open.svg';
 import { ReactComponent as EyeClosed } from '../../assets/icons/eye_closed.svg';
+import { CtaButton, TextInput } from '../../components';
 import './style.scss';
-import CtaButton from '../../components/CtaButton/CtaButton';
 
 export const Signup = () => {
     const navigate = useNavigate();
@@ -83,12 +82,17 @@ export const Signup = () => {
                     </TextInput>
                 </div>
 
-                <CtaButton color='positive'>
+                <CtaButton type='submit' color='positive'>
                     <>
                     Register
                     </>
                 </CtaButton>
             </form>
+            <div>
+                <Link to="/login">
+                    Already have an account? <strong>Sign in here</strong>
+                </Link>
+            </div>
             {error}
         </div>
     )
