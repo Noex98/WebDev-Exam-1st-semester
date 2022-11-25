@@ -45,6 +45,7 @@ if (!$allParamsExist) {
             'errMessage' => 'Invalid name format. Name cannot contain numbers or special characters and must be at least 2 characters.'
         ]);
     } else { echo "succes";
+        // $authService = new AuthService();        
         // $success = $authService->registerUser(
         //     $req['email'],
         //     $req['password'],

@@ -6,7 +6,7 @@
     $req = getJsonBody();
     
     $requestValid = (
-        isset($req['username']) &&
+        isset($req['email']) &&
         isset($req['password'])
     );
 
@@ -17,8 +17,9 @@
             'errMessage' => 'Invalid request'
         ]);
     } else {
-        $id = $authModel->authorize(
-            $req['username'],
+        $authService = new AuthService();
+        $id = $authService->authorize(
+            $req['email'],
             $req['password'],
         );
 
@@ -26,7 +27,7 @@
             echo json_encode([
                 'data' => null,
                 'succes' => false,
-                'errMessage' => 'Invalid user credentials'
+                'errMessage' => 'Unknown email and password.'
             ]);
         } else {
             if(!session_id()){
@@ -34,9 +35,9 @@
             }
             $_SESSION['authToken'] = $id;
 
-            
+            $userService = new UserService();
             echo json_encode([
-                'data' => $userModel->getUser($id),
+                'data' => $userService->getUser($id),
                 'succes' => true,
                 'errMessage' => ''
             ]);
