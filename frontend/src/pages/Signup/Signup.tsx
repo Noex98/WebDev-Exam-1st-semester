@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { TextInput } from '../../components/formElements';
+import { TextInput } from '../../components';
 import { apiService } from '../../service/apiService';
-import { ReactComponent as EyeOpen } from '../../assets/icons/eye_open.svg'
-import { ReactComponent as EyeClosed } from '../../assets/icons/eye_closed.svg'
+import { ReactComponent as EyeOpen } from '../../assets/icons/eye_open.svg';
+import { ReactComponent as EyeClosed } from '../../assets/icons/eye_closed.svg';
 import './style.scss';
+import CtaButton from '../../components/CtaButton/CtaButton';
 
 export const Signup = () => {
     const navigate = useNavigate();
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showPasswordRepeat, setShowPasswordRepeat] = useState(false);
     const [data, setData] = useState({
@@ -17,7 +18,7 @@ export const Signup = () => {
         email: "",
         password: "",
         passwordRepeat: ""
-    })
+    });
 
 
 
@@ -82,7 +83,11 @@ export const Signup = () => {
                     </TextInput>
                 </div>
 
-                <input type="submit" value="Sign Up" className='button' />
+                <CtaButton color='positive'>
+                    <>
+                    Register
+                    </>
+                </CtaButton>
             </form>
             {error}
         </div>

@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { apiService } from '../../service/apiService';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
 import { IUser } from '../../types';
-import CtaButton from '../../components/CtaButton/CtaButton';
 
 type Props = {
     setUser: React.Dispatch<React.SetStateAction<IUser | null>>
@@ -49,10 +48,10 @@ export const Login = ({setUser}: Props) => {
                 <input type="submit" value="Log in" className='button'/>
             </form>
             <div>{errMessage}</div>
-            <CtaButton text={'Login'} type={'positive'} onclick={function (): void {
-                throw new Error('Function not implemented.');
-            } } />
-            <div className="registerText"><p>New to this app?</p> <a href=""> Register new user</a></div>
+            <div className="registerText">
+                <p>New to this app?</p> 
+                <a href="/"> Register new user</a>
+            </div>
         </div>
     )
 }

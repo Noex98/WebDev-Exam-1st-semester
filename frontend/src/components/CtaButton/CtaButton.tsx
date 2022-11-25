@@ -1,17 +1,15 @@
-import { type } from '@testing-library/user-event/dist/type'
 import './CtaButton.scss'
 import React from 'react'
 
-type Props = {
-    text: string,
-    type: "positive" | "negative" | "neutral",
-    onclick: () => void
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    color?: "positive" | "negative" | "neutral",
+    children?: JSX.Element
 }
 
-const CtaButton = ({ text, type, onclick }: Props) => {
+const CtaButton = ({ color = 'neutral' ,children, ...rest}: Props) => {
     return (
         <div className='components__CtaButton'>
-            <button className={type} onClick={onclick}>{text}</button>
+            <button className={color} {...rest}>{children}</button>
         </div>
     )
 }
