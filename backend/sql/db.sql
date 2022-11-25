@@ -1,22 +1,12 @@
--- Active: 1664263597767@@mysql70.unoeuro.com@3306@knickering_dk_db
+-- Active: 1669371901231@@mysql70.unoeuro.com@3306@ahusted_dk_db
 
-CREATE TABLE userprofile (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    firstname VARCHAR(100),
-    lastname VARCHAR(100),
-    email VARCHAR(100),
-    username VARCHAR(100)
-);
-CREATE TABLE userlogin (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    user_password VARCHAR(60)
-);
+DROP TABLE users;
 
-CREATE TABLE userSettings (
-    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    darkmode BOOLEAN
-);
+CREATE TABLE users(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    email VARCHAR(50),
+    phoneNumber VARCHAR(50)
+)
 
-/*
-SELECT * FROM userprofile INNER JOIN userSettings ON userprofile.id = userSettings.id WHERE userprofile.id = '1'
-*/
+CALL RegisterUser('$name', '$email', '$phonenumber', '$encryptedPassword');
