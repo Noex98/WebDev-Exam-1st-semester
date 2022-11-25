@@ -44,25 +44,26 @@ if (!$allParamsExist) {
             'succes' => false,
             'errMessage' => 'Invalid name format. Name cannot contain numbers or special characters and must be at least 2 characters.'
         ]);
-    } else { echo "succes";
-        // $success = $authService->registerUser(
-        //     $req['email'],
-        //     $req['password'],
-        //     $req['phonenumber'],
-        //     $req['name'],
-        // );
-        // if ($success) {
-        //     echo json_encode([
-        //         'data' => null,
-        //         'succes' => true,
-        //         'errMessage' => ''
-        //     ]);
-        // } else {
-        //     echo json_encode([
-        //         'data' => null,
-        //         'succes' => false,
-        //         'errMessage' => 'User already exists'
-        //     ]);
-        // }
+    } else {
+        $authService = new AuthService();
+        $success = $authService->registerUser(
+            $req['name'],
+            $req['email'],
+            $req['phoneNumber'],
+            $req['password'],
+        );
+        if ($success) {
+            echo json_encode([
+                'data' => null,
+                'succes' => true,
+                'errMessage' => ''
+            ]);
+        } else {
+            echo json_encode([
+                'data' => null,
+                'succes' => false,
+                'errMessage' => 'User already exists'
+            ]);
+        }
     }
 }

@@ -10,19 +10,17 @@ class AuthService {
 
     function registerUser(
         $name,
-        $password,
         $email,
-        $phonenumber
-
+        $phonenumber,
+        $password
     ){
-
         $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $q = "SELECT * FROM users WHERE email = '$email'";
         $res = $this->mySQL->query($q);
         $row = mysqli_num_rows($res);
         if ($row < 1) {
-            $q = "CALL RegisterUser('$name', '$encryptedPassword', '$email', '$phonenumber')";
+            $q = "CALL RegisterUser('$name', '$email', '$phonenumber', '$encryptedPassword')";
             $this->mySQL->query($q);
             return true;
         } else {
