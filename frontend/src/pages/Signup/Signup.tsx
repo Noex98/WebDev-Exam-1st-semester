@@ -82,10 +82,8 @@ export const Signup = () => {
                     </TextInput>
                 </div>
 
-                <CtaButton type='submit' color='positive'>
-                    <>
-                    Register
-                    </>
+                <CtaButton className='btn' type='submit' color='positive'>
+                    <>Register</>
                 </CtaButton>
             </form>
             <div>
