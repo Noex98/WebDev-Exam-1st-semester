@@ -1,6 +1,6 @@
 <?php
-/*
-include($_SERVER['DOCUMENT_ROOT'] . '/models/AuthModel.php');
+
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/api/signup/utils.php');
 
@@ -16,29 +16,26 @@ if (!$allParamsExist) {
     ]);
 } else {
     $passwordVaild = isPasswordValid($req['password']);
-    $usernameValid = isUsernameValid($req['username']);
+    $emailValid = isEmailValid($req['email']);
 
     if (!$passwordVaild) {
         echo json_encode([
             'data' => null,
             'succes' => false,
-            'errMessage' => 'Invalid password'
+            'errMessage' => 'Invalid password. Password must include at least 6 characters and must include at least one number.'
         ]);
-    } else if (!$usernameValid) {
+    } else if (!$emailValid) {
         echo json_encode([
             'data' => null,
             'succes' => false,
-            'errMessage' => 'Invalid username'
+            'errMessage' => 'Invalid email address format.'
         ]);
     } else {
-        $success = $authModel->registerUser(
-            $req['username'],
+        $success = $authService->registerUser(
+            $req['email'],
             $req['password'],
-            $req['firstname'],
-            $req['lastname'],
-            $req['height'],
-            $req['birthday'],
-            $req['gender'],
+            $req['phonenumber'],
+            $req['name'],
         );
         if ($success) {
             echo json_encode([
@@ -55,4 +52,3 @@ if (!$allParamsExist) {
         }
     }
 }
-*/

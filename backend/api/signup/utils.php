@@ -1,21 +1,29 @@
-<?php 
-    function doesParamsExist($req){
-        return (
-            !empty($req['name']) &&
-            !empty($req['phonenumber']) &&
-            !empty($req['email']) &&
-            !empty($req['password']) 
-        );
-    }
+<?php
+function doesParamsExist($req)
+{
+    return (!empty($req['name']) &&
+        !empty($req['phonenumber']) &&
+        !empty($req['email']) &&
+        !empty($req['password'])
+    );
+}
 
-    function isUsernameValid($username){
-        return strlen($username) >= 4 ? true : false;        
-    }
+//logik her - tjek på email er valid??
 
-    function isPasswordValid($password){
-        if (preg_match('~[0-9]+~', $password) && strlen($password) > 6) {
-            return true;
-        } else {
-            return false;
-        }
+function isEmailValid($email)
+{
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return true;
+    } else {
+        return false;
     }
+}
+
+function isPasswordValid($password)
+{
+    if (preg_match('~[0-9]+~', $password) && strlen($password) > 6) {
+        return true;
+    } else {
+        return false;
+    }
+}
