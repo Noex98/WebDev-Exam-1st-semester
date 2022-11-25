@@ -35,13 +35,10 @@ export class apiService {
     }
 
     static signup = async (
-        username: string,
+        name: string,
+        phoneNumber: string,
+        email: string,
         password: string,
-        firstname: string,
-        lastname: string,
-        height: number,
-        gender: "male" | "female",
-        birthday: string
     ): Promise<IRes<null>> => {
         const url = '/api/signup'
         const res = await fetch(url, {
@@ -51,13 +48,10 @@ export class apiService {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: username,
+                name: name,
+                phoneNumber: phoneNumber,
+                email: email,
                 password: password,
-                firstname: firstname,
-                lastname: lastname,
-                height: height,
-                gender: gender,
-                birthday: birthday
             })
         })
         return await res.json();

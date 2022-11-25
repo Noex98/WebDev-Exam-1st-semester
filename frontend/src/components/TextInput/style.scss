@@ -1,0 +1,28 @@
+.components__TextInput {
+
+    position:relative;
+    color: black;
+
+    input {
+        width: 100%;
+        padding: 10px 36px 10px 10px;
+        background: rgb(221, 221, 221);
+        border:none;
+        border-radius: 10px;
+        transition: 200ms;
+        
+        &:focus-within {
+            background: rgb(255, 255, 255);
+        }
+    }
+
+    >div {
+        cursor: pointer;
+        position:absolute;
+        top:7px;
+        right: 7px;
+        height:22px;
+        width:22px;
+        direction: rtl;
+    }
+}
