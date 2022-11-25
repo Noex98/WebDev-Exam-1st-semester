@@ -17,7 +17,8 @@ if (!$allParamsExist) {
 } else {
     $passwordVaild = isPasswordValid($req['password']);
     $emailValid = isEmailValid($req['email']);
-    $phoneNumberValid = isPhoneNumberValid($req['phonenumber']);
+    $phoneNumberValid = isPhoneNumberValid($req['phoneNumber']);
+    $nameValid = isNameValid($req['name']);
 
     if (!$passwordVaild) {
         echo json_encode([
@@ -36,6 +37,12 @@ if (!$allParamsExist) {
             'data' => null,
             'succes' => false,
             'errMessage' => 'Invalid phonenumber format. Must be 8 digits.'
+        ]);
+    } else if (!$nameValid) {
+        echo json_encode([
+            'data' => null,
+            'succes' => false,
+            'errMessage' => 'Invalid name format. Name cannot contain numbers or special characters and must be at least 2 characters.'
         ]);
     } else { echo "succes";
         // $success = $authService->registerUser(

@@ -2,7 +2,7 @@
 function doesParamsExist($req)
 {
     return (!empty($req['name']) &&
-        !empty($req['phonenumber']) &&
+        !empty($req['phoneNumber']) &&
         !empty($req['email']) &&
         !empty($req['password'])
     );
@@ -25,8 +25,8 @@ function isEmailValid($email): bool
  * if input is numbers only
  */
 
-function isPhoneNumberValid(string $phonenumber, int $digits = 8): bool{
-    return preg_match('/^[0-9]{'.$digits.'}\z/', $phonenumber);
+function isPhoneNumberValid(string $phoneNumber, int $digits = 8): bool{
+    return preg_match('/^[0-9]{'.$digits.'}\z/', $phoneNumber);
 }
 /**
  * returns true if input is valid
@@ -36,4 +36,8 @@ function isPhoneNumberValid(string $phonenumber, int $digits = 8): bool{
 function isPasswordValid($password): bool
 {
     return preg_match('~[0-9]+~', $password) && strlen($password) > 5;
+}
+
+function isNameValid($name): bool {
+        return preg_match('[a-åA-Å]', $name) && strlen($name) > 1;
 }
