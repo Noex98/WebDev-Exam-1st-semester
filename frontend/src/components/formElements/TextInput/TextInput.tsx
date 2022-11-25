@@ -6,6 +6,16 @@ interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"
     children?: React.ReactNode
 }
 
+/**
+ * Can be used for these input types
+ * * Text
+ * * Email
+ * * Tel
+ * * Password
+ * 
+ * Default type is "text"
+ */
+
 export const TextInput = ({type = "text", children, ...rest }: Props) => {
     return (
         <div className='components__TextInput'>
