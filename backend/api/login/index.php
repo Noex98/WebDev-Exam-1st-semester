@@ -18,6 +18,7 @@
         ]);
     } else {
         $authService = new AuthService();
+        // var_dump($authService->authorize);
         $id = $authService->authorize(
             $req['email'],
             $req['password'],

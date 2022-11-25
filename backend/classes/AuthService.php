@@ -40,9 +40,13 @@ class AuthService {
         $q = "SELECT * FROM users WHERE email = '$email'";
         $res = $this->mySQL->query($q);
         $user = $res->fetch_object();
-
         if ($user) {
-            $loginSucces = password_verify($password, $user->password);
+            $q = "SELECT password FROM userPrivate WHERE id = '$user->id'";
+            $res = $this->mySQL->query($q);
+
+            //to do? clean up code. fetch variable instead of object
+            $userPassword = $res->fetch_object();
+            $loginSucces = password_verify($password, $userPassword->password);
             return $loginSucces ? $user->id : false;
         } else {
             return false;
