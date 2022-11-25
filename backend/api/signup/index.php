@@ -17,6 +17,7 @@ if (!$allParamsExist) {
 } else {
     $passwordVaild = isPasswordValid($req['password']);
     $emailValid = isEmailValid($req['email']);
+    $phoneNumberValid = isPhoneNumberValid($req['phonenumber']);
 
     if (!$passwordVaild) {
         echo json_encode([
@@ -30,25 +31,31 @@ if (!$allParamsExist) {
             'succes' => false,
             'errMessage' => 'Invalid email address format.'
         ]);
-    } else {
-        $success = $authService->registerUser(
-            $req['email'],
-            $req['password'],
-            $req['phonenumber'],
-            $req['name'],
-        );
-        if ($success) {
-            echo json_encode([
-                'data' => null,
-                'succes' => true,
-                'errMessage' => ''
-            ]);
-        } else {
-            echo json_encode([
-                'data' => null,
-                'succes' => false,
-                'errMessage' => 'User already exists'
-            ]);
-        }
+    } else if (!$phoneNumberValid) {
+        echo json_encode([
+            'data' => null,
+            'succes' => false,
+            'errMessage' => 'Invalid phonenumber format. Must be 8 digits.'
+        ]);
+    } else { echo "succes";
+        // $success = $authService->registerUser(
+        //     $req['email'],
+        //     $req['password'],
+        //     $req['phonenumber'],
+        //     $req['name'],
+        // );
+        // if ($success) {
+        //     echo json_encode([
+        //         'data' => null,
+        //         'succes' => true,
+        //         'errMessage' => ''
+        //     ]);
+        // } else {
+        //     echo json_encode([
+        //         'data' => null,
+        //         'succes' => false,
+        //         'errMessage' => 'User already exists'
+        //     ]);
+        // }
     }
 }

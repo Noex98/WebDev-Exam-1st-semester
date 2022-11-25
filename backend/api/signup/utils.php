@@ -8,22 +8,32 @@ function doesParamsExist($req)
     );
 }
 
-//logik her - tjek på email er valid??
+/**
+ * returns true if input is valid
+ * checks if email format is valid
+ */
 
-function isEmailValid($email)
+
+function isEmailValid($email): bool
 {
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return true;
-    } else {
-        return false;
-    }
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function isPasswordValid($password)
+/**
+ * Returns true if input is valid
+ * checks if $digits is 8 characters
+ * if input is numbers only
+ */
+
+function isPhoneNumberValid(string $phonenumber, int $digits = 8): bool{
+    return preg_match('/^[0-9]{'.$digits.'}\z/', $phonenumber);
+}
+/**
+ * returns true if input is valid
+ * checks if password is 6 characters long and if input contains special characters
+ */
+
+function isPasswordValid($password): bool
 {
-    if (preg_match('~[0-9]+~', $password) && strlen($password) > 6) {
-        return true;
-    } else {
-        return false;
-    }
+    return preg_match('~[0-9]+~', $password) && strlen($password) > 5;
 }
