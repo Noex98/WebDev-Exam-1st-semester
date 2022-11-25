@@ -1,0 +1,12 @@
+.components__nav {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    display:flex;
+    justify-content: space-between;
+    border-radius: 15px;
+    padding:20px;
+    background-color: white;
+    color:black;
+}

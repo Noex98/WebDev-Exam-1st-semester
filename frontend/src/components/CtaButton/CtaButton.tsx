@@ -3,7 +3,7 @@ import React from 'react'
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     color?: "positive" | "negative" | "neutral",
-    children?: JSX.Element
+    children?: React.ReactNode
 }
 
 export const CtaButton = ({ color = 'neutral' ,children, ...rest}: Props) => {

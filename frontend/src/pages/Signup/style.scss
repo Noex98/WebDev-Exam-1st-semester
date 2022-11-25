@@ -19,7 +19,7 @@
         margin-bottom: 50px;
         gap: 15px;
 
-        > div {
+        > label {
             display: flex;
             flex-direction: column;
             gap: 7px;
@@ -32,5 +32,9 @@
             align-self: center;
         }
     }
+    .registerText {
+        display: flex;
+        justify-content: center;
+      }
 
 }

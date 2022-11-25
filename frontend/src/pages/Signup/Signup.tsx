@@ -43,35 +43,37 @@ export const Signup = () => {
         <div className='pages__signup'>
             <h1>Register new user</h1>
             <form onSubmit={e => submitHandler(e)}>
-                <div>
-                    <label>Name:</label>
+                
+                <label>
+                    <div>Name:</div>
                     <TextInput  value={data.name} onChange={e => setData(prev => {return {...prev, name: e.target.value}})} />
-                </div>
+                </label>
+                
 
-                <div>
-                    <label>Phone Number:</label>
+                <label>
+                    <div>Phone Number:</div>
                     <TextInput value={data.phoneNumber} onChange={e => setData(prev => {return {...prev, phoneNumber: e.target.value}})} />
-                </div>
+                </label>
 
-                <div>
-                    <label>Email:</label>
+                <label>
+                    <div>Email:</div>
                     <TextInput value={data.email} onChange={e => setData(prev => {return {...prev, email: e.target.value}})} />
-                </div>
+                </label>
 
-                <div>
-                    <label>Password:</label>
+                <label>
+                    <div>Password:</div>
                     <TextInput 
                         value={data.password} 
                         type={showPassword ? "text" : "password"} 
                         onChange={e => setData(prev => {return {...prev, password: e.target.value}})}
-                    >
+                        >
                         {showPassword && <EyeClosed onClick={() => setShowPassword(prev => !prev)}/>}
                         {!showPassword && <EyeOpen onClick={() => setShowPassword(prev => !prev)}/>}
                     </TextInput>
-                </div>
+                </label>
 
-                <div>
-                    <label>Repeat password:</label>
+                <label>
+                    <div>Repeat password:</div>
                     <TextInput 
                         value={data.passwordRepeat} 
                         type={showPasswordRepeat ? "text" : "password"} 
@@ -80,16 +82,17 @@ export const Signup = () => {
                         {showPasswordRepeat && <EyeClosed onClick={() => setShowPasswordRepeat(prev => !prev)}/>}
                         {!showPasswordRepeat && <EyeOpen onClick={() => setShowPasswordRepeat(prev => !prev)}/>}
                     </TextInput>
-                </div>
+                </label>
+                
 
                 <span className='btnContainer'>
                     <CtaButton type='submit' color='positive'>
-                        <>Register</>
+                        Register
                     </CtaButton>
                 </span>
                 {error}
             </form>
-            <div>
+            <div className='registerText'>
                 <Link to="/login">
                     Already have an account? <strong>Sign in here</strong>
                 </Link>

@@ -15,7 +15,6 @@ import { IUser } from './types';
 import { Spinner } from './components';
 
 function App() {
-
     const [user, setUser] = useState<IUser | null>(null);
     const [loading, setLoading] = useState(true);
 
@@ -47,7 +46,7 @@ function App() {
                     <Route path="/" element={<Explore />} />
                     <Route path="/reservations" element={<Reservations />} />
                     <Route path="/resturant" element={<Resturant />} />
-                    <Route path="/profile" element={<Profile user={user}/>} />
+                    <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
                     <Route path="/*" element={<Navigate to={'/'}/>} />
                 </Routes>
             )}

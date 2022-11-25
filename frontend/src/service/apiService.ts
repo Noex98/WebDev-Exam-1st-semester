@@ -3,7 +3,7 @@ import { IRes, IUser } from "../types";
 export class apiService {
 
     static login = async (
-        username: string, 
+        email: string, 
         password: string
     ): Promise<IRes<IUser>> => {
         const url = '/api//login'
@@ -14,7 +14,7 @@ export class apiService {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: username,
+                email: email,
                 password: password
             })
         })

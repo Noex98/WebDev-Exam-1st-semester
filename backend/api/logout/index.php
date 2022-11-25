@@ -1,13 +1,12 @@
 <?php 
-    /*
-    include($_SERVER['DOCUMENT_ROOT'] . '/models/AuthModel.php');
+    include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 
-    $authModel->logout();
+    $authService = new AuthService();
+    $authService->logout();
 
     echo json_encode([
         'data' => null,
         'succes' => true,
         'errMessage' => ''
     ]);
-    */
 ?>
