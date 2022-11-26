@@ -8,14 +8,25 @@
     color: blacK;
     box-shadow: none;
     cursor: pointer;
+    transition: 250ms;
+
   }
   .positive {
     background-color: #5cff58;
+    &:disabled {
+        background-color: #3aa839;
+    }
   }
   .negative {
     background-color: #ff3f3f;
+    &:disabled {
+        background-color: #c53131;
+    }
   }
   .neutral {
     background-color: #ffffff;
+    &:disabled {
+        background-color: #cacaca;
+    }
   }
 }

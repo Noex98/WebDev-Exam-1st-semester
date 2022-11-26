@@ -2,4 +2,4 @@ export * from './Spinner';
 export * from './Nav';
 export * from './CtaButton';
 export * from './TextInput';
-export * from './Logo';
+export * from './Popup';

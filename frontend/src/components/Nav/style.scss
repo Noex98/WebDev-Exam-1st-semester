@@ -1,12 +1,14 @@
 .components__nav {
     position: fixed;
+    align-items: center;
     bottom: 15px;
     left: 15px;
     right: 15px;
     display:flex;
     justify-content: space-between;
     border-radius: 15px;
-    padding:20px;
+    padding: 0 20px;
+    height: 76px;
     background-color: white;
     color:black;
 }

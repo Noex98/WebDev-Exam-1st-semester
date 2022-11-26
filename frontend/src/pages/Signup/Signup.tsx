@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { apiService } from '../../service/apiService';
 import { ReactComponent as EyeOpen } from '../../assets/icons/eye_open.svg';
@@ -11,6 +11,7 @@ export const Signup = () => {
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showPasswordRepeat, setShowPasswordRepeat] = useState(false);
+    const [btnDisabled, setBtnDisabled] = useState(true);
     const [data, setData] = useState({
         name: "",
         phoneNumber: "",
@@ -18,6 +19,20 @@ export const Signup = () => {
         password: "",
         passwordRepeat: ""
     });
+
+    useEffect(() => {
+        if(
+            data.name.length > 0 &&
+            data.phoneNumber.length > 0 &&
+            data.email.length > 0 &&
+            data.password.length > 0 &&
+            data.passwordRepeat.length > 0
+        ) {
+            setBtnDisabled(false)
+        } else {
+            setBtnDisabled(true)
+        }
+    }, [data])
 
 
 
@@ -43,26 +58,22 @@ export const Signup = () => {
         <div className='pages__signup'>
             <h1>Register new user</h1>
             <form onSubmit={e => submitHandler(e)}>
-                
                 <label>
                     <div>Name:</div>
-                    <TextInput  value={data.name} onChange={e => setData(prev => {return {...prev, name: e.target.value}})} />
+                    <TextInput  required value={data.name} onChange={e => setData(prev => {return {...prev, name: e.target.value}})} />
                 </label>
-                
-
                 <label>
                     <div>Phone Number:</div>
-                    <TextInput value={data.phoneNumber} onChange={e => setData(prev => {return {...prev, phoneNumber: e.target.value}})} />
+                    <TextInput required type='tel' value={data.phoneNumber} onChange={e => setData(prev => {return {...prev, phoneNumber: e.target.value}})} />
                 </label>
-
                 <label>
                     <div>Email:</div>
-                    <TextInput value={data.email} onChange={e => setData(prev => {return {...prev, email: e.target.value}})} />
+                    <TextInput required type='email' value={data.email} onChange={e => setData(prev => {return {...prev, email: e.target.value}})} />
                 </label>
-
                 <label>
                     <div>Password:</div>
                     <TextInput 
+                        required
                         value={data.password} 
                         type={showPassword ? "text" : "password"} 
                         onChange={e => setData(prev => {return {...prev, password: e.target.value}})}
@@ -71,10 +82,10 @@ export const Signup = () => {
                         {!showPassword && <EyeOpen onClick={() => setShowPassword(prev => !prev)}/>}
                     </TextInput>
                 </label>
-
                 <label>
                     <div>Repeat password:</div>
                     <TextInput 
+                        required
                         value={data.passwordRepeat} 
                         type={showPasswordRepeat ? "text" : "password"} 
                         onChange={e => setData(prev => {return {...prev, passwordRepeat: e.target.value}})} 
@@ -83,10 +94,8 @@ export const Signup = () => {
                         {!showPasswordRepeat && <EyeOpen onClick={() => setShowPasswordRepeat(prev => !prev)}/>}
                     </TextInput>
                 </label>
-                
-
                 <span className='btnContainer'>
-                    <CtaButton type='submit' color='positive'>
+                    <CtaButton disabled={btnDisabled} type='submit' color='positive'>
                         Register
                     </CtaButton>
                 </span>

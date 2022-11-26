@@ -1,0 +1,41 @@
+.components__popup {
+    > .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition:250ms;
+    }
+    > .overlay--visible {
+        pointer-events: all;
+        opacity: 1;
+    }
+    > .content {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding:25px;
+        background-color: #030C21;
+        border-radius: 10px 10px 0 0;
+        transform: translateY(100%);
+        transition: 250ms;
+
+        > .closeBtn {
+            display: block;
+            margin-left: auto;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+    }
+
+    > .content--visible {
+        transform: translateY(0);
+    }
+
+    
+}
