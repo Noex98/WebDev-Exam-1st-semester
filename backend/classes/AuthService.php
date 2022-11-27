@@ -9,11 +9,11 @@ class AuthService {
     }
 
     function registerUser(
-        $name,
-        $email,
-        $phonenumber,
-        $password
-    ){
+        string $name,
+        string $email,
+        string $phonenumber,
+        string $password
+    ): bool {
         $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $q = "SELECT * FROM users WHERE email = '$email'";
@@ -28,7 +28,7 @@ class AuthService {
         }
     }
 
-    function logout(){
+    function logout(): void {
         session_unset();
         session_destroy();
         session_write_close();
@@ -36,7 +36,7 @@ class AuthService {
         session_regenerate_id(true);
     }
 
-    function authorize($email, $password){
+    function authorize(string $email, string $password): int | false {
         $q = "SELECT * FROM users WHERE email = '$email'";
         $res = $this->mySQL->query($q);
         $user = $res->fetch_object();
@@ -53,7 +53,7 @@ class AuthService {
         }
     }
 
-    function authenticate(){
+    function authenticate(): int | false {
         if (!session_id()) {
             session_start();
         }
