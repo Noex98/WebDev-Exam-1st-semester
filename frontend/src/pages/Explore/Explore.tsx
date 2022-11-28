@@ -22,7 +22,8 @@ export const Explore = () => {
             maxDistance: maxDistance,
             categories: categories
         }
-
+        console.log(filter);
+        
 
 
     }, [longtitude, latitude, searchString, sortBy, maxDistance, categories])
@@ -41,11 +42,9 @@ export const Explore = () => {
                 sortBy={sortBy}
                 maxDistance={maxDistance}
                 setSearchString={setSearchString}
-                setMaxDistance={setMaxDistance}
                 setSortBy={setSortBy}
+                setMaxDistance={setMaxDistance}
             />
-
-                
             <Nav />
         </>
     )
