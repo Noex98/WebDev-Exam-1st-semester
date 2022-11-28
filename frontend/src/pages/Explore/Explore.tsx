@@ -15,10 +15,7 @@ export const Explore = () => {
     const [address, setAddress] = useState([]);
 
     useEffect(() => {
-        console.log(latitude);
-        console.log(longtitude);
         if(latitude && longtitude){
-            
             apiService.getResturantList(
                 latitude,
                 longtitude,
@@ -27,18 +24,20 @@ export const Explore = () => {
                 searchString,
                 sortBy
                 ).then(res => {
-                    console.log(res.data);
+                    console.log(res);
                 })
             }
     }, [longtitude, latitude, searchString, sortBy, maxDistance, categories])
 
+    /*
     useEffect(() => {
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=AIzaSyBvRjeC4wHsf574-_J6z-I7eEy32dmNCkQ`)
         .then((response) => response.json())
         .then((data) => setAddress(data))
         console.log(address);
-        
     }, [latitude, longtitude])
+    */
+
     return (
         <><div className="component__Explore">
             <Location

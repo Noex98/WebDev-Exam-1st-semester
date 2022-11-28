@@ -114,7 +114,7 @@ export class apiService {
         searchString: string,
         sortBy: "price" | "distance"
     ): Promise<IRes<any>> => {
-        const url = '/api/getResturantList'
+        const url = '/api/resturantList'
         const res = await fetch(url, {
             method: "POST",
             credentials: "include",
@@ -127,7 +127,7 @@ export class apiService {
                 maxDistance: maxDistance,
                 categories: categories,
                 searchString: searchString,
-                soryBy: sortBy
+                sortBy: sortBy
             })
         })
         return await res.json();
