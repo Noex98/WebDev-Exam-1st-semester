@@ -1,12 +1,16 @@
--- Active: 1669371901231@@mysql70.unoeuro.com@3306@ahusted_dk_db
+-- Active: 1669113446860@@mysql70.unoeuro.com@3306@ahusted_dk_db
 
-DROP TABLE users;
-
-CREATE TABLE users(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50),
-    email VARCHAR(50),
-    phoneNumber VARCHAR(50)
-)
-
-CALL RegisterUser('$name', '$email', '$phonenumber', '$encryptedPassword');
+SELECT 
+id, 
+(
+   6371 *
+   acos(cos(radians(56.162939)) * 
+   cos(radians(latitude)) * 
+   cos(radians(longtitude) - 
+   radians(10.203921)) + 
+   sin(radians(56.162939)) * 
+   sin(radians(latitude )))
+) AS distance 
+FROM resturants 
+HAVING distance < 28 
+ORDER BY distance LIMIT 0, 20;

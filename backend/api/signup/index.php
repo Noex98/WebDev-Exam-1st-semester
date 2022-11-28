@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
@@ -45,25 +45,36 @@ if (!$allParamsExist) {
             'errMessage' => 'Invalid name format. Name cannot contain numbers or special characters and must be at least 2 characters.'
         ]);
     } else {
+
         $authService = new AuthService();
-        $success = $authService->registerUser(
-            $req['name'],
-            $req['email'],
-            $req['phoneNumber'],
-            $req['password'],
-        );
-        if ($success) {
-            echo json_encode([
-                'data' => null,
-                'succes' => true,
-                'errMessage' => ''
-            ]);
-        } else {
+        $userExist = $authService->doesUserExist($req['email']);
+
+        if($userExist){
             echo json_encode([
                 'data' => null,
                 'succes' => false,
                 'errMessage' => 'User already exists'
             ]);
+        } else {
+            $success = $authService->registerUser(
+                $req['name'],
+                $req['email'],
+                $req['phoneNumber'],
+                $req['password'],
+            );
+            if ($success) {
+                echo json_encode([
+                    'data' => null,
+                    'succes' => true,
+                    'errMessage' => ''
+                ]);
+            } else {
+                echo json_encode([
+                    'data' => null,
+                    'succes' => false,
+                    'errMessage' => 'An unknown error occured'
+                ]);
+            }
         }
     }
 }

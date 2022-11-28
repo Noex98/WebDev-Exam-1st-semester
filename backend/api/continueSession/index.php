@@ -21,5 +21,3 @@
             'errMessage' => 'Not logged in'
         ]);
     }
-    
-?>

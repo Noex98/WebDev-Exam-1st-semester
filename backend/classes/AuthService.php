@@ -8,6 +8,13 @@ class AuthService {
         $this->mySQL = new Database;
     }
 
+    function doesUserExist($email): bool {
+        $q = "SELECT * FROM users WHERE email = '$email'";
+        $res = $this->mySQL->query($q);
+        $row = mysqli_num_rows($res);
+        return $row < 1 ? false : true;
+    }
+
     function registerUser(
         string $name,
         string $email,
@@ -16,16 +23,8 @@ class AuthService {
     ): bool {
         $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $q = "SELECT * FROM users WHERE email = '$email'";
-        $res = $this->mySQL->query($q);
-        $row = mysqli_num_rows($res);
-        if ($row < 1) {
-            $q = "CALL RegisterUser('$name', '$email', '$phonenumber', '$encryptedPassword')";
-            $this->mySQL->query($q);
-            return true;
-        } else {
-            return false;
-        }
+        $q = "CALL RegisterUser('$name', '$email', '$phonenumber', '$encryptedPassword')";
+        return !!$this->mySQL->query($q);
     }
 
     function logout(): void {
@@ -47,7 +46,7 @@ class AuthService {
             //to do? clean up code. fetch variable instead of object
             $userPassword = $res->fetch_object();
             $loginSucces = password_verify($password, $userPassword->password);
-            return $loginSucces ? $user->id : false;
+            return $loginSucces ? intval($user->id) : false;
         } else {
             return false;
         }
@@ -57,6 +56,6 @@ class AuthService {
         if (!session_id()) {
             session_start();
         }
-        return isset($_SESSION['authToken']) ? $_SESSION['authToken'] : false;
+        return isset($_SESSION['authToken']) ? intval($_SESSION['authToken']) : false;
     }
 }

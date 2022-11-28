@@ -1,6 +1,6 @@
-<?php
-function doesParamsExist($req)
-{
+<?php declare(strict_types=1);
+
+function doesParamsExist($req): bool {
     return (!empty($req['name']) &&
         !empty($req['phoneNumber']) &&
         !empty($req['email']) &&
@@ -14,8 +14,7 @@ function doesParamsExist($req)
  */
 
 
-function isEmailValid($email): bool
-{
+function isEmailValid($email): bool {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
@@ -25,8 +24,7 @@ function isEmailValid($email): bool
  * if input is numbers only
  */
 
-function isPhoneNumberValid(string $phoneNumber, int $digits = 8): bool
-{
+function isPhoneNumberValid(string $phoneNumber, int $digits = 8): bool {
     return preg_match('/^[0-9]{' . $digits . '}\z/', $phoneNumber);
 }
 /**
@@ -34,12 +32,10 @@ function isPhoneNumberValid(string $phoneNumber, int $digits = 8): bool
  * checks if password is 6 characters long and if input contains special characters
  */
 
-function isPasswordValid($password): bool
-{
+function isPasswordValid($password): bool {
     return preg_match('~[0-9]+~', $password) && strlen($password) > 5;
 }
 
-function isNameValid($name): bool
-{
+function isNameValid($name): bool {
     return strlen($name) > 1;
 }
