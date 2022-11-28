@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Nav } from '../../components'
+import { apiService } from '../../service/apiService';
 import { Location, Filter } from './components'
 import './style.scss';
 
@@ -14,18 +15,18 @@ export const Explore = () => {
     const [address, setAddress] = useState([]);
 
     useEffect(() => {
-        const filter = {
-            longtitude: longtitude,
-            latitude: latitude,
-            searchString: searchString,
-            sortBy: sortBy,
-            maxDistance: maxDistance,
-            categories: categories
-        }
-        console.log(filter);
-
-
-
+        if(!!latitude && !!longtitude){
+            apiService.getResturantList(
+                latitude,
+                longtitude,
+                maxDistance,
+                categories,
+                searchString,
+                sortBy
+                ).then(res => {
+                    console.log(res.data);
+                })
+            }
     }, [longtitude, latitude, searchString, sortBy, maxDistance, categories])
 
     useEffect(() => {

@@ -31,29 +31,30 @@ class UserService
         array $categories,
         string $searchString,
         string $sortBy,
-        
     ){
+
         // Query from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
         $q = "SELECT *,
         (
            6371 *
-           acos(cos(radians($latitude)) * 
-           cos(radians(latitude)) * 
-           cos(radians(longtitude) - 
-           radians($longtitude)) + 
-           sin(radians($latitude)) * 
+           acos(cos(radians($latitude)) *
+           cos(radians(latitude)) *
+           cos(radians(longtitude) -
+           radians($longtitude)) +
+           sin(radians($latitude)) *
            sin(radians(latitude )))
         ) AS distance
         FROM resturants
-        HAVING distance < $maxDistance" .
-        
-        "ORDER BY distance LIMIT 0, 20;";
-
+        HAVING distance < $maxDistance " .
+        (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
+        "ORDER BY $sortBy ASC;";
         $res = $this->mySQL->query($q);
         $output = [];
 
-        while ($row = mysqli_fetch_assoc($res)) {
-            $output[] = $row;
+        if($res){
+            while ($row = mysqli_fetch_assoc($res)) {
+                $output[] = $row;
+            }
         }
 
         return $output;
