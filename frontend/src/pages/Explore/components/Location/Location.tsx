@@ -12,7 +12,7 @@ type Props = {
     setLatitude: React.Dispatch<React.SetStateAction<number | null>>
 }
 
-export const Location = ({}: Props) => {
+export const Location = ({ }: Props) => {
     const [longtitude, setLongtitude] = useState<number | null>(null);
     const [latutide, setLatitude] = useState<number | null>(null);
     const { coords, isGeolocationAvailable, isGeolocationEnabled } =
@@ -22,21 +22,21 @@ export const Location = ({}: Props) => {
             },
             userDecisionTimeout: 5000,
         });
-        useEffect(() => {
-            if(coords?.latitude && coords?.longitude) {
-                setLatitude(coords.latitude);
-                setLongtitude(coords.longitude)
-            }
-        }, [coords?.latitude, coords?.longitude])
+    useEffect(() => {
+        if (coords?.latitude && coords?.longitude) {
+            setLatitude(coords.latitude);
+            setLongtitude(coords.longitude)
+        }
+    }, [coords?.latitude, coords?.longitude])
 
     return !isGeolocationAvailable ? (
         <div>Your browser does not support Geolocation</div>
     ) : !isGeolocationEnabled ? (
         <div>Allow location</div>
     ) : coords ? (
-        < div className = 'components__Location' >
+        < div className='components__Location' >
             <div className="locationDisplay">
-                <PinSvg />
+                <PinSvg width="22px" height="22px" />
                 <div>
                     <div>Search area near: </div>
                     <div>{longtitude} {latutide}</div>
@@ -47,7 +47,7 @@ export const Location = ({}: Props) => {
             </TextInput>
         </div >
     )
-    : (
-        <div>Getting the location data&hellip; </div>
-    );
+        : (
+            <div>Getting the location data&hellip; </div>
+        );
 };

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Nav } from '../../components'
 import { IFilter } from '../../types';
 import { Location, Filter } from './components'
+import './style.scss';
 
 export const Explore = () => {
 
@@ -23,29 +24,27 @@ export const Explore = () => {
             categories: categories
         }
         console.log(filter);
-        
+
 
 
     }, [longtitude, latitude, searchString, sortBy, maxDistance, categories])
 
 
     return (
-        <>
-            <Location 
-            longtitude={longtitude}
-            latitude={latitude}
-            setLongtitude={setLongtitude}
-            setLatitude={setLatitude}
-            />
-            <Filter 
+        <><div className="component__Explore">
+            <Location
+                longtitude={longtitude}
+                latitude={latitude}
+                setLongtitude={setLongtitude}
+                setLatitude={setLatitude} />
+            <Filter
                 searchString={searchString}
                 sortBy={sortBy}
                 maxDistance={maxDistance}
                 setSearchString={setSearchString}
                 setSortBy={setSortBy}
-                setMaxDistance={setMaxDistance}
-            />
-            <Nav />
-        </>
+                setMaxDistance={setMaxDistance} />
+
+        </div><Nav /></>
     )
 }
