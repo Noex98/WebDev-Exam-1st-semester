@@ -1,0 +1,9 @@
+.pages__explore {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .line {
+        border-top: 1px solid #C8C8C8;
+    }
+}

@@ -32,29 +32,36 @@ export const Explore = () => {
 
     
     useEffect(() => {
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=AIzaSyBvRjeC4wHsf574-_J6z-I7eEy32dmNCkQ`)
-        .then((response) => response.json())
-        .then((data) => setAddress(data.results[0].formatted_address));
+        if(latitude && longtitude){
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=AIzaSyBvRjeC4wHsf574-_J6z-I7eEy32dmNCkQ`)
+            .then((response) => response.json())
+            .then((data) => setAddress(data.results[0].formatted_address));
+        }
     }, [latitude, longtitude])
     
 
     return (
-        <><div className="component__Explore">
-            <Location
-                longtitude={longtitude}
-                latitude={latitude}
-                setLongtitude={setLongtitude}
-                setLatitude={setLatitude} 
-                address={address}
+        <>
+            <div className="pages__explore">
+                <Location
+                    longtitude={longtitude}
+                    latitude={latitude}
+                    setLongtitude={setLongtitude}
+                    setLatitude={setLatitude} 
+                    address={address}
                 />
-            <Filter
-                searchString={searchString}
-                sortBy={sortBy}
-                maxDistance={maxDistance}
-                setSearchString={setSearchString}
-                setSortBy={setSortBy}
-                setMaxDistance={setMaxDistance} />
-
-        </div><Nav /></>
+                <div className='line'></div>
+                <Filter
+                    searchString={searchString}
+                    sortBy={sortBy}
+                    maxDistance={maxDistance}
+                    setSearchString={setSearchString}
+                    setSortBy={setSortBy}
+                    setMaxDistance={setMaxDistance} 
+                />
+                <div className='line'></div>
+            </div>
+            <Nav />
+        </>
     )
 }

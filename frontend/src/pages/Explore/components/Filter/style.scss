@@ -1,39 +1,44 @@
 .components__Filter {
-  //   p {
-  //     margin-bottom: 1rem;
-  //   }
-  button {
-    margin: 16px 20px 16px 0px;
-    background: #051334;
-    border: none;
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.25);
-    border-radius: 15px;
-    padding: 14px 16px;
-    border: 2px solid transparent;
-  }
-  .active {
-    border: 2px solid white;
-  }
+    button {
+        margin: 16px 20px 16px 0px;
+        background: #051334;
+        border: none;
+        box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.25);
+        border-radius: 15px;
+        padding: 14px 16px;
+        border: 2px solid transparent;
+        transition: 250ms;
+    }
+    .active {
+        border: 2px solid white;
+    }
 
-  input {
-    margin-bottom: 50px;
-    width: 100%;
-  }
+    input::-ms-fill-lower {
+        background: white;
+    }
+    
+    input[type="range"] {
+        cursor: pointer;
+        appearance: none;
+        height: 12px;
+        background: rgb(110, 110, 110);
+        border-radius: 6px;
+        overflow: hidden;
 
-  input[type="range"] {
-    -webkit-appearance: none;
-    margin-right: 15px;
-    height: 7px;
-    background: grey;
-    border-radius: 5px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background: #ffffff;
-  }
+        &::-webkit-slider-thumb {
+            border-radius: 50%;
+            appearance: none;
+            height: 12px;
+            width: 12px;
+            background: #ffffff;
+            box-shadow: -100vw 0 0 100vw #ffffff;
+        }
+
+        &::-webkit-slider-runnable-track {
+            height: 10px;
+            appearance: none;
+            color: #13bba4;
+            margin-top: -1px;
+          }
+    }
 }
