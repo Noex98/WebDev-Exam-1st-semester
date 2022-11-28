@@ -12,6 +12,7 @@ export const Explore = () => {
     const [sortBy, setSortBy] = useState<"distance" | "price">("distance");
     const [maxDistance, setMaxDistance] = useState<number>(10);
     const [categories, setCategories] = useState<number[]>([]);
+    const [address, setAddress] = useState([]);
 
     useEffect(() => {
         console.log(latitude);
@@ -31,7 +32,13 @@ export const Explore = () => {
             }
     }, [longtitude, latitude, searchString, sortBy, maxDistance, categories])
 
-
+    useEffect(() => {
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=AIzaSyBvRjeC4wHsf574-_J6z-I7eEy32dmNCkQ`)
+        .then((response) => response.json())
+        .then((data) => setAddress(data))
+        console.log(address);
+        
+    }, [latitude, longtitude])
     return (
         <><div className="component__Explore">
             <Location
