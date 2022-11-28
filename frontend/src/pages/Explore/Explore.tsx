@@ -7,7 +7,7 @@ import { Location, Filter } from './components'
 export const Explore = () => {
 
     const [longtitude, setLongtitude] = useState<number | null>(null);
-    const [latutide, setLatitude] = useState<number | null>(null);
+    const [latitude, setLatitude] = useState<number | null>(null);
     const [searchString, setSearchString] = useState<string>("");
     const [sortBy, setSortBy] = useState<"distance" | "price">("distance");
     const [maxDistance, setMaxDistance] = useState<number>(10);
@@ -16,7 +16,7 @@ export const Explore = () => {
     useEffect(() => {
         const filter = {
             longtitude: longtitude,
-            latutide: latutide,
+            latutide: latitude,
             searchString: searchString,
             sortBy: sortBy,
             maxDistance: maxDistance,
@@ -26,12 +26,17 @@ export const Explore = () => {
         
 
 
-    }, [longtitude, latutide, searchString, sortBy, maxDistance, categories])
+    }, [longtitude, latitude, searchString, sortBy, maxDistance, categories])
 
 
     return (
         <>
-            <Location />
+            <Location 
+            longtitude={longtitude}
+            latitude={latitude}
+            setLongtitude={setLongtitude}
+            setLatitude={setLatitude}
+            />
             <Filter 
                 searchString={searchString}
                 sortBy={sortBy}
