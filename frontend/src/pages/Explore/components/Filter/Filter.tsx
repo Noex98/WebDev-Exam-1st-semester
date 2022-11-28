@@ -5,7 +5,7 @@ import { TextInput } from '../../../../components'
 type Props = {
 }
 
-export const Filter = ({setFilter}: Props) => {
+export const Filter = ({}: Props) => {
     return (
         <div className='components__Filter'>
             <TextInput placeholder='Search for a specific restaurant...' >
