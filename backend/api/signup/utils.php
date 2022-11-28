@@ -15,7 +15,7 @@ function doesParamsExist($req): bool {
 
 
 function isEmailValid($email): bool {
-    return filter_var($email, FILTER_VALIDATE_EMAIL);
+    return !!filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
 /**
@@ -25,7 +25,7 @@ function isEmailValid($email): bool {
  */
 
 function isPhoneNumberValid(string $phoneNumber, int $digits = 8): bool {
-    return preg_match('/^[0-9]{' . $digits . '}\z/', $phoneNumber);
+    return !!preg_match('/^[0-9]{' . $digits . '}\z/', $phoneNumber);
 }
 /**
  * returns true if input is valid
@@ -33,7 +33,7 @@ function isPhoneNumberValid(string $phoneNumber, int $digits = 8): bool {
  */
 
 function isPasswordValid($password): bool {
-    return preg_match('~[0-9]+~', $password) && strlen($password) > 5;
+    return !!preg_match('~[0-9]+~', $password) && strlen($password) > 5;
 }
 
 function isNameValid($name): bool {
