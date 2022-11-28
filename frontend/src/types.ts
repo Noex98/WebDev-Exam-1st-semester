@@ -22,3 +22,14 @@ export interface IResturant {
     description: string,
     location: string,
 }
+
+export interface IFilter {
+    longtitude: number,
+    latitude: number,
+
+    searchString: string,
+    sortBy: "distance" | "price",
+    maxDistance: number,
+
+    categories: number[]
+}
