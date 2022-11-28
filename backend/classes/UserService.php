@@ -27,7 +27,8 @@ class UserService
     function getResturantList(
         float $latitude,
         float $longtitude,
-        float $maxDistance
+        float $maxDistance,
+        array $categories
     ){
         // Query from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
         $q = "SELECT *,
