@@ -106,14 +106,29 @@ export class apiService {
         })
         return await res.json();
     }
-    static getMatches = async(): Promise<IRes<IUser[]>> => {
-        const url = '/api/getMatches'
+    static getResturantList = async(
+        latitude: number,
+        longtitude: number,
+        maxDistance: number,
+        categories: number[],
+        searchString: string,
+        sortBy: "price" | "distance"
+    ): Promise<IRes<any>> => {
+        const url = '/api/getResturantList'
         const res = await fetch(url, {
             method: "POST",
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify({
+                latitude: latitude,
+                longtitude: longtitude,
+                maxDistance: maxDistance,
+                categories: categories,
+                searchString: searchString,
+                soryBy: sortBy
+            })
         })
         return await res.json();
     }

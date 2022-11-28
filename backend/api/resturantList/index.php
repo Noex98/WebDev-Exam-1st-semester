@@ -4,19 +4,37 @@ include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
 
 $req = getJsonBody();
 
-$requestValid = (
-    !empty($req['latitude']) &&
-    !empty($req['longtitude']) &&
-    !empty($req['maxDistance'])
+$allParamsIsSet = (
+    isset($req['latitude']) &&
+    isset($req['longtitude']) &&
+    isset($req['maxDistance']) &&
+    isset($req['categories']) &&
+    isset($req['searchString']) &&
+    isset($req['sortBy'])
 );
 
-if ($requestValid){
+if ($allParamsIsSet){
+
     $userService = new UserService();
-    var_dump($userService->getResturantList(
-        floatval($req['latitude']), 
-        floatval($req['longtitude']), 
-        floatval($req['maxDistance'])
-    ));
+    $data = $userService->getResturantList(
+        floatval($req['latitude']),
+        floatval($req['longtitude']),
+        floatval($req['maxDistance']),
+        $req['categories'],
+        $req['searchString'],
+        $req['sortBy'],
+    );
+
+    echo json_encode([
+        'data' => $data,
+        'succes' => true,
+        'errMessage' => ''
+    ]);
+    
 } else {
-    echo "not valid";
+    echo json_encode([
+        'data' => null,
+        'succes' => false,
+        'errMessage' => 'Invalid request: Must set all variabels'
+    ]);
 }
