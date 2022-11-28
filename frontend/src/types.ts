@@ -22,3 +22,4 @@ export interface IResturant {
     description: string,
     location: string,
 }
+
