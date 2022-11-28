@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ReactComponent as PinSvg } from '../../../../assets/icons/pin.svg';
 import { TextInput } from '../../../../components';
 import './style.scss';
@@ -32,9 +32,9 @@ export const Location = ({longtitude, setLongtitude, latitude, setLatitude}: Pro
     ) : !isGeolocationEnabled ? (
         <div>Allow location</div>
     ) : coords ? (
-        < div className = 'components__Location' >
+        < div className='components__Location' >
             <div className="locationDisplay">
-                <PinSvg />
+                <PinSvg width="22px" height="22px" />
                 <div>
                     <div>Search area near: </div>
                     <div>{longtitude} {latitude}</div>
@@ -45,7 +45,7 @@ export const Location = ({longtitude, setLongtitude, latitude, setLatitude}: Pro
             </TextInput>
         </div >
     )
-    : (
-        <div>Getting the location data&hellip; </div>
-    );
+        : (
+            <div>Getting the location data&hellip; </div>
+        );
 };
