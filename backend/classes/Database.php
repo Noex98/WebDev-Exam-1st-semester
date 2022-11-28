@@ -8,5 +8,6 @@ class Database extends mysqli {
 
     function __construct(){
         parent::__construct($this->server, $this->username, $this->password, $this->database, $this->port);
+        parent::set_charset("utf8mb4");
     }
 }

@@ -23,15 +23,13 @@ if ($allParamsIsSet){
         $req['searchString'],
         $req['sortBy'],
     );
-
-    //var_dump($data);
-
+    
     echo json_encode([
         'data' => $data,
         'succes' => true,
-        'errMessage' => ''
+        'errMessage' => '',
     ]);
-    
+
 } else {
     echo json_encode([
         'data' => null,
@@ -39,3 +37,4 @@ if ($allParamsIsSet){
         'errMessage' => 'Invalid request: Must set all variabels'
     ]);
 }
+

@@ -15,10 +15,10 @@
  * @return float Distance between points in [m] (same as earthRadius)
  */
 function getDistanceBetweenPoints(
-    $latitudeFrom, 
-    $longitudeFrom, 
-    $latitudeTo, 
-    $longitudeTo, 
+    $latitudeFrom,
+    $longitudeFrom,
+    $latitudeTo,
+    $longitudeTo,
     $earthRadius = 6371000
     ){
     // convert from degrees to radians
