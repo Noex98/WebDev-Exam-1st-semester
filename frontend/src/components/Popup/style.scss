@@ -9,6 +9,7 @@
         background-color: rgba(0, 0, 0, 0.5);
         opacity: 0;
         transition:250ms;
+        z-index: 100;
     }
     > .overlay--visible {
         pointer-events: all;
@@ -24,6 +25,7 @@
         border-radius: 10px 10px 0 0;
         transform: translateY(100%);
         transition: 250ms;
+        z-index: 1000;
 
         > .closeBtn {
             display: block;

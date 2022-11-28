@@ -22,7 +22,8 @@ export const Explore = () => {
             maxDistance: maxDistance,
             categories: categories
         }
-
+        console.log(filter);
+        
 
 
     }, [longtitude, latutide, searchString, sortBy, maxDistance, categories])
