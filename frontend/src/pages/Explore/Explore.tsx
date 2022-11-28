@@ -31,16 +31,7 @@ export const Explore = () => {
     return (
         <>
             <Location />
-            <Filter 
-                searchString={searchString}
-                sortBy={sortBy}
-                maxDistance={maxDistance}
-                setSearchString={setSearchString}
-                setMaxDistance={setMaxDistance}
-                setSortBy={setSortBy}
-            />
-
-                
+            <Filter />
             <Nav />
         </>
     )
