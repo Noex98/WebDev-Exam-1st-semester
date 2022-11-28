@@ -13,22 +13,29 @@ type Props = {
 
 export const Filter = ({ searchString, setSearchString, sortBy, setSortBy, maxDistance, setMaxDistance }: Props) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+
     return (
         <div className='components__Filter'>
-            <TextInput placeholder='Search for a specific restaurant...' >
+            <TextInput placeholder='Search for a specific restaurant...' onChange={e => setSearchString(e.target.value)}>
 
                 <FilterIcon onClick={() => setIsPopupOpen(true)} />
             </TextInput>
             <Popup open={isPopupOpen} closePopup={() => setIsPopupOpen(false)}>
                 <div>
-                    ljahdklajwhd
+                    <button onClick={() => setSortBy("price")} className={sortBy === "price" ? "active" : ""}> Price </button>
+                    <button onClick={() => setSortBy("distance")} className={sortBy === "distance" ? "active" : ""}> Distance </button>
+                    
+                    <span>{maxDistance}</span>
+                    <br></br>
+                    <input type="range" min="1" max="100" onChange={e => setMaxDistance(parseInt(e.target.value))}></input>
                 </div>
             </Popup>
         </div>
     )
 }
 
-/* onchange event på textinput hvor værdien opdateres. setSearchString
+/* 
 buttons der ændrer setSortby
 slider der ændrer maxDistance 
 */
