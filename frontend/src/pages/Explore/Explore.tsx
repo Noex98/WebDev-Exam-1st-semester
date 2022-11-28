@@ -16,7 +16,10 @@ export const Explore = () => {
 
 
     useEffect(() => {
-        if(!!latitude && !!longtitude){
+        console.log(latitude);
+        console.log(longtitude);
+        if(latitude && longtitude){
+            
             apiService.getResturantList(
                 latitude,
                 longtitude,
