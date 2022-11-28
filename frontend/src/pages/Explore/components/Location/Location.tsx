@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ReactComponent as PinSvg } from '../../../../assets/icons/pin.svg';
 import { TextInput } from '../../../../components';
 import './style.scss';
@@ -12,13 +12,11 @@ type Props = {
     setLatitude: React.Dispatch<React.SetStateAction<number | null>>
 }
 
-export const Location = ({}: Props) => {
-    const [longtitude, setLongtitude] = useState<number | null>(null);
-    const [latutide, setLatitude] = useState<number | null>(null);
-    const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+export const Location = ({longtitude, setLongtitude, latitude, setLatitude}: Props) => {
+    const { coords, isGeolocationAvailable, isGeolocationEnabled, getPosition, timestamp } =
         useGeolocated({
             positionOptions: {
-                enableHighAccuracy: false,
+                enableHighAccuracy: true,
             },
             userDecisionTimeout: 5000,
         });
@@ -27,7 +25,7 @@ export const Location = ({}: Props) => {
                 setLatitude(coords.latitude);
                 setLongtitude(coords.longitude)
             }
-        }, [coords?.latitude, coords?.longitude])
+        }, [coords, setLatitude, setLongtitude])
 
     return !isGeolocationAvailable ? (
         <div>Your browser does not support Geolocation</div>
@@ -39,11 +37,11 @@ export const Location = ({}: Props) => {
                 <PinSvg />
                 <div>
                     <div>Search area near: </div>
-                    <div>{longtitude} {latutide}</div>
+                    <div>{longtitude} {latitude}</div>
                 </div>
             </div>
             <TextInput placeholder='Type adress or city...'>
-                <LocationSvg />
+                <LocationSvg onClick={getPosition}/>
             </TextInput>
         </div >
     )

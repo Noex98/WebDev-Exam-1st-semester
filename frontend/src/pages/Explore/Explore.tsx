@@ -1,7 +1,5 @@
-import { click } from '@testing-library/user-event/dist/click';
 import React, { useEffect, useState } from 'react'
 import { Nav } from '../../components'
-import { IFilter } from '../../types';
 import { Location, Filter } from './components'
 
 export const Explore = () => {
@@ -12,11 +10,12 @@ export const Explore = () => {
     const [sortBy, setSortBy] = useState<"distance" | "price">("distance");
     const [maxDistance, setMaxDistance] = useState<number>(10);
     const [categories, setCategories] = useState<number[]>([]);
+    const [address, setAddress] = useState<string>("");
 
     useEffect(() => {
         const filter = {
             longtitude: longtitude,
-            latutide: latitude,
+            latitude: latitude,
             searchString: searchString,
             sortBy: sortBy,
             maxDistance: maxDistance,
@@ -27,7 +26,6 @@ export const Explore = () => {
 
 
     }, [longtitude, latitude, searchString, sortBy, maxDistance, categories])
-
 
     return (
         <>
