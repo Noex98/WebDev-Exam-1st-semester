@@ -10,13 +10,14 @@ type Props = {
     setLongtitude: React.Dispatch<React.SetStateAction<number | null>>,
     latitude: number | null,
     setLatitude: React.Dispatch<React.SetStateAction<number | null>>
+    address: string
 }
 
-export const Location = ({longtitude, setLongtitude, latitude, setLatitude}: Props) => {
+export const Location = ({longtitude, setLongtitude, latitude, setLatitude, address }: Props) => {
     const { coords, isGeolocationAvailable, isGeolocationEnabled, getPosition, timestamp } =
         useGeolocated({
             positionOptions: {
-                enableHighAccuracy: true,
+                enableHighAccuracy: false,
             },
             userDecisionTimeout: 5000,
         });
@@ -37,7 +38,7 @@ export const Location = ({longtitude, setLongtitude, latitude, setLatitude}: Pro
                 <PinSvg width="22px" height="22px" />
                 <div>
                     <div>Search area near: </div>
-                    <div>{longtitude} {latitude}</div>
+                    <div>{address} </div>
                 </div>
             </div>
             <TextInput placeholder='Type adress or city...'>
