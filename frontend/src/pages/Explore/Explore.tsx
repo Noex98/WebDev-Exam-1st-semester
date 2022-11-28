@@ -1,3 +1,4 @@
+import { click } from '@testing-library/user-event/dist/click';
 import React, { useEffect, useState } from 'react'
 import { Nav } from '../../components'
 import { IFilter } from '../../types';
@@ -22,15 +23,18 @@ export const Explore = () => {
             categories: categories
         }
 
-        
+
 
     }, [longtitude, latutide, searchString, sortBy, maxDistance, categories])
-    
+
 
     return (
         <>
             <Location />
-            <Filter />
+            <Filter 
+                searchString={() =>setSearchString}
+                sortBy={setSortBy}
+                maxDistance={setMaxDistance} />
             <Nav />
         </>
     )
