@@ -12,7 +12,6 @@ $allParamsIsSet = (
     isset($req['searchString']) &&
     isset($req['sortBy'])
 );
-
 if ($allParamsIsSet){
 
     $userService = new UserService();
@@ -24,6 +23,8 @@ if ($allParamsIsSet){
         $req['searchString'],
         $req['sortBy'],
     );
+
+    //var_dump($data);
 
     echo json_encode([
         'data' => $data,
