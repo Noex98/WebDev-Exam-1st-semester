@@ -1,9 +1,8 @@
-import { click } from '@testing-library/user-event/dist/click';
 import React, { useEffect, useState } from 'react'
 import { Nav } from '../../components'
 import { apiService } from '../../service/apiService';
-import { IFilter } from '../../types';
 import { Location, Filter } from './components'
+import './style.scss';
 
 export const Explore = () => {
 
@@ -31,17 +30,20 @@ export const Explore = () => {
 
 
     return (
-        <>
-            <Location />
+        <><div className="component__Explore">
+            <Location
+                longtitude={longtitude}
+                latitude={latitude}
+                setLongtitude={setLongtitude}
+                setLatitude={setLatitude} />
             <Filter
                 searchString={searchString}
                 sortBy={sortBy}
                 maxDistance={maxDistance}
                 setSearchString={setSearchString}
                 setSortBy={setSortBy}
-                setMaxDistance={setMaxDistance}
-            />
-            <Nav />
-        </>
+                setMaxDistance={setMaxDistance} />
+
+        </div><Nav /></>
     )
 }
