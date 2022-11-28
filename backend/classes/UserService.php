@@ -28,7 +28,10 @@ class UserService
         float $latitude,
         float $longtitude,
         float $maxDistance,
-        array $categories
+        array $categories,
+        string $searchString,
+        string $sortBy,
+        
     ){
         // Query from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
         $q = "SELECT *,
@@ -40,10 +43,11 @@ class UserService
            radians($longtitude)) + 
            sin(radians($latitude)) * 
            sin(radians(latitude )))
-        ) AS distance 
-        FROM resturants 
-        HAVING distance < $maxDistance
-        ORDER BY distance LIMIT 0, 20;";
+        ) AS distance
+        FROM resturants
+        HAVING distance < $maxDistance" .
+        
+        "ORDER BY distance LIMIT 0, 20;";
 
         $res = $this->mySQL->query($q);
         $output = [];

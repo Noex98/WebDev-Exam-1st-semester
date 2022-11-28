@@ -21,7 +21,7 @@ export const Profile = ({user, setUser}: Props) => {
 
     return (
         <>
-            <div>
+            <div>  
                 <h3>Profile</h3>
                 <CtaButton color='negative' onClick={logoutHandler}>Log out</CtaButton>
                 <CtaButton onClick={() => setPopupOpen(true)}>Open popup</CtaButton>
