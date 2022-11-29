@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 include_once($_SERVER['DOCUMENT_ROOT'] . "/classes/Database.php");
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/utils.php');
 
@@ -6,18 +8,20 @@ class UserService
 {
     private $mySQL;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->mySQL = new Database;
     }
 
-    function getUser(int $id){
+    function getUser(int $id)
+    {
         $q = "SELECT * FROM users WHERE id = '$id'";
         $res = $this->mySQL->query($q);
         $output = mysqli_fetch_assoc($res);
 
         return $output;
     }
-    
+
     /**
      * @param float latitude The users latitude
      * @param float longtitude The users longtitude
@@ -31,7 +35,7 @@ class UserService
         array $categories,
         string $searchString,
         string $sortBy,
-    ){
+    ) {
 
         // Query from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
         $q = "SELECT *,
@@ -46,17 +50,28 @@ class UserService
         ) AS distance
         FROM resturants
         HAVING distance < $maxDistance " .
-        (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
-        "ORDER BY $sortBy ASC;";
+            (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
+            "ORDER BY $sortBy ASC;";
         $res = $this->mySQL->query($q);
         $output = [];
 
-        if($res){
+        if ($res) {
             while ($row = mysqli_fetch_assoc($res)) {
                 $output[] = $row;
             }
         }
 
         return $output;
+    }
+
+    function getCategories()
+    {
+        $q = 'SELECT * FROM categories';
+        $res = $this->mySQL->query($q);
+        $categories = [];
+        while ($row = mysqli_fetch_array($res)) {
+            $categories[] = $row;
+        }
+        return $categories;
     }
 }
