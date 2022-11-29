@@ -21,6 +21,7 @@ export interface IResturant {
     closeTime: string | null
     description: string | null
     distance: number
+    price: number
 }
 
 export interface ICategory {

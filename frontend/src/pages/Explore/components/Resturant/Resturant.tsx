@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { IResturant } from '../../../../types';
 import './style.scss';
 
@@ -17,11 +18,30 @@ export const Resturant = ({resturant}: Props) => {
         email,
         image,
         openTime,
-        phoneNumber
+        phoneNumber,
+        price
     } = resturant
 
+    const getPriceTag = () => {
+        const dollarSigns = []
+        for (let i = 0; i < 4; i++){
+            if(i + 1 < price ){
+                dollarSigns.push(
+                    <b>$</b>
+                )
+            } else {
+                dollarSigns.push(
+                    <span>$</span>
+                )
+            }
+        }
+        return dollarSigns;
+    }
+
     return (
-        <div className='components__Resturant' style={{
+        <Link 
+            to={'/resturant/' + id} 
+            className='components__Resturant' style={{
             background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%),linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%), url(${image})`,                        
             backgroundPosition: 'center',
             backgroundSize: 'cover',
@@ -29,8 +49,15 @@ export const Resturant = ({resturant}: Props) => {
         }}>
             <div>
                 <div>{name}</div>
-                <div>{Math.round(distance) + ' km'}</div>
+                <div className='split'>
+                    <span>
+                        {Math.round(distance) + ' km'}
+                    </span> 
+                    <div>
+                        {getPriceTag()}
+                    </div>
+                </div>
             </div>
-        </div>
+        </Link>
     )
 }

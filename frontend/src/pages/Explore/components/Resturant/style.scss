@@ -6,4 +6,13 @@
     padding: 5px 12px;
     display:flex;
     align-items: end;
+
+    >div {
+        flex: 1;
+    }
+
+    .split {
+        display: flex;
+        justify-content: space-between;
+    }
 }
