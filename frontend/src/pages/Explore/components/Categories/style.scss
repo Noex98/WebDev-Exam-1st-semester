@@ -1,0 +1,19 @@
+.components__Categories {
+  overflow-x: hidden;
+  .scrollbar {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  .images {
+    
+        display: inline-block;
+    padding: 14px;
+    height: 97px;
+    width: 135px;
+    margin: 10px 10px 20px 0px;
+    border-radius: 15px;
+    p {
+      padding-top: 255px;
+    }
+  }
+}

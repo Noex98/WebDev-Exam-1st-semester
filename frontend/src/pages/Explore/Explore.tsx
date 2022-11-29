@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Nav } from '../../components'
 import { apiService } from '../../service/apiService';
-import { Location, Filter } from './components'
-import { Categories } from './components/Categories';
+import { Location, Filter, Categories } from './components'
 import './style.scss';
 
 export const Explore = () => {

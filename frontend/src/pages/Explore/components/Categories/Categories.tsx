@@ -22,13 +22,19 @@ export const Categories = ({ selectedCategories, setSelectedCategories }: Props)
     return (
         <div className='components__Categories'>
             Categories
-
-            {categories && categories.map((category, index) => (
-                <div key={index}>{category.name}</div>
-            ))}
-            {!categories && (
-                <div>Loading</div>
+            <div className='scrollbar'>
+                {categories && categories.map((category, index) => (
+                    <div className='images' key={index} style={{
+                        background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%),linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%), url(${category.image})`,                        
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                    }}>{category.name}</div>
+                ))}
+                {!categories && (
+                    <div>Loading</div>
                 )}
+            </div>
         </div>
     )
 }
