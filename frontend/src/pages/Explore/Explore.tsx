@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Nav } from '../../components'
 import { apiService } from '../../service/apiService';
 import { Location, Filter } from './components'
+import { Categories } from './components/Categories';
 import './style.scss';
 
 export const Explore = () => {
@@ -58,6 +59,11 @@ export const Explore = () => {
                     setSearchString={setSearchString}
                     setSortBy={setSortBy}
                     setMaxDistance={setMaxDistance} 
+                />
+
+                <Categories 
+                categories={categories}
+                setCategories={setCategories}
                 />
                 <div className='line'></div>
             </div>
