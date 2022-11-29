@@ -25,7 +25,7 @@ export const Categories = ({ selectedCategories, setSelectedCategories }: Props)
             <div className='scrollbar'>
                 {categories && categories.map((category, index) => (
                     <div className='images' key={index} style={{
-                        background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%),linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%), url(${category.image})`,                        
+                        background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.81) 61.98%), url(${category.image})`,                        
                         backgroundPosition: 'center',
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
