@@ -130,8 +130,6 @@ export class apiService {
                 sortBy: sortBy
             })
         })
-        console.log(res);
-        
         return await res.json();
     }
 
