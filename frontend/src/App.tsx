@@ -21,7 +21,7 @@ function App() {
     useEffect(() => {
         apiService.continueSession().then(res =>{
             if(res.succes){
-                setUser(res.data)
+                setUser(res.data);
             }
             setLoading(false);
         })
