@@ -12,15 +12,15 @@ export interface IUser {
 }
 
 export interface IResturant {
-    id: number,
-    name: string,
-    email: string,
-    image: string,
-    phoneNumber: number
-    openTime: string,
-    closeTime: string,
-    description: string,
-    location: string,
+    id: number
+    name: string
+    email: string | null
+    image: string | null
+    phoneNumber: number | null
+    openTime: string | null
+    closeTime: string | null
+    description: string | null
+    distance: number
 }
 
 export interface IFilter {
