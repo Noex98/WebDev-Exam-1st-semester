@@ -1,4 +1,4 @@
-import { IRes, IUser } from "../types";
+import { ICategory, IRes, IUser } from "../types";
 
 export class apiService {
 
@@ -133,6 +133,20 @@ export class apiService {
         console.log(res);
         
         return await res.json();
+    }
+
+    static getCategories = async(): Promise<IRes<ICategory[]>> => {
+        const url = '/api/categories'
+        const res = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    console.log(res);
+    return await res.json();
+
     }
 
     static logout = async (): Promise<IRes<null>> => {

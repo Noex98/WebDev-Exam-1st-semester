@@ -12,7 +12,7 @@ export const Explore = () => {
     const [searchString, setSearchString] = useState<string>("");
     const [sortBy, setSortBy] = useState<"distance" | "price">("distance");
     const [maxDistance, setMaxDistance] = useState<number>(1000);
-    const [categories, setCategories] = useState<number[]>([]);
+    const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
     const [address, setAddress] = useState<string>("");
 
     const [resturants, setResturants] = useState<any[]>([]);
@@ -24,7 +24,7 @@ export const Explore = () => {
                 latitude,
                 longtitude,
                 maxDistance,
-                categories,
+                selectedCategories,
                 searchString,
                 sortBy
                 ).then(res => {
@@ -33,7 +33,7 @@ export const Explore = () => {
                     }
                 })
             }
-    }, [longtitude, latitude, searchString, sortBy, maxDistance, categories])
+    }, [longtitude, latitude, searchString, sortBy, maxDistance, selectedCategories])
 
     
     useEffect(() => {
@@ -66,8 +66,8 @@ export const Explore = () => {
                 />
 
                 <Categories 
-                categories={categories}
-                setCategories={setCategories}
+                selectedCategories={selectedCategories}
+                setSelectedCategories={setSelctedCategories}
                 />
                 <div className='line'></div>
                 {resturants.map((resturant, index) => (

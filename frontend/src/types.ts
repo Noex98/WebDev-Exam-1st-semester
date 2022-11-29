@@ -23,6 +23,12 @@ export interface IResturant {
     distance: number
 }
 
+export interface ICategory {
+    id: number
+    name: string
+    image: string
+}
+
 export interface IFilter {
     longtitude: number,
     latitude: number,
