@@ -5,15 +5,18 @@
     white-space: nowrap;
   }
   .images {
-    
-        display: inline-block;
+    display: inline-block;
+    background-position: "center" !important;
+    background-size: "cover" !important;
+    background-repeat: "no-repeat" !important;
     padding: 14px;
     height: 97px;
     width: 135px;
     margin: 10px 10px 20px 0px;
     border-radius: 15px;
     p {
-      padding-top: 255px;
+      padding-top: 50px;
+      font-weight: 600;
     }
   }
 }
