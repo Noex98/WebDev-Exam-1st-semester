@@ -11,8 +11,16 @@ $userService = new UserService();
 $id = $req['id'];
 
 $restaurant = $userService->getRestaurant($id);
-echo json_encode([
-    'data' => $restaurant,
-    'succes' => true,
-    'errMessage' => '',
-]);
+if ($restaurant) {
+    echo json_encode([
+        'data' => $restaurant,
+        'succes' => true,
+        'errMessage' => '',
+    ]);
+} else {
+    echo json_encode([
+        'data' => null,
+        'succes' => false,
+        'errMessage' => 'Invalid request. Restaurant does not exist',
+    ]);
+}
