@@ -4,6 +4,7 @@ import './style.scss'
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">{
     type?: "text" | "email" |"tel" | "password"
     children?: React.ReactNode
+
 }
 
 /**
@@ -16,13 +17,13 @@ interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"
  * Default type is "text"
  */
 
-export const TextInput = ({type = "text", children, ...rest }: Props) => {
+export const TextInput = React.forwardRef(({type = "text", children, ...rest }: Props, ref) => {
     return (
         <div className='components__TextInput'>
-            <input type={type} {...rest}  />
+            <input  type={type} {...rest}  />
             <div>
                 {children}
             </div>
         </div>
     )
-}
+})

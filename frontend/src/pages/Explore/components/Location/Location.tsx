@@ -1,32 +1,40 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ReactComponent as PinSvg } from '../../../../assets/icons/pin.svg';
-import { TextInput } from '../../../../components';
 import './style.scss';
 import { ReactComponent as LocationSvg } from '../../../../assets/icons/location.svg';
 import { useGeolocated } from 'react-geolocated';
+import Autocomplete from "react-google-autocomplete";
 
 type Props = {
     longtitude: number | null,
     setLongtitude: React.Dispatch<React.SetStateAction<number | null>>,
     latitude: number | null,
     setLatitude: React.Dispatch<React.SetStateAction<number | null>>
-    address: string
+    address: string,
 }
 
-export const Location = ({longtitude, setLongtitude, latitude, setLatitude, address }: Props) => {
-    const { coords, isGeolocationAvailable, isGeolocationEnabled, getPosition, timestamp } =
+
+export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, address}: Props) => {
+    const [customAddress, setCustomAddress] = useState<string>("")
+    const { coords, isGeolocationAvailable, isGeolocationEnabled, getPosition } =
         useGeolocated({
             positionOptions: {
                 enableHighAccuracy: false,
             },
             userDecisionTimeout: 5000,
         });
-        useEffect(() => {
-            if(coords?.latitude && coords?.longitude) {
-                setLatitude(coords.latitude);
-                setLongtitude(coords.longitude)
-            }
-        }, [coords, setLatitude, setLongtitude])
+    useEffect(() => {
+        if (coords?.latitude && coords?.longitude) {
+            setLatitude(coords.latitude);
+            setLongtitude(coords.longitude)
+        }
+    }, [coords, setLatitude, setLongtitude])
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCustomAddress(e.target.value);
+      }
+      console.log(customAddress);
+      
 
     return !isGeolocationAvailable ? (
         <div>Your browser does not support Geolocation</div>
@@ -38,12 +46,20 @@ export const Location = ({longtitude, setLongtitude, latitude, setLatitude, addr
                 <PinSvg width="22px" height="22px" />
                 <div>
                     <div>Search area near: </div>
-                    <div>{address} </div>
+
                 </div>
             </div>
-            <TextInput placeholder='Type adress or city...'>
-                <LocationSvg onClick={getPosition}/>
-            </TextInput>
+            <Autocomplete placeholder={address} onChange={handleChange} oninput
+                apiKey={process.env.REACT_APP_API_KEY}
+                options={{
+                    fields: ["formatted_address", "name"],
+                    strictBounds: false,
+                    types: ["address"],
+                }}
+            />
+             <LocationSvg onClick={getPosition} />
+           
+    
         </div >
     )
         : (

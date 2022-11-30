@@ -5,4 +5,16 @@
         gap: 5px;
         margin: 5px 0px 15px 0px;
     }
+    .pac-target-input{
+        width: 100%;
+        padding: 10px 36px 10px 10px;
+        background: rgb(221, 221, 221);
+        border: none;
+        border-radius: 10px;
+        transition: 200ms;
+        color: black;
+    }
+    svg{right: 30px;
+        top: 71px;
+        position: absolute;}
 }
