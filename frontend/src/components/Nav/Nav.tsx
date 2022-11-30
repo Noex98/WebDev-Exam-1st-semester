@@ -11,27 +11,30 @@ export const Nav = () => {
     let activeClassName = "underline";
 
     return (
-        <nav className='components__nav'>
-            <NavLink to="/profile"
-                className={({ isActive }) =>
+        <div className='components__nav'>
+            <nav>
+                <NavLink to="/profile"
+                    className={({ isActive }) =>
+                        isActive ? activeClassName : undefined
+                    }
+                >
+                    <Profile height="36px" width="36px" />
+                </NavLink>
+                <NavLink to="/" end
+                    className={({ isActive }) =>
                     isActive ? activeClassName : undefined
-                }
-            >
-                <Profile height="36px" width="36px" />
-            </NavLink>
-            <NavLink to="/" end
-                className={({ isActive }) =>
-                isActive ? activeClassName : undefined
-            }>
-                <Logo height="50px" width="50px" stroke="rgb(7, 22, 63)" fill='rgb(7, 22, 63)' />
-            </NavLink>
-            <NavLink to="/reservations"
-                 className={({ isActive }) =>
-                 isActive ? activeClassName : undefined
-             }>
-                <Reservations height="36px" width="36px" />
-            </NavLink>
+                }>
+                    <Logo height="50px" width="50px" stroke="rgb(7, 22, 63)" fill='rgb(7, 22, 63)' />
+                </NavLink>
+                <NavLink to="/reservations"
+                    className={({ isActive }) =>
+                    isActive ? activeClassName : undefined
+                }>
+                    <Reservations height="36px" width="36px" />
+                </NavLink>
 
-        </nav>
+            </nav>
+            <div className='spaceReserve'></div>
+        </div>
     )
 }

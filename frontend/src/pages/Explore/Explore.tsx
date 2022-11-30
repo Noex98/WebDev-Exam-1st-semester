@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Nav } from '../../components'
 import { apiService } from '../../service/apiService';
-import { Location, Filter } from './components'
+import { Location, Filter, Resturant } from './components'
 import { Categories } from './components/Categories';
 import './style.scss';
 
@@ -43,7 +43,6 @@ export const Explore = () => {
             .then((data) => setAddress(data.results[0].formatted_address));
         }
     }, [latitude, longtitude])
-    
 
     return (
         <>
@@ -66,13 +65,17 @@ export const Explore = () => {
                 />
 
                 <Categories 
-                selectedCategories={selectedCategories}
-                setSelectedCategories={setSelctedCategories}
+                    selectedCategories={selectedCategories}
+                    setSelectedCategories={setSelctedCategories}
                 />
+
                 <div className='line'></div>
-                {resturants.map((resturant, index) => (
-                    <div key={index}>{resturant.name}</div>
-                ))}
+
+                <div className="resturantContainer">
+                    {resturants.map((resturant, index) => (
+                        <Resturant key={index} resturant={resturant}/>
+                    ))}
+                </div>
             </div>
             <Nav />
         </>

@@ -1,0 +1,46 @@
+.components__Categories {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .container {
+        overflow-x: auto;
+        display: flex;
+        gap:10px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        &example {
+            -ms-overflow-style: none; 
+            scrollbar-width: none;
+        }
+    }
+
+    .imageWrapper{
+        border: 2px solid transparent;
+        transition: 150ms;
+        border-radius: 15px;
+        overflow: hidden;
+        height: 97px;
+        width: 135px;
+        flex-shrink: 0;
+    }
+    
+    .image {
+        background-position: "center" !important;
+        background-size: "cover" !important;
+        background-repeat: "no-repeat" !important;
+        padding: 14px;
+
+        p {
+            padding-top: 50px;
+            font-weight: 600;
+        }
+    }
+
+  .active {
+    border: 2px solid white
+  }
+}
