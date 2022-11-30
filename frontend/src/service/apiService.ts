@@ -106,7 +106,7 @@ export class apiService {
         })
         return await res.json();
     }
-    static getResturantList = async(
+    static getRestaurantList = async(
         latitude: number,
         longtitude: number,
         maxDistance: number,
@@ -114,7 +114,7 @@ export class apiService {
         searchString: string,
         sortBy: "price" | "distance"
     ): Promise<IRes<any>> => {
-        const url = '/api/resturantList'
+        const url = '/api/restaurantList'
         const res = await fetch(url, {
             method: "POST",
             credentials: "include",

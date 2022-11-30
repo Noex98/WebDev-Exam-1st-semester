@@ -15,12 +15,12 @@ export const Explore = () => {
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
     const [address, setAddress] = useState<string>("");
 
-    const [resturants, setResturants] = useState<any[]>([]);
+    const [restaurants, setRestaurants] = useState<any[]>([]);
     const [isLoading, setIsloading] = useState(true);
 
     useEffect(() => {
         if(latitude && longtitude){
-            apiService.getResturantList(
+            apiService.getRestaurantList(
                 latitude,
                 longtitude,
                 maxDistance,
@@ -29,7 +29,7 @@ export const Explore = () => {
                 sortBy
                 ).then(res => {
                     if (res.succes){
-                        setResturants(res.data)
+                        setRestaurants(res.data)
                     }
                 })
             }
@@ -70,9 +70,9 @@ export const Explore = () => {
                 />
 
                 <div className='line'></div>
-                <div className="resturantContainer">
-                    {resturants.map((resturant, index) => (
-                        <Restaurant key={index} resturant={resturant}/>
+                <div className="restaurantContainer">
+                    {restaurants.map((restaurant, index) => (
+                        <Restaurant key={index} restaurant={restaurant}/>
                     ))}
                 </div>
             </div>

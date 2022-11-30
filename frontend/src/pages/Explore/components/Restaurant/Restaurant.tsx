@@ -4,10 +4,10 @@ import { IRestaurant } from '../../../../types';
 import './style.scss';
 
 type Props = {
-    resturant: IRestaurant
+    restaurant: IRestaurant
 }
 
-export const Restaurant = ({resturant}: Props) => {
+export const Restaurant = ({restaurant}: Props) => {
 
     const { 
         id, 
@@ -20,7 +20,7 @@ export const Restaurant = ({resturant}: Props) => {
         openTime,
         phoneNumber,
         price
-    } = resturant
+    } = restaurant
 
     const getPriceTag = () => {
         const dollarSigns = []
@@ -41,7 +41,7 @@ export const Restaurant = ({resturant}: Props) => {
     return (
         <Link 
             to={'/restaurant/' + id} 
-            className='components__Resturant' style={{
+            className='components__Restaurant' style={{
             background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%),linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%), url(${image})`,                        
             backgroundPosition: 'center',
             backgroundSize: 'cover',
