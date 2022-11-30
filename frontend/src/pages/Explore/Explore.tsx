@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Nav } from '../../components'
 import { apiService } from '../../service/apiService';
-import { Location, Filter, Resturant } from './components'
+import { Location, Filter, Restaurant } from './components'
 import { Categories } from './components/Categories';
 import './style.scss';
 
@@ -72,7 +72,7 @@ export const Explore = () => {
                 <div className='line'></div>
                 <div className="resturantContainer">
                     {resturants.map((resturant, index) => (
-                        <Resturant key={index} resturant={resturant}/>
+                        <Restaurant key={index} resturant={resturant}/>
                     ))}
                 </div>
             </div>

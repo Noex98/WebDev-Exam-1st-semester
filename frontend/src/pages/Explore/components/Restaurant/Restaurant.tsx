@@ -7,7 +7,7 @@ type Props = {
     resturant: IResturant
 }
 
-export const Resturant = ({resturant}: Props) => {
+export const Restaurant = ({resturant}: Props) => {
 
     const { 
         id, 
