@@ -5,8 +5,7 @@ export interface IRes<T> {
 }
 
 export interface IUser {
-    firstname: string,
-    lastname: string,
+    name: string,
     email: string,
     phoneNumber: number
 }
