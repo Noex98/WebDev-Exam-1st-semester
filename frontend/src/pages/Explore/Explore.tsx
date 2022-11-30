@@ -38,7 +38,7 @@ export const Explore = () => {
     
     useEffect(() => {
         if(latitude && longtitude){
-            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=AIzaSyBvRjeC4wHsf574-_J6z-I7eEy32dmNCkQ`)
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=${process.env.REACT_APP_API_KEY}`)
             .then((response) => response.json())
             .then((data) => setAddress(data.results[0].formatted_address));
         }
