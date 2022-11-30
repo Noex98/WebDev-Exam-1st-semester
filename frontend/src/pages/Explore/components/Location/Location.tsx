@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { ReactComponent as PinSvg } from '../../../../assets/icons/pin.svg';
 import './style.scss';
 import { ReactComponent as LocationSvg } from '../../../../assets/icons/location.svg';
@@ -14,7 +14,8 @@ type Props = {
 }
 
 
-export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, address}: Props) => {
+export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, address }: Props) => {
+    const inputRef = useRef<HTMLInputElement>(null);
     const [customAddress, setCustomAddress] = useState<string>("")
     const { coords, isGeolocationAvailable, isGeolocationEnabled, getPosition } =
         useGeolocated({
@@ -23,6 +24,7 @@ export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, add
             },
             userDecisionTimeout: 5000,
         });
+
     useEffect(() => {
         if (coords?.latitude && coords?.longitude) {
             setLatitude(coords.latitude);
@@ -30,11 +32,24 @@ export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, add
         }
     }, [coords, setLatitude, setLongtitude])
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCustomAddress(e.target.value);
-      }
-      console.log(customAddress);
-      
+    useEffect(() => {
+        if(customAddress){
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${customAddress}{&key=${process.env.REACT_APP_API_KEY}`)
+            .then(response => response.json())
+            .then(data => {
+                setLatitude(data.results[0].geometry.location.lat)
+                setLongtitude(data.results[0].geometry.location.lng)
+                console.log(latitude, longtitude);
+                
+        })
+        }
+    }, [customAddress]) 
+    
+    const removeInputValue = () => {
+    if (inputRef.current?.value != null)
+      inputRef.current.value = "";
+    };
+  
 
     return !isGeolocationAvailable ? (
         <div>Your browser does not support Geolocation</div>
@@ -49,17 +64,18 @@ export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, add
 
                 </div>
             </div>
-            <Autocomplete placeholder={address} onChange={handleChange} oninput
+            <Autocomplete ref={inputRef} placeholder={address}
                 apiKey={process.env.REACT_APP_API_KEY}
+                onPlaceSelected={(place) => {
+                    setCustomAddress(place.formatted_address)
+                }}
                 options={{
                     fields: ["formatted_address", "name"],
                     strictBounds: false,
                     types: ["address"],
                 }}
             />
-             <LocationSvg onClick={getPosition} />
-           
-    
+            <LocationSvg onClick={function(event){removeInputValue(); getPosition()}} />
         </div >
     )
         : (

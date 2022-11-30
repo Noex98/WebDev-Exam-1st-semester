@@ -41,7 +41,7 @@ export const Explore = () => {
             fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=${process.env.REACT_APP_API_KEY}`)
             .then((response) => response.json())
             .then((data) => setAddress(data.results[0].formatted_address));
-        }
+        }        
     }, [latitude, longtitude])
 
     return (
@@ -70,7 +70,6 @@ export const Explore = () => {
                 />
 
                 <div className='line'></div>
-
                 <div className="resturantContainer">
                     {resturants.map((resturant, index) => (
                         <Resturant key={index} resturant={resturant}/>
