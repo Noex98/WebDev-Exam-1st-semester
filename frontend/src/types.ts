@@ -11,7 +11,7 @@ export interface IUser {
     phoneNumber: number
 }
 
-export interface IResturant {
+export interface IRestaurant {
     id: number
     name: string
     email: string | null

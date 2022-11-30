@@ -7,7 +7,7 @@ type Props = {
     resturant: IRestaurant
 }
 
-export const Restaurant = ({resturant}: Props) => {
+export const Resturant = ({resturant}: Props) => {
 
     const { 
         id, 
@@ -40,7 +40,7 @@ export const Restaurant = ({resturant}: Props) => {
 
     return (
         <Link 
-            to={'/restaurant/' + id} 
+            to={'/resturant/' + id} 
             className='components__Resturant' style={{
             background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%),linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%), url(${image})`,                        
             backgroundPosition: 'center',
