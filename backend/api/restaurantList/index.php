@@ -15,7 +15,7 @@ $allParamsIsSet = (
 if ($allParamsIsSet){
 
     $userService = new UserService();
-    $data = $userService->getResturantList(
+    $data = $userService->getRestaurantList(
         floatval($req['latitude']),
         floatval($req['longtitude']),
         floatval($req['maxDistance']),

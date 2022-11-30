@@ -25,10 +25,10 @@ class UserService
     /**
      * @param float latitude The users latitude
      * @param float longtitude The users longtitude
-     * @param float maxDistance The maximum distance between user & resturant allowed in results, - in kilometers
+     * @param float maxDistance The maximum distance between user & restaurant allowed in results, - in kilometers
      */
 
-    function getResturantList(
+    function getRestaurantList(
         float $latitude,
         float $longtitude,
         float $maxDistance,
@@ -48,7 +48,7 @@ class UserService
            sin(radians($latitude)) *
            sin(radians(latitude )))
         ) AS distance
-        FROM resturants
+        FROM restaurants
         HAVING distance < $maxDistance " .
             (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
             "ORDER BY $sortBy ASC;";
