@@ -21,13 +21,16 @@ export const Categories = ({ selectedCategories, setSelectedCategories }: Props)
 
     const clickHandler = (id: number) => {
         const index = selectedCategories.indexOf(id);
-        if(index === -1){
+        if (index === -1) {
             setSelectedCategories(prev => [...prev, id])
+            console.log(selectedCategories);
+
         } else {
             setSelectedCategories(prev => {
-                const output = prev;
-                output.splice(index, 1);
+                const output = [...prev];
+                output.splice(index, 1)
                 return [...output];
+
             })
         }
     }
@@ -40,11 +43,14 @@ export const Categories = ({ selectedCategories, setSelectedCategories }: Props)
                     <div className={`imageWrapper ${selectedCategories.includes(category.id) ? "active" : ""}`}>
                         <div
                             onClick={() => clickHandler(category.id)}
-                            className='image' 
-                            key={index} 
+                            className='image'
+                            key={index}
                             style={{
-                                background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%),linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%), url(${category.image})`
-                            }}>
+                                background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%),linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%), url(${category.image})`,
+                                backgroundPosition: 'center',
+                                backgroundSize: 'cover',
+                                backgroundRepeat: 'no-repeat'
+                           }}>
                             <p>{category.name}</p>
                         </div>
                     </div>

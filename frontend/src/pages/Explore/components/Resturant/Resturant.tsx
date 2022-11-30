@@ -31,7 +31,7 @@ export const Resturant = ({resturant}: Props) => {
                 )
             } else {
                 dollarSigns.push(
-                    <span>$</span>
+                    <span className='smallDollarSign'>$</span>
                 )
             }
         }

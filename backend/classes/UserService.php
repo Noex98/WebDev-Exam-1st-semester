@@ -74,4 +74,12 @@ class UserService
         }
         return $categories;
     }
+
+    function getRestaurant($id){
+        $q = "SELECT * FROM restaurants WHERE id = '$id'";
+        $res = $this->mySQL->query($q);
+        $output = mysqli_fetch_assoc($res);
+
+        return $output;
+    }
 }
