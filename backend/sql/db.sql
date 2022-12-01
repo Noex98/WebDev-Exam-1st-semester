@@ -9,17 +9,20 @@ JOIN categories ON categories.id = restaurantCategories.categoryId
 ;
 
 
-SELECT DISTINCT restaurants.* ,
-(
-    6371 *
-    acos(cos(radians(56.162939)) *
-    cos(radians(56.162939)) *
-    cos(radians(10.203921) -
-    radians(10.203921)) +
-    sin(radians(56.162939)) *
-    sin(radians(56.162939 )))
-) AS distance
-FROM restaurants
-HAVING distance < 100
-ORDER BY distance ASC
-;
+SELECT restaurants.id, 
+        restaurants.name,
+        restaurants.email,
+        restaurants.image,
+        restaurants.phoneNumber,
+        restaurants.price,
+        restaurants.openTime,
+        restaurants.closeTime,
+        restaurants.description,
+        restaurants.address,
+        menuItems.title AS menuItemTitle,
+        menuItems.description AS menuItemDescrition,
+        menuItems.price AS menuItemPrice
+        FROM restaurants
+        INNER JOIN `menuItems`
+        ON menuItems.`resturantId` = restaurants.id 
+        WHERE restaurants.id = 3;
