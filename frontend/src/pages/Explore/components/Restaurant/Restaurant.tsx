@@ -27,11 +27,11 @@ export const Restaurant = ({restaurant}: Props) => {
         for (let i = 0; i < 4; i++){
             if(i + 1 < price ){
                 dollarSigns.push(
-                    <b>$</b>
+                    <b key={i}>$</b>
                 )
             } else {
                 dollarSigns.push(
-                    <span className='smallDollarSign'>$</span>
+                    <span key={i} className='smallDollarSign'>$</span>
                 )
             }
         }

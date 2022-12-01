@@ -142,7 +142,6 @@ export class apiService {
             'Content-Type': 'application/json'
         }
     })
-    console.log(res);
     return await res.json();
 
     }

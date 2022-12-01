@@ -37,8 +37,8 @@ class UserService
         string $sortBy,
     ) {
 
-        // Query from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
-        $q = "SELECT *,
+        // Triangulation stuff is from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
+        $q = "SELECT DISTINCT restaurants.*,
         (
            6371 *
            acos(cos(radians($latitude)) *
@@ -48,10 +48,19 @@ class UserService
            sin(radians($latitude)) *
            sin(radians(latitude )))
         ) AS distance
-        FROM restaurants
-        HAVING distance < $maxDistance " .
-            (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
-            "ORDER BY $sortBy ASC;";
+        FROM restaurants " .
+        
+        (
+            !!$categories ? 
+            "JOIN restaurantCategories ON restaurants.id = restaurantCategories.restaurantId
+            JOIN categories ON categories.id = restaurantCategories.categoryId
+            WHERE categoryId IN (" . implode(",", array_map('intval', $categories)) . ") "
+            : " "
+        ) .
+        "HAVING distance < $maxDistance " .
+        (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
+        "ORDER BY $sortBy ASC;";
+ 
         $res = $this->mySQL->query($q);
         $output = [];
 
@@ -64,8 +73,7 @@ class UserService
         return $output;
     }
 
-    function getCategories()
-    {
+    function getCategories(){
         $q = 'SELECT * FROM categories';
         $res = $this->mySQL->query($q);
         $categories = [];
