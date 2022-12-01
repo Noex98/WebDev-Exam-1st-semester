@@ -23,8 +23,6 @@ export const Categories = ({ selectedCategories, setSelectedCategories }: Props)
         const index = selectedCategories.indexOf(id);
         if (index === -1) {
             setSelectedCategories(prev => [...prev, id])
-            console.log(selectedCategories);
-
         } else {
             setSelectedCategories(prev => {
                 const output = [...prev];
@@ -40,11 +38,10 @@ export const Categories = ({ selectedCategories, setSelectedCategories }: Props)
             <h2>Categories</h2>
             <div className='container'>
                 {categories && categories.map((category, index) => (
-                    <div className={`imageWrapper ${selectedCategories.includes(category.id) ? "active" : ""}`}>
+                    <div key={index} className={`imageWrapper ${selectedCategories.includes(category.id) ? "active" : ""}`}>
                         <div
                             onClick={() => clickHandler(category.id)}
                             className='image'
-                            key={index}
                             style={{
                                 background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%),linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.62) 79.69%), url(${category.image})`,
                                 backgroundPosition: 'center',

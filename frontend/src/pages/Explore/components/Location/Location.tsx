@@ -39,9 +39,7 @@ export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, add
             .then(data => {
                 setLatitude(data.results[0].geometry.location.lat)
                 setLongtitude(data.results[0].geometry.location.lng)
-                console.log(latitude, longtitude);
-                
-        })
+            })
         }
     }, [customAddress]) 
     

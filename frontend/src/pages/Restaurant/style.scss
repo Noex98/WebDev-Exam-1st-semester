@@ -1,0 +1,53 @@
+.pages__restaurant {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .titleContainer {
+        display:flex;
+        align-items: center;
+
+        h2 {
+            margin: 0 auto;
+        }
+
+        svg {
+            cursor: pointer;
+        }
+    }
+
+    .infoContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .timeContainer {
+        display:flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .buttonContainer {
+        margin: 10px auto;
+        width: 225px;
+    }
+    >img {
+        height:190px;
+        object-fit: cover;
+    }
+
+    .popupContent {
+        
+        >div {
+            display:flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        input {
+            background: none;
+            border: 1px solid white;
+            padding:10px;
+            border-radius: 15px;
+        }
+    }
+}

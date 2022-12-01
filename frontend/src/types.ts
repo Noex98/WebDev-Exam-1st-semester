@@ -14,12 +14,12 @@ export interface IUser {
 export interface IRestaurant {
     id: number
     name: string
-    email: string | null
+    email: string
     image: string
-    phoneNumber: number | null
-    openTime: string | null
-    closeTime: string | null
-    description: string | null
+    phoneNumber: number
+    openTime: string
+    closeTime: string
+    description: string
     distance: number
     price: number
 }
