@@ -19,34 +19,31 @@ export const Explore = () => {
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
     const [address, setAddress] = useState<string>("");
 
-    
-
     useEffect(() => {
-        setIsloading(true);
-        if(latitude && longtitude){
-            apiService.getRestaurantList(
-                latitude,
-                longtitude,
-                maxDistance,
-                selectedCategories,
-                searchString,
-                sortBy
+            if(latitude && longtitude){
+                setIsloading(true);
+                apiService.getRestaurantList(
+                    latitude,
+                    longtitude,
+                    maxDistance,
+                    selectedCategories,
+                    searchString,
+                    sortBy
                 ).then(res => {
                     if (res.succes){
                         setRestaurants(res.data)
-                        setIsloading(false)
                     }
+                    setIsloading(false)
                 })
             }
     }, [longtitude, latitude, searchString, sortBy, maxDistance, selectedCategories])
 
-    
     useEffect(() => {
         if(latitude && longtitude){
             fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=${process.env.REACT_APP_API_KEY}`)
             .then((response) => response.json())
             .then((data) => setAddress(data.results[0].formatted_address));
-        }        
+        }
     }, [latitude, longtitude])
 
     return (
