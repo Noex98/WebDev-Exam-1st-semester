@@ -10,11 +10,12 @@ export interface IUser {
     phoneNumber: number
 }
 
+//menu
 export interface IRestaurant {
     id: number
     name: string
     email: string | null
-    image: string | null
+    image: string
     phoneNumber: number | null
     openTime: string | null
     closeTime: string | null

@@ -147,7 +147,7 @@ export class apiService {
 
     }
 
-    static getRestaurant = async(id: number): Promise<IRes<IRestaurant[]>> => {
+    static getRestaurant = async(id: number): Promise<IRes<IRestaurant>> => {
         const url = '/api/restaurant'
         const res = await fetch(url, {
             method: 'POST', 
@@ -158,7 +158,6 @@ export class apiService {
                 id: id
             })
         })
-        console.log(res)
         return await res.json();
     }
 

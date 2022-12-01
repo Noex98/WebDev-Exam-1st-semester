@@ -45,7 +45,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Explore />} />
                     <Route path="/reservations" element={<Reservations />} />
-                    <Route path="/restaurant/:id" element={<Restaurant />} />
+                    <Route path="/restaurant/:id" element={<Restaurant  />} />
                     <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
                     <Route path="/*" element={<Navigate to={'/'}/>} />
                 </Routes>

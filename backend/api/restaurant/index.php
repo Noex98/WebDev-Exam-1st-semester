@@ -10,6 +10,8 @@ $userService = new UserService();
 
 $id = $req['id'];
 
+//menu
+
 $restaurant = $userService->getRestaurant($id);
 if ($restaurant) {
     echo json_encode([
