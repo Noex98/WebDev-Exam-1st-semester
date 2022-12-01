@@ -30,7 +30,7 @@ export const Filter = ({ searchString, setSearchString, sortBy, setSortBy, maxDi
 
                     <p>Max distance: {maxDistance} km</p>
                     <br></br>
-                    <input type="range" min="1" max="200" onChange={e => setMaxDistance(parseInt(e.target.value))} />
+                    <input type="range" value={maxDistance} min="1" max="200" onChange={e => setMaxDistance(parseInt(e.target.value))} />
                 </div>
             </Popup>
         </div>

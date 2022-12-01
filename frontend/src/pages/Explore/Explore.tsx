@@ -15,7 +15,7 @@ export const Explore = () => {
     const [latitude, setLatitude] = useState<number | null>(null);
     const [searchString, setSearchString] = useState<string>("");
     const [sortBy, setSortBy] = useState<"distance" | "price">("distance");
-    const [maxDistance, setMaxDistance] = useState<number>(1000);
+    const [maxDistance, setMaxDistance] = useState<number>(100);
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
     const [address, setAddress] = useState<string>("");
 
