@@ -49,18 +49,17 @@ class UserService
            sin(radians(latitude )))
         ) AS distance
         FROM restaurants " .
-        
-        (
-            !!$categories ? 
-            "JOIN restaurantCategories ON restaurants.id = restaurantCategories.restaurantId
+
+            (!!$categories ?
+                "JOIN restaurantCategories ON restaurants.id = restaurantCategories.restaurantId
             JOIN categories ON categories.id = restaurantCategories.categoryId
             WHERE categoryId IN (" . implode(",", array_map('intval', $categories)) . ") "
-            : " "
-        ) .
-        "HAVING distance < $maxDistance " .
-        (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
-        "ORDER BY $sortBy ASC;";
- 
+                : " "
+            ) .
+            "HAVING distance < $maxDistance " .
+            (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
+            "ORDER BY $sortBy ASC;";
+
         $res = $this->mySQL->query($q);
         $output = [];
 
@@ -73,7 +72,8 @@ class UserService
         return $output;
     }
 
-    function getCategories(){
+    function getCategories()
+    {
         $q = 'SELECT * FROM categories';
         $res = $this->mySQL->query($q);
         $categories = [];
@@ -83,26 +83,29 @@ class UserService
         return $categories;
     }
 
-    function getRestaurant($id){
-        $q = "SELECT restaurants.id, 
-        restaurants.name,
-        restaurants.email,
-        restaurants.image,
-        restaurants.phoneNumber,
-        restaurants.price,
-        restaurants.openTime,
-        restaurants.closeTime,
-        restaurants.description,
-        restaurants.address,
-        menuItems.title AS menuItemTitle,
-        menuItems.description AS menuItemDescrition,
-        menuItems.price AS menuItemPrice
-        FROM restaurants
-        INNER JOIN `menuItems`
-        ON menuItems.`resturantId` = restaurants.id 
-        WHERE restaurants.id = '$id';";
+    function getRestaurant($id)
+    {
+        $q = "SELECT * FROM restaurants WHERE id = '$id';";
         $res = $this->mySQL->query($q);
         $output = mysqli_fetch_assoc($res);
         return $output;
     }
+
+    // function getRestaurantMenuItems($id)
+    // {
+    //     $q = "SELECT *,
+    //     menuItems.title AS menuItemTitle,
+    //     menuItems.description AS menuItemDescrition,
+    //     menuItems.price AS menuItemPrice
+    //     FROM restaurants
+    //     INNER JOIN `menuItems`
+    //     ON menuItems.`resturantId` = restaurants.id 
+    //     WHERE restaurants.id = '$id';";
+    //     $res = $this->mySQL->query($q);
+    //     $menuItems = [];
+    //     while ($row = mysqli_fetch_array($res)) {
+    //         $menuItems[] = $row;
+    //     }
+    //     return $menuItems;
+    // }
 }

@@ -1,4 +1,4 @@
-import { ICategory, IRes, IRestaurant, IUser } from "../types";
+import { ICategory, IRes, IRestaurant, IRestaurantFull, IUser } from "../types";
 
 export class apiService {
 
@@ -146,7 +146,7 @@ export class apiService {
 
     }
 
-    static getRestaurant = async(id: string): Promise<IRes<IRestaurant>> => {
+    static getRestaurant = async(id: string): Promise<IRes<IRestaurantFull>> => {
         const url = '/api/restaurant'
         const res = await fetch(url, {
             method: 'POST', 

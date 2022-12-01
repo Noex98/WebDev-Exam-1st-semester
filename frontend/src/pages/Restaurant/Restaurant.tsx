@@ -98,7 +98,6 @@ export const Restaurant = () => {
                     <CtaButton color='positive'>Confirm</CtaButton>
                 </Popup>
                 <div className='menuItems'>
-                    {/* <p>{restaurant.menuItemDescription}</p> */}
                 </div>
             </div>
             
