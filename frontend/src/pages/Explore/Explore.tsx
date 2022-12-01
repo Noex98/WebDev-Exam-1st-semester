@@ -80,7 +80,11 @@ export const Explore = () => {
                     <Spinner type='block'/>
                 )}
 
-                {!isLoading && (
+                {!isLoading && restaurants.length === 0 && (
+                    <div>No results</div>
+                )}
+
+                {!isLoading && restaurants.length !== 0 && (
                     <div className="restaurantContainer">
                         {restaurants.map((restaurant, index) => (
                             <Restaurant key={index} restaurant={restaurant}/>
