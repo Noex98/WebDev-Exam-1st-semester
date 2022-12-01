@@ -71,7 +71,6 @@ export const Restaurant = () => {
 
                 
                 <div className='menuItems'>
-                    {/* <p>{restaurant.menuItemDescription}</p> */}
                 </div>
             </div>
             
