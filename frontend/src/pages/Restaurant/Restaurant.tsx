@@ -5,9 +5,7 @@ import { apiService } from '../../service/apiService';
 import { IRestaurant } from '../../types';
 import { ReactComponent as ClockSvg } from '../../assets/icons/clock.svg'
 import { ReactComponent as ArrowSvg } from '../../assets/icons/arrow_left.svg'
-import { ReactComponent as PeopleSvg } from '../../assets/icons/people.svg'
-import { ReactComponent as CalenderSvg} from '../../assets/icons/calender.svg'
-import { ReactComponent as TextBoxSvg } from '../../assets/icons/textBox.svg'
+
 
 import './style.scss'
 
@@ -17,7 +15,7 @@ export const Restaurant = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true)
     const [restaurant, setRestaurant] = useState<IRestaurant | null>(null);
-    const [popupOpen, setPopupOpen] = useState(false);
+    
 
     useEffect(() => {
         if(id){
@@ -68,35 +66,10 @@ export const Restaurant = () => {
                 </div>
                 <img width='100%' src={restaurant.image} alt="" />
                 <div className='buttonContainer'>
-                    <CtaButton onClick={() => setPopupOpen(true)} color="positive">Make reservation</CtaButton>
+                    
                 </div>
 
-                <Popup open={popupOpen} closePopup={() => setPopupOpen(false)}>
-                    <div className='popupContent'>
-                        <div>
-                            <PeopleSvg />
-                            <label>
-                                <div>Number of people</div>
-                                <input type="text" />
-                            </label>
-                        </div>
-                        <div>
-                            <CalenderSvg />
-                            <label>
-                                <div>Time & date</div>
-                                <input type="datetime-local" />
-                            </label>
-                        </div>
-                        <div>
-                            <TextBoxSvg />
-                            <label>
-                                <div>Comment</div>
-                                <input type="text" />
-                            </label>
-                        </div>
-                    </div>
-                    <CtaButton color='positive'>Confirm</CtaButton>
-                </Popup>
+                
                 <div className='menuItems'>
                     {/* <p>{restaurant.menuItemDescription}</p> */}
                 </div>
