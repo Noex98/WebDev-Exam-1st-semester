@@ -25,8 +25,8 @@ export const Filter = ({ searchString, setSearchString, sortBy, setSortBy, maxDi
             <Popup open={isPopupOpen} closePopup={() => setIsPopupOpen(false)}>
                 <div>
                     <p>Sort by</p>
-                    <button onClick={() => setSortBy("price")} className={sortBy === "price" ? "active" : ""}> Price </button>
                     <button onClick={() => setSortBy("distance")} className={sortBy === "distance" ? "active" : ""}> Distance </button>
+                    <button onClick={() => setSortBy("price")} className={sortBy === "price" ? "active" : ""}> Price </button>
 
                     <p>Max distance: {maxDistance} km</p>
                     <br></br>

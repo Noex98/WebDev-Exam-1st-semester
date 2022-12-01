@@ -30,4 +30,24 @@
         margin: 10px auto;
         width: 225px;
     }
+    >img {
+        height:190px;
+        object-fit: cover;
+    }
+
+    .popupContent {
+        
+        >div {
+            display:flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        input {
+            background: none;
+            border: 1px solid white;
+            padding:10px;
+            border-radius: 15px;
+        }
+    }
 }
