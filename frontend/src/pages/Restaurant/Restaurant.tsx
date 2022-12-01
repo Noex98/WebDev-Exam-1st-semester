@@ -5,7 +5,6 @@ import { apiService } from '../../service/apiService';
 import { IRestaurant } from '../../types';
 import { ReactComponent as ClockSvg } from '../../assets/icons/clock.svg'
 import { ReactComponent as ArrowSvg } from '../../assets/icons/arrow_left.svg'
-
 import { ReactComponent as PeopleSvg } from '../../assets/icons/people.svg'
 import { ReactComponent as CalenderSvg} from '../../assets/icons/calender.svg'
 import { ReactComponent as TextBoxSvg } from '../../assets/icons/textBox.svg'

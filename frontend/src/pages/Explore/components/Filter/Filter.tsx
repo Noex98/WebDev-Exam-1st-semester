@@ -25,12 +25,12 @@ export const Filter = ({ searchString, setSearchString, sortBy, setSortBy, maxDi
             <Popup open={isPopupOpen} closePopup={() => setIsPopupOpen(false)}>
                 <div>
                     <p>Sort by</p>
-                    <button onClick={() => setSortBy("distance")} className={sortBy === "distance" ? "active" : ""}> Distance </button>
                     <button onClick={() => setSortBy("price")} className={sortBy === "price" ? "active" : ""}> Price </button>
+                    <button onClick={() => setSortBy("distance")} className={sortBy === "distance" ? "active" : ""}> Distance </button>
 
                     <p>Max distance: {maxDistance} km</p>
                     <br></br>
-                    <input type="range" value={maxDistance} min="1" max="200" onChange={e => setMaxDistance(parseInt(e.target.value))} />
+                    <input type="range" min="1" max="200" onChange={e => setMaxDistance(parseInt(e.target.value))} />
                 </div>
             </Popup>
         </div>

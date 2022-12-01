@@ -34,7 +34,7 @@ class UserService
         float $maxDistance,
         array $categories,
         string $searchString,
-        string $sortBy,
+        string $sortBy
     ) {
 
         // Triangulation stuff is from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
