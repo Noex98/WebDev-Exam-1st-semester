@@ -22,6 +22,10 @@ export interface IRestaurant {
     description: string
     distance: number
     price: number
+    menuItemTitle: string
+    menuItemDescription: string
+    menuItemPrice: number
+
 }
 
 export interface ICategory {

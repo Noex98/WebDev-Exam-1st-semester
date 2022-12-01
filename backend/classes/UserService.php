@@ -84,7 +84,23 @@ class UserService
     }
 
     function getRestaurant($id){
-        $q = "SELECT * FROM restaurants WHERE id = '$id'";
+        $q = "SELECT restaurants.id, 
+        restaurants.name,
+        restaurants.email,
+        restaurants.image,
+        restaurants.phoneNumber,
+        restaurants.price,
+        restaurants.openTime,
+        restaurants.closeTime,
+        restaurants.description,
+        restaurants.address,
+        menuItems.title AS menuItemTitle,
+        menuItems.description AS menuItemDescrition,
+        menuItems.price AS menuItemPrice
+        FROM restaurants
+        INNER JOIN `menuItems`
+        ON menuItems.`resturantId` = restaurants.id 
+        WHERE restaurants.id = '$id';";
         $res = $this->mySQL->query($q);
         $output = mysqli_fetch_assoc($res);
         return $output;
