@@ -57,55 +57,6 @@ export class apiService {
         return await res.json();
     }
 
-    static editUser = async( 
-        firstname: string,
-        lastname: string,
-        height: number,
-        gender: "male" | "female",
-        birthday: string
-    ): Promise<IRes<null>> => {
-        const url = '/api/edit'
-        const res = await fetch(url, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                firstname: firstname,
-                lastname: lastname,
-                height: height,
-                gender: gender,
-                birthday: birthday
-            })
-        })
-        return await res.json();
-    }
-
-    static setPreferences = async(
-        heightMin: number,
-        heightMax: number,
-        ageMin: number,
-        ageMax: number,
-        gender: "male" | "female" | "all"
-    ): Promise<IRes<null>> => {
-        const url = '/api/preferences'
-        const res = await fetch(url, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                heightMin: heightMin,
-                heightMax: heightMax,
-                ageMin: ageMin,
-                ageMax: ageMax,
-                gender: gender
-            })
-        })
-        return await res.json();
-    }
     static getRestaurantList = async(
         latitude: number,
         longtitude: number,
@@ -113,7 +64,7 @@ export class apiService {
         categories: number[],
         searchString: string,
         sortBy: "price" | "distance"
-    ): Promise<IRes<any>> => {
+    ): Promise<IRes<IRestaurant[]>> => {
         const url = '/api/restaurantList'
         const res = await fetch(url, {
             method: "POST",
