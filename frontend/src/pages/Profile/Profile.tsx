@@ -3,6 +3,7 @@ import { IUser } from '../../types';
 import { apiService } from '../../service/apiService';
 import { SetStateAction, useState } from 'react';
 import { CtaButton, Nav, Popup } from '../../components';
+import { ReactComponent as ArrowRight } from '../../assets/icons/arrow_right.svg'
 
 
 type Props = {
@@ -10,7 +11,7 @@ type Props = {
     setUser: React.Dispatch<SetStateAction<IUser | null>>
 }
 
-export const Profile = ({user, setUser}: Props) => {
+export const Profile = ({ user, setUser }: Props) => {
 
     const [popupOpen, setPopupOpen] = useState(false);
 
@@ -18,11 +19,22 @@ export const Profile = ({user, setUser}: Props) => {
         apiService.logout();
         setUser(null);
     }
+    console.log(user);
+
 
     return (
         <>
-            <div>  
+            <div className='pages__profile'>
                 <h3>Profile</h3>
+                <div className="setting">
+                    <div className="right">
+                        <h4>Name:</h4>
+                    </div>
+                    <div className="left">
+                        <p>{user.name}</p>
+                        <ArrowRight/>
+                    </div>
+                </div>
                 <CtaButton color='negative' onClick={logoutHandler}>Log out</CtaButton>
                 <CtaButton onClick={() => setPopupOpen(true)}>Open popup</CtaButton>
             </div>
