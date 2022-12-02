@@ -22,6 +22,12 @@ class UserService
         return $output;
     }
 
+    function editUser(int $id, $key, $value) {
+        $q = "UPDATE users SET '$key' = '$value' WHERE id = '$id'";
+        $res = $this->mySQL->query($q);
+        return $res ? true : false;
+    }
+
     /**
      * @param float latitude The users latitude
      * @param float longtitude The users longtitude
@@ -34,11 +40,11 @@ class UserService
         float $maxDistance,
         array $categories,
         string $searchString,
-        string $sortBy,
+        string $sortBy
     ) {
 
-        // Query from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
-        $q = "SELECT *,
+        // Triangulation stuff is from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
+        $q = "SELECT DISTINCT restaurants.*,
         (
            6371 *
            acos(cos(radians($latitude)) *
@@ -48,10 +54,18 @@ class UserService
            sin(radians($latitude)) *
            sin(radians(latitude )))
         ) AS distance
-        FROM restaurants
-        HAVING distance < $maxDistance " .
+        FROM restaurants " .
+
+            (!!$categories ?
+                "JOIN restaurantCategories ON restaurants.id = restaurantCategories.restaurantId
+                JOIN categories ON categories.id = restaurantCategories.categoryId
+                WHERE categoryId IN (" . implode(",", array_map('intval', $categories)) . ") "
+                : " "
+            ) .
+            "HAVING distance < $maxDistance " .
             (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
             "ORDER BY $sortBy ASC;";
+
         $res = $this->mySQL->query($q);
         $output = [];
 
@@ -75,11 +89,37 @@ class UserService
         return $categories;
     }
 
-    function getRestaurant($id){
-        $q = "SELECT * FROM restaurants WHERE id = '$id'";
+    function getRestaurant($id)
+    {
+        $q = "SELECT * FROM restaurants WHERE id = '$id';";
         $res = $this->mySQL->query($q);
-        $output = mysqli_fetch_assoc($res);
+        $restaurant = mysqli_fetch_assoc($res);
+        if (!$restaurant) {
+            return false;
+        }
+        $q = "SELECT * from menuItems where resturantId = '$id';";
+        $res = $this->mySQL->query($q);
+        $menuItems = [];
+        while ($row = mysqli_fetch_array($res)) {
+            $menuItems[] = $row;
+        }
+        $restaurant["menuItems"] = $menuItems;
+        return $restaurant;
+    }
 
-        return $output;
+
+    function deleteUser($id)
+    {        
+        $q = "DELETE FROM users WHERE id='$id';";
+        $res = $this->mySQL->query($q);
+        if (!$res) {
+            return false;
+        }
+        $q = "DELETE FROM userPrivate WHERE id='$id';";
+        $res = $this->mySQL->query($q);
+        if (!$res) {
+            return false;
+        }
+        return $res;
     }
 }

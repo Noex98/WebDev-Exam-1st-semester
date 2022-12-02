@@ -21,6 +21,10 @@ export const Profile = ({ user, setUser }: Props) => {
         setUser(null);
     }
     console.log(user);
+    const deleteUserHandler = () => {
+        apiService.deleteUser();
+        setUser(null);
+    }
 
 
     return (
