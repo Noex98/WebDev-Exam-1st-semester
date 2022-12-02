@@ -22,6 +22,12 @@ class UserService
         return $output;
     }
 
+    function editUser(int $id, $key, $value) {
+        $q = "UPDATE users SET '$key' = '$value' WHERE id = '$id'";
+        $res = $this->mySQL->query($q);
+        return $res ? true : false;
+    }
+
     /**
      * @param float latitude The users latitude
      * @param float longtitude The users longtitude
