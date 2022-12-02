@@ -17,7 +17,7 @@ export const Explore = () => {
     const [sortBy, setSortBy] = useState<"distance" | "price">("distance");
     const [maxDistance, setMaxDistance] = useState<number>(100);
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
-    const [address, setAddress] = useState<string>("");
+
 
     useEffect(() => {
             if(latitude && longtitude){
@@ -38,14 +38,6 @@ export const Explore = () => {
             }
     }, [longtitude, latitude, searchString, sortBy, maxDistance, selectedCategories])
 
-    useEffect(() => {
-        if(latitude && longtitude){
-            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=${process.env.REACT_APP_API_KEY}`)
-            .then((response) => response.json())
-            .then((data) => setAddress(data.results[0].formatted_address));
-        }
-    }, [latitude, longtitude])
-
     return (
         <>
             <div className="pages__explore">
@@ -54,7 +46,6 @@ export const Explore = () => {
                     latitude={latitude}
                     setLongtitude={setLongtitude}
                     setLatitude={setLatitude} 
-                    address={address}
                 />
                 <div className='line'></div>
                 <Filter
