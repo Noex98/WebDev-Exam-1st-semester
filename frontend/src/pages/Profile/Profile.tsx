@@ -33,12 +33,18 @@ export const Profile = ({ user, setUser }: Props) => {
             <div className='pages__profile'>
                 <div className="settings">
                     <h2>Profile</h2>
-                    <Setting label='Name' value={user.name} key='name' />
-                    <Setting label='Email' value={user.email} key="email" />
-                    <Setting label='Name' value={user.phoneNumber} key="phoneNumber"/>
-                    <Setting label='Delete account' value="" key="" />
-                    <Setting label='Reset Password' value="" key=""/>
-                    <Setting label='Notifications' value="" key=""/>
+                    <Link to="/editUser" state={"name"}>
+                        <Setting label='Name' value={user.name} />
+                    </Link>
+                    <Link to="/editUser" state="email">
+                        <Setting label='Email' value={user.email}  />
+                    </Link>
+                    <Link to="/editUser" state="phoneNumber">
+                        <Setting label='Name' value={user.phoneNumber} />
+                    </Link>
+                    <Setting label='Delete account' value="" />
+                    <Setting label='Reset Password' value="" />
+                    <Setting label='Notifications' value="" />
                 </div>
                 <div>
                     <CtaButton color='negative' onClick={logoutHandler}>Log out</CtaButton>
