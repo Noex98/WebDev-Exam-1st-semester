@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Nav, Spinner } from '../../components'
 import { apiService } from '../../service/apiService';
+import { IRestaurant } from '../../types';
 import { Location, Filter, Restaurant } from './components'
 import { Categories } from './components/Categories';
 import './style.scss';
 
 export const Explore = () => {
 
-    const [restaurants, setRestaurants] = useState<any[]>([]);
+    const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
     const [isLoading, setIsloading] = useState(true);
 
     //Filters
