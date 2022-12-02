@@ -52,8 +52,8 @@ class UserService
 
             (!!$categories ?
                 "JOIN restaurantCategories ON restaurants.id = restaurantCategories.restaurantId
-            JOIN categories ON categories.id = restaurantCategories.categoryId
-            WHERE categoryId IN (" . implode(",", array_map('intval', $categories)) . ") "
+                JOIN categories ON categories.id = restaurantCategories.categoryId
+                WHERE categoryId IN (" . implode(",", array_map('intval', $categories)) . ") "
                 : " "
             ) .
             "HAVING distance < $maxDistance " .
