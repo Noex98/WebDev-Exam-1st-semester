@@ -4,3 +4,4 @@ export * from './Signup';
 export * from './Reservations';
 export * from './Explore';
 export * from './Restaurant';
+export * from './EditUser';

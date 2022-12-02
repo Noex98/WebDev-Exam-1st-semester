@@ -2,8 +2,9 @@ import './style.scss';
 import { IUser } from '../../types';
 import { apiService } from '../../service/apiService';
 import { SetStateAction, useState } from 'react';
-import { CtaButton, Nav, Popup } from '../../components';
-import { Setting } from './components/Setting'
+import { CtaButton, Nav } from '../../components';
+import { Setting } from './components/Setting';
+import { Link } from "react-router-dom"
 
 
 
@@ -30,18 +31,18 @@ export const Profile = ({ user, setUser }: Props) => {
     return (
         <>
             <div className='pages__profile'>
-            <div className="settings">
-                <h2>Profile</h2>
-                <Setting label='Name' value={user.name} />
-                <Setting label='Email' value={user.email} />
-                <Setting label='Name' value={user.phoneNumber} />
-                <Setting label='Delete account' value="" />
-                <Setting label='Reset Password' value="" />
-                <Setting label='Notifications' value="" />
+                <div className="settings">
+                    <h2>Profile</h2>
+                    <Setting label='Name' value={user.name} key='name' />
+                    <Setting label='Email' value={user.email} key="email" />
+                    <Setting label='Name' value={user.phoneNumber} key="phoneNumber"/>
+                    <Setting label='Delete account' value="" key="" />
+                    <Setting label='Reset Password' value="" key=""/>
+                    <Setting label='Notifications' value="" key=""/>
                 </div>
                 <div>
-                <CtaButton color='negative' onClick={logoutHandler}>Log out</CtaButton>
-                <CtaButton onClick={() => setPopupOpen(true)}>Open popup</CtaButton>
+                    <CtaButton color='negative' onClick={logoutHandler}>Log out</CtaButton>
+                    <CtaButton onClick={() => setPopupOpen(true)}>Open popup</CtaButton>
                 </div>
             </div>
             <Nav />
