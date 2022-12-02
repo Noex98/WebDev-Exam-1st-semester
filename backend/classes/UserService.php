@@ -103,8 +103,7 @@ class UserService
 
 
     function deleteUser($id)
-    {
-        
+    {        
         $q = "DELETE FROM users WHERE id='$id';";
         $res = $this->mySQL->query($q);
         if (!$res) {

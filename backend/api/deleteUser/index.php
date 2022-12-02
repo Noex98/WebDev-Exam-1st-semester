@@ -14,7 +14,7 @@ $id = $authService->authenticate();
 
 //menu
 
-if($id){
+if ($id) {
     $deleteUser = $userService->deleteUser($id);
     if ($deleteUser) {
         echo json_encode([
@@ -29,7 +29,6 @@ if($id){
             'errMessage' => 'Invalid request. User does not exist',
         ]);
     }
-
 } else {
     echo json_encode([
         'data' => null,
@@ -37,7 +36,3 @@ if($id){
         'errMessage' => 'Invalid request. User not logged in.',
     ]);
 }
-
-
-
-

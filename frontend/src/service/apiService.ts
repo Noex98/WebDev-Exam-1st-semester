@@ -111,6 +111,19 @@ export class apiService {
         return await res.json();
     }
 
+    
+    static deleteUser = async(): Promise<IRes<null>> => {
+        const url = '/api/deleteUser'
+        const res = await fetch(url, {
+            method: 'POST', 
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        return await res.json();
+    }
+
     static logout = async (): Promise<IRes<null>> => {
         const url = '/api/logout'
         const res = await fetch(url, {
