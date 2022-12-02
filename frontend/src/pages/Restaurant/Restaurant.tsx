@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CtaButton, Nav, Popup, PriceTag, Spinner } from '../../components';
 import { apiService } from '../../service/apiService';
-import { IRestaurant } from '../../types';
+import { IRestaurantFull } from '../../types';
 import { ReactComponent as ClockSvg } from '../../assets/icons/clock.svg'
 import { ReactComponent as ArrowSvg } from '../../assets/icons/arrow_left.svg'
 import { ReactComponent as PeopleSvg } from '../../assets/icons/people.svg'
@@ -16,7 +16,7 @@ export const Restaurant = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true)
-    const [restaurant, setRestaurant] = useState<IRestaurant | null>(null);
+    const [restaurant, setRestaurant] = useState<IRestaurantFull | null>(null);
     const [popupOpen, setPopupOpen] = useState(false);
 
     useEffect(() => {
@@ -98,6 +98,9 @@ export const Restaurant = () => {
                     <CtaButton color='positive'>Confirm</CtaButton>
                 </Popup>
                 <div className='menuItems'>
+                    {restaurant.menuItems.map((menuItem, index) => (
+                        <h3 key={index}>{menuItem.title}</h3>
+                    ))}
                 </div>
             </div>
             
