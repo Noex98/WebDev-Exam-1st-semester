@@ -10,13 +10,13 @@ type Props = {
     setLongtitude: React.Dispatch<React.SetStateAction<number | null>>,
     latitude: number | null,
     setLatitude: React.Dispatch<React.SetStateAction<number | null>>
-    address: string,
 }
 
 
-export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, address }: Props) => {
+export const Location = ({ longtitude, setLongtitude, latitude, setLatitude }: Props) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [customAddress, setCustomAddress] = useState<string>("")
+    const [address, setAddress] = useState<string>("");
     const { coords, isGeolocationAvailable, isGeolocationEnabled, getPosition } =
         useGeolocated({
             positionOptions: {
@@ -33,6 +33,16 @@ export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, add
     }, [coords, setLatitude, setLongtitude])
 
     useEffect(() => {
+        if(latitude && longtitude){
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longtitude}&key=${process.env.REACT_APP_API_KEY}`)
+            .then((response) => response.json())
+            .then(data => {
+                setAddress(data.results[0].formatted_address)
+                });
+        }
+    }, [latitude, longtitude])
+
+    useEffect(() => {
         if(customAddress){
             fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${customAddress}{&key=${process.env.REACT_APP_API_KEY}`)
             .then(response => response.json())
@@ -41,7 +51,8 @@ export const Location = ({ longtitude, setLongtitude, latitude, setLatitude, add
                 setLongtitude(data.results[0].geometry.location.lng)
             })
         }
-    }, [customAddress]) 
+    }, [customAddress, setLatitude, setLongtitude]) 
+    
     
     const removeInputValue = () => {
     if (inputRef.current?.value != null)
