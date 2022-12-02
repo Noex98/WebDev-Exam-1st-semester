@@ -104,11 +104,17 @@ class UserService
 
     function deleteUser($id)
     {
+        
         $q = "DELETE FROM users WHERE id='$id';";
         $res = $this->mySQL->query($q);
-        if(!$res){
+        if (!$res) {
             return false;
         }
-        
+        $q = "DELETE FROM userPrivate WHERE id='$id';";
+        $res = $this->mySQL->query($q);
+        if (!$res) {
+            return false;
+        }
+        return $res;
     }
 }
