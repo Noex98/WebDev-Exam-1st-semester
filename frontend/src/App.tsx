@@ -48,7 +48,7 @@ function App() {
                     <Route path="/reservations" element={<Reservations />} />
                     <Route path="/restaurant/:id" element={<Restaurant  />} />
                     <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
-                    <Route path="/editUser" element= {<EditUser />} />
+                    <Route path="/editUser" element= {<EditUser user={user} setUser={setUser}/>} />
                     <Route path="/*" element={<Navigate to={'/'}/>} />
                 </Routes>
             )}

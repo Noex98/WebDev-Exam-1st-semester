@@ -33,14 +33,14 @@ export const Profile = ({ user, setUser }: Props) => {
             <div className='pages__profile'>
                 <div className="settings">
                     <h2>Profile</h2>
-                    <Link to="/editUser" state={"name"}>
+                    <Link to="/editUser" state="Name">
                         <Setting label='Name' value={user.name} />
                     </Link>
-                    <Link to="/editUser" state="email">
+                    <Link to="/editUser" state="Email">
                         <Setting label='Email' value={user.email}  />
                     </Link>
-                    <Link to="/editUser" state="phoneNumber">
-                        <Setting label='Name' value={user.phoneNumber} />
+                    <Link to="/editUser" state="Phone Number">
+                        <Setting label='Phone Number' value={user.phoneNumber} />
                     </Link>
                     <Setting label='Delete account' value="" />
                     <Setting label='Reset Password' value="" />
