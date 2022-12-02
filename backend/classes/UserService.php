@@ -58,8 +58,8 @@ class UserService
 
             (!!$categories ?
                 "JOIN restaurantCategories ON restaurants.id = restaurantCategories.restaurantId
-            JOIN categories ON categories.id = restaurantCategories.categoryId
-            WHERE categoryId IN (" . implode(",", array_map('intval', $categories)) . ") "
+                JOIN categories ON categories.id = restaurantCategories.categoryId
+                WHERE categoryId IN (" . implode(",", array_map('intval', $categories)) . ") "
                 : " "
             ) .
             "HAVING distance < $maxDistance " .
@@ -93,25 +93,34 @@ class UserService
     {
         $q = "SELECT * FROM restaurants WHERE id = '$id';";
         $res = $this->mySQL->query($q);
-        $output = mysqli_fetch_assoc($res);
-        return $output;
+        $restaurant = mysqli_fetch_assoc($res);
+        if (!$restaurant) {
+            return false;
+        }
+        $q = "SELECT * from menuItems where resturantId = '$id';";
+        $res = $this->mySQL->query($q);
+        $menuItems = [];
+        while ($row = mysqli_fetch_array($res)) {
+            $menuItems[] = $row;
+        }
+        $restaurant["menuItems"] = $menuItems;
+        return $restaurant;
     }
 
-    // function getRestaurantMenuItems($id)
-    // {
-    //     $q = "SELECT *,
-    //     menuItems.title AS menuItemTitle,
-    //     menuItems.description AS menuItemDescrition,
-    //     menuItems.price AS menuItemPrice
-    //     FROM restaurants
-    //     INNER JOIN `menuItems`
-    //     ON menuItems.`resturantId` = restaurants.id 
-    //     WHERE restaurants.id = '$id';";
-    //     $res = $this->mySQL->query($q);
-    //     $menuItems = [];
-    //     while ($row = mysqli_fetch_array($res)) {
-    //         $menuItems[] = $row;
-    //     }
-    //     return $menuItems;
-    // }
+
+    function deleteUser($id)
+    {
+        
+        $q = "DELETE FROM users WHERE id='$id';";
+        $res = $this->mySQL->query($q);
+        if (!$res) {
+            return false;
+        }
+        $q = "DELETE FROM userPrivate WHERE id='$id';";
+        $res = $this->mySQL->query($q);
+        if (!$res) {
+            return false;
+        }
+        return $res;
+    }
 }

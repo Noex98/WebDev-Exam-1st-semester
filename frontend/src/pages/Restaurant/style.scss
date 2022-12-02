@@ -1,53 +1,64 @@
 .pages__restaurant {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .titleContainer {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    align-items: center;
 
-    .titleContainer {
-        display:flex;
-        align-items: center;
-
-        h2 {
-            margin: 0 auto;
-        }
-
-        svg {
-            cursor: pointer;
-        }
+    h2 {
+      margin: 0 auto;
     }
 
-    .infoContainer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    svg {
+      cursor: pointer;
     }
-    .timeContainer {
-        display:flex;
-        align-items: center;
-        gap: 15px;
-    }
-    .buttonContainer {
-        margin: 10px auto;
-        width: 225px;
-    }
-    >img {
-        height:190px;
-        object-fit: cover;
+  }
+
+  .infoContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .timeContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .buttonContainer {
+    margin: 10px auto;
+    width: 225px;
+  }
+  > img {
+    height: 190px;
+    object-fit: cover;
+  }
+
+  .popupContent {
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 30px;
     }
 
-    .popupContent {
-        
-        >div {
-            display:flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        input {
-            background: none;
-            border: 1px solid white;
-            padding:10px;
-            border-radius: 15px;
-        }
+    input {
+      background: none;
+      border: 1px solid white;
+      padding: 10px;
+      border-radius: 15px;
     }
+  }
+  .menuItems {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #949494;
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+    p {
+        font-size: 14px;
+    }
+  }
 }
