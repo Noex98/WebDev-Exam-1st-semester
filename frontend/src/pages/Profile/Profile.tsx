@@ -3,7 +3,8 @@ import { IUser } from '../../types';
 import { apiService } from '../../service/apiService';
 import { SetStateAction, useState } from 'react';
 import { CtaButton, Nav, Popup } from '../../components';
-import { ReactComponent as ArrowRight } from '../../assets/icons/arrow_right.svg'
+import { Setting } from './components/Setting'
+
 
 
 type Props = {
@@ -25,23 +26,22 @@ export const Profile = ({ user, setUser }: Props) => {
     return (
         <>
             <div className='pages__profile'>
-                <h3>Profile</h3>
-                <div className="setting">
-                    <div className="right">
-                        <h4>Name:</h4>
-                    </div>
-                    <div className="left">
-                        <p>{user.name}</p>
-                        <ArrowRight/>
-                    </div>
+            <div className="settings">
+                <h2>Profile</h2>
+                <Setting label='Name' value={user.name} />
+                <Setting label='Email' value={user.email} />
+                <Setting label='Name' value={user.phoneNumber} />
+                <Setting label='Delete account' value="" />
+                <Setting label='Reset Password' value="" />
+                <Setting label='Notifications' value="" />
                 </div>
+                <div>
                 <CtaButton color='negative' onClick={logoutHandler}>Log out</CtaButton>
                 <CtaButton onClick={() => setPopupOpen(true)}>Open popup</CtaButton>
+                </div>
             </div>
             <Nav />
-            <Popup open={popupOpen} closePopup={() => setPopupOpen(false)}>
-                Some content
-            </Popup>
+
         </>
     )
 }
