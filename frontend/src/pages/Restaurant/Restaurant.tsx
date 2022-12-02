@@ -99,12 +99,12 @@ export const Restaurant = () => {
                 </Popup>
 
                 {restaurant.menuItems.map((menuItem, index) => (
-                    <div className='menuItems'>
+                    <div className='menuItems' key={index}>
                         <div className='wrapper'>
-                            <h3 key={index}>{menuItem.title}</h3>
-                            <h3 key={index}>{menuItem.price}kr</h3>
+                            <h3>{menuItem.title}</h3>
+                            <h3>{menuItem.price}kr</h3>
                         </div>
-                        <p key={index}>{menuItem.description}</p>
+                        <p>{menuItem.description}</p>
                     </div>
                 ))}
 

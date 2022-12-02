@@ -100,4 +100,15 @@ class UserService
         $restaurant["menuItems"] = $menuItems;
         return $restaurant;
     }
+
+
+    function deleteUser($id)
+    {
+        $q = "DELETE FROM users WHERE id='$id';";
+        $res = $this->mySQL->query($q);
+        if(!$res){
+            return false;
+        }
+        
+    }
 }
