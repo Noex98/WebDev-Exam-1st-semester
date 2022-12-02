@@ -28,7 +28,7 @@ export const Restaurant = () => {
                 setLoading(false)
             })
         }
-    }, [])
+    }, [id, setRestaurant, setLoading])
 
     if (loading) {
         return (
