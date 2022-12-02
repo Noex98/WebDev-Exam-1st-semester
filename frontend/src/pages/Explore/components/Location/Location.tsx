@@ -38,8 +38,6 @@ export const Location = ({ longtitude, setLongtitude, latitude, setLatitude }: P
             .then((response) => response.json())
             .then(data => {
                 setAddress(data.results[0].formatted_address)
-                console.log(data);
-                
                 });
         }
     }, [latitude, longtitude])
