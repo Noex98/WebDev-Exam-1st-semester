@@ -111,7 +111,31 @@ export class apiService {
         return await res.json();
     }
 
-    
+    static createReservation = async(
+        restaurantId: number,
+        date: any,
+        time: any,
+        comment: string,
+        peopleNum: number
+    ): Promise<IRes<null>> => {
+        const url = '/api/createReservation'
+        const res = await fetch(url, {
+            method: 'POST', 
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                restaurantId: restaurantId,
+                date: date,
+                time: time,
+                comment: comment,
+                peopleNum: peopleNum
+            })
+        })
+        return await res.json();
+    }
+
     static deleteUser = async(): Promise<IRes<null>> => {
         const url = '/api/deleteUser'
         const res = await fetch(url, {
@@ -146,7 +170,10 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
-            },
+            }, body: JSON.stringify({
+                key: key,
+                value: value
+            })
         })
         return await res.json()
     }

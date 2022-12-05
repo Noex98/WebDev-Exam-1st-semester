@@ -21,6 +21,7 @@ class UserService
         return $output;
     }
 
+   
     function editUser(int $id, $key, $value)
     {
         $q = "UPDATE users SET '$key' = '$value' WHERE id = '$id'";
@@ -130,3 +131,4 @@ class UserService
         $this->mySQL->query($q);
     }
 }
+
