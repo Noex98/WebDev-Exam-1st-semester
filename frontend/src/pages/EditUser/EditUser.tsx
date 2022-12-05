@@ -2,8 +2,8 @@ import './style.scss'
 import React from 'react'
 import { IUser } from '../../types';
 import { SetStateAction, useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
-import { Nav, TextInput, CtaButton } from '../../components';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Nav, TextInput, CtaButton, Spinner } from '../../components';
 import { apiService } from '../../service/apiService';
 import { ReactComponent as ArrowSvg } from '../../assets/icons/arrow_left.svg'
 
@@ -16,7 +16,9 @@ type Props = {
 export const EditUser = ({ user, setUser }: Props) => {
   const location = useLocation();
   const key = location.state;
-  const [newValue, setNewValue] = useState<string | number>("")
+  const [newValue, setNewValue] = useState<string | number>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   let placeholder = ""
   let label = ""
@@ -38,14 +40,21 @@ export const EditUser = ({ user, setUser }: Props) => {
   }
 
   const setNewUserData = () => {
+    setLoading(true)
     apiService.editUser(key, newValue).then(res => {
       if (res.succes) {
         setUser(prev => {  
           return prev ? {...prev, [key]: newValue} : null
         })
+        setLoading(false)
+        navigate('/profile')
       }
     })
   }
+
+  if (loading) { 
+    return <Spinner/>
+  } 
 
   return (
     <div>
