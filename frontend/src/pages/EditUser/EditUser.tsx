@@ -15,30 +15,41 @@ type Props = {
 
 export const EditUser = ({ user, setUser }: Props) => {
   const location = useLocation();
-  const thisSetting = location.state;
+  const key = location.state;
   const [newValue, setNewValue] = useState<string | number>("")
-  const [key, setKey] = useState<string>(thisSetting)
 
-
-  useEffect(() => {
-    setKey(thisSetting)
-  }, [thisSetting])
+  let placeholder = ""
+  let label = ""
+  switch (key) {
+    case "name":
+      placeholder = user.name
+      label = "Name"
+      break;
+    case "email":
+      placeholder = user.email
+      label = "Email"
+      break;
+    case "phoneNumber":
+      placeholder = "" + user.phoneNumber
+      label = "Phone Number"
+      break;
+      default:
+    return <></>
+  }
 
   const setNewUserData = () => {
-    apiService.editUser(key, newValue)
+    apiService.editUser(key, newValue).then(res => {
+      if (res.succes) {
+        setUser(prev => {
+          return user ? {...prev, [key]: newValue} : null
+        })
+      }
+    })
+    
   }
-  let placeholder = ""
-  switch (thisSetting) {
-    case "Name":
-      placeholder = user.name
-      break;
-    case "Email":
-      placeholder = user.email
-      break;
-    case "Phone Number":
-      placeholder = "" + user.phoneNumber
-      break;
-  }
+
+
+
   return (
     <div>
       <div className='pages__editUser'>
@@ -48,9 +59,9 @@ export const EditUser = ({ user, setUser }: Props) => {
           </Link>
           <h2>Profile</h2>
         </div>
-        <h3>{thisSetting}</h3>
-        <TextInput placeholder={placeholder}></TextInput>
-        <CtaButton color="positive">Save Changes</CtaButton>
+        <h3>{label}</h3>
+        <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} placeholder={placeholder}></TextInput>
+        <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
       </div>
       <Nav />
     </div>

@@ -37,13 +37,13 @@ export const Profile = ({ user, setUser }: Props) => {
             <div className='pages__profile'>
                 <div className="settings">
                     <h2>Profile</h2>
-                    <Link to="/editUser" state="Name">
+                    <Link to="/editUser" state="name">
                         <Setting label='Name' value={user.name} />
                     </Link>
-                    <Link to="/editUser" state="Email">
+                    <Link to="/editUser" state="email">
                         <Setting label='Email' value={user.email} />
                     </Link>
-                    <Link to="/editUser" state="Phone Number">
+                    <Link to="/editUser" state="phoneNumber">
                         <Setting label='Phone Number' value={user.phoneNumber} />
                     </Link>
                     <div onClick={() => setPopupOpen(true)}>
