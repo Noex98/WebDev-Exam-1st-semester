@@ -5,18 +5,27 @@ import { ReactComponent as Time } from '../../../../assets/icons/clock.svg'
 import { ReactComponent as Calender } from '../../../../assets/icons/calender.svg'
 import { ReactComponent as Accepted } from '../../../../assets/icons/checkmark.svg'
 import { ReactComponent as Cancelled } from '../../../../assets/icons/cross.svg'
+import { IReservation } from '../../../../types';
+
 import './style.scss'
 
 
 
 type Props = {
-    restaurantName: string,
-    status: "pending" | "accepted" | "declined",
-    peopleNum: number,
-    time: string,
-    date: string
+    reservation: IReservation,
+
 }
-export const Reservation = ({ restaurantName, status, peopleNum, time, date }: Props) => {
+export const Reservation = ({ reservation }: Props) => {
+    const { 
+        id, 
+        restaurantName,
+        peopleNum,
+        time,
+        date,
+        image,
+        status
+    } = reservation
+    
     return (
     <div className='components__reservation'>
         <div className='reservation__header'>

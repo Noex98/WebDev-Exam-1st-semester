@@ -57,8 +57,8 @@ export interface IReservation {
     restaurantName: string,
     image: string,
     time: string,
+    peopleNum: number,
     date: string,
     comment: string, 
     status: "accepted", 
-
 }

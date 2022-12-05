@@ -21,8 +21,7 @@ export const Reservations = ({ reservation, setReservation }: Props) => {
     return (
         <>
             <div>Reservations</div>
-            <Reservation restaurantName={"McDonalds"} date="24-05-1999" time="17:30" 
-            peopleNum={5} status="accepted" />
+            <Reservation reservation={reservation} />
             <Nav />
         </>
     )
