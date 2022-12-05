@@ -41,13 +41,11 @@ export const EditUser = ({ user, setUser }: Props) => {
     apiService.editUser(key, newValue).then(res => {
       if (res.succes) {
         setUser(prev => {  
-          return user ? {...prev, [key]: newValue} : null
+          return prev ? {...prev, [key]: newValue} : null
         })
       }
     })
   }
-
-
 
   return (
     <div>
