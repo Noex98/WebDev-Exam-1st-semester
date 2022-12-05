@@ -68,7 +68,7 @@ export const Restaurant = () => {
                 </div>
                 <img width='100%' src={restaurant.image} alt="" />
                 <div className='buttonContainer'>
-                    <CtaButton onClick={() => setPopupOpen(true)} color="positive">Make reservation</CtaButton>
+                    
                 </div>
 
                 <Popup open={popupOpen} closePopup={() => setPopupOpen(false)}>
