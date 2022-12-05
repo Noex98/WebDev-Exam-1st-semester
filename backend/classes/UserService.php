@@ -124,6 +124,17 @@ class UserService
         return $res;
     }
 
+    function getReservations($userId)
+    {
+        $q = "SELECT * FROM reservations WHERE userId = '$userId';";
+        $res = $this->mySQL->query($q);
+        $reservations = [];
+        while ($row = mysqli_fetch_array($res)) {
+            $reservations[] = $row;
+        }
+        return $reservations;
+    }
+
 
     function deleteReservation($id)
     {

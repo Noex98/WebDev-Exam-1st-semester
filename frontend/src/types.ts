@@ -50,3 +50,15 @@ export interface IFilter {
 
     categories: number[]
 }
+
+export interface IReservation {
+    id: number,
+    restaurantId: number,
+    restaurantName: string,
+    image: string,
+    time: string,
+    date: string,
+    comment: string, 
+    status: "accepted", 
+
+}

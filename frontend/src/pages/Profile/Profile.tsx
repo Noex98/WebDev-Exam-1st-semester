@@ -24,8 +24,8 @@ export const Profile = ({ user, setUser }: Props) => {
     }
 
     const deleteUser = () => {
-        apiService.deleteUser().then(res => {
-            if (res.succes) {
+        apiService.deleteUser().then(succes => {
+            if (succes) {
                 setUser(null);
             }
         });
