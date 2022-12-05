@@ -54,7 +54,11 @@ export interface IFilter {
 export interface IReservation {
     id: number,
     restaurantId: number,
-    startTime: any,
+    restaurantName: string,
+    image: string,
+    time: string,
+    date: string,
     comment: string, 
-    status: "accepted"
+    status: "accepted", 
+
 }
