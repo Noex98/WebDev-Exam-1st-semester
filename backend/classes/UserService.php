@@ -21,7 +21,8 @@ class UserService
         return $output;
     }
 
-    function editUser(int $id, $key, $value) {
+    function editUser(int $id, $key, $value)
+    {
         $q = "UPDATE users SET '$key' = '$value' WHERE id = '$id'";
         $res = $this->mySQL->query($q);
         return $res ? true : false;
@@ -108,7 +109,7 @@ class UserService
 
 
     function deleteUser($id)
-    {        
+    {
         $q = "DELETE FROM users WHERE id='$id';";
         $res = $this->mySQL->query($q);
         if (!$res) {
@@ -120,5 +121,12 @@ class UserService
             return false;
         }
         return $res;
+    }
+
+
+    function deleteReservation($id)
+    {
+        $q = "DELETE FROM reservations WHERE id = '$id';";
+        $this->mySQL->query($q);
     }
 }
