@@ -25,9 +25,9 @@ export interface IRestaurant {
 }
 
 export interface IMenuItem {
-    menuItemTitle: string
-    menuItemDescription: string
-    menuItemPrice: number
+    title: string
+    description: string
+    price: number
 }
 
 export interface IRestaurantFull extends IRestaurant {

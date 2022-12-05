@@ -8,7 +8,8 @@ import {
     Explore,
     Reservations,
     Restaurant,
-    Signup 
+    Signup,
+    EditUser
 } from './pages';
 import { useEffect, useState } from 'react';
 import { IUser } from './types';
@@ -47,6 +48,7 @@ function App() {
                     <Route path="/reservations" element={<Reservations />} />
                     <Route path="/restaurant/:id" element={<Restaurant  />} />
                     <Route path="/profile" element={<Profile user={user} setUser={setUser}/>} />
+                    <Route path="/editUser" element= {<EditUser user={user} setUser={setUser}/>} />
                     <Route path="/*" element={<Navigate to={'/'}/>} />
                 </Routes>
             )}
