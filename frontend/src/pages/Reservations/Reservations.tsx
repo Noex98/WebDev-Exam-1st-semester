@@ -4,12 +4,10 @@ import { Reservation } from './components/Reservation'
 import { apiService } from '../../service/apiService';
 import { IReservation } from '../../types';
 
-type Props = {
-    reservation: IReservation,
-    setReservation: React.Dispatch<SetStateAction<IReservation | null>>
-}
 
-export const Reservations = ({ reservation, setReservation }: Props) => {
+export const Reservations = () => {
+
+    /*
 
     const deleteReservation = () => {
         apiService.deleteReservation().then(succes => {
@@ -24,5 +22,6 @@ export const Reservations = ({ reservation, setReservation }: Props) => {
             <Reservation reservation={reservation} />
             <Nav />
         </>
-    )
+    )*/
+    return <></>
 }
