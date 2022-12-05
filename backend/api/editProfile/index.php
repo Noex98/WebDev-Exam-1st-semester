@@ -23,6 +23,7 @@ if($id){
             'errMessage' => 'Invalid request: please fill out all params'
         ]);
     };
+    /*
     if($isKeyValid) {
         echo json_encode([
             'data' => $userService->editUser($id),
@@ -35,7 +36,7 @@ if($id){
             'succes' => false,
             'errMessage' => 'Invalid request: key is not valid, key must be name, email or phoneNumber'
         ]);
-    };
+    }; */
 } else {
     echo json_encode([
         'data' => null,
