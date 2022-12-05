@@ -1,13 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { CtaButton, Popup } from '../../../../components'
 import { ReactComponent as PeopleSvg } from '../../../../assets/icons/people.svg'
 import { ReactComponent as CalenderSvg} from '../../../../assets/icons/calender.svg'
+import { ReactComponent as ClockSvg} from '../../../../assets/icons/clock.svg'
 import { ReactComponent as TextBoxSvg } from '../../../../assets/icons/textBox.svg'
 import './style.scss'
+import { apiService } from '../../../../service/apiService'
 
-export const CreateBookingBtn = () => {
+type Props = {
+    restaurantId: number
+}
 
+export const CreateBookingBtn = ({restaurantId}: Props) => {
+    
+    const d = new Date();
     const [popupOpen, setPopupOpen] = useState(false);
+    const [peopleNum, setPeopleNum] = useState(1);
+    const [date, setDate] = useState(null);
+    const [time, setTime] = useState(null);
+    const [comment, setComment] = useState("");
+
+    const submitHandler = () => {
+        apiService.createReservation(
+            restaurantId,
+            date,
+            time,
+            comment,
+            peopleNum
+        )
+    }
 
     return (
         <div className='components__createBookingBtn'>
@@ -24,9 +45,18 @@ export const CreateBookingBtn = () => {
                     <div className='formItem'>
                         <CalenderSvg />
                         <label>
-                            <div>Time & date</div>
+                            <div>Date</div>
                             <input 
-                                type="datetime-local" 
+                                type="date" 
+                            />
+                        </label>
+                    </div>
+                    <div className='formItem'>
+                        <ClockSvg />
+                        <label>
+                            <div>Time</div>
+                            <input 
+                                type="time"
                             />
                         </label>
                     </div>
@@ -37,7 +67,7 @@ export const CreateBookingBtn = () => {
                             <input type="text" />
                         </label>
                     </div>
-                    <CtaButton color='positive'>Confirm</CtaButton>
+                    <CtaButton onClick={submitHandler} color='positive'>Confirm</CtaButton>
                 </div>
             </Popup>
         </div>
