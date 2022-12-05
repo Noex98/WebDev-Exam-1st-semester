@@ -64,7 +64,10 @@ export const Restaurant = () => {
                 </div>
                 <img width='100%' src={restaurant.image} alt="" />
                 <div className='buttonContainer'>
-                    <CreateBookingBtn restaurantId={restaurant.id} />
+                    <CreateBookingBtn 
+                        restaurantId={restaurant.id}
+                        restaurantName={restaurant.name}
+                    />
                 </div>
 
                 {restaurant.menuItems.map((menuItem, index) => (

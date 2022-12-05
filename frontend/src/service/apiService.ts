@@ -113,10 +113,10 @@ export class apiService {
 
     static createReservation = async(
         restaurantId: number,
+        peopleNum: number,
         date: any,
         time: any,
-        comment: string,
-        peopleNum: number
+        comment: string
     ): Promise<IRes<null>> => {
         const url = '/api/createReservation'
         const res = await fetch(url, {
