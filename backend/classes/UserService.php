@@ -22,7 +22,7 @@ class UserService
     }
 
     function editUser(int $id, $key, $value) {
-        $q = "UPDATE users SET '$key' = '$value' WHERE id = '$id'";
+        $q = "UPDATE users SET $key = '$value' WHERE id = $id";
         $res = $this->mySQL->query($q);
         return $res ? true : false;
     }
