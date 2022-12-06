@@ -2,12 +2,14 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/api/createReservation/utils.php');
 
 $req = getJsonBody();
 $authService = new AuthService();
 $userService = new UserService();
 
 $id = $authService->authenticate();
+
 
 $allParamsExist = (
     isset($req['restaurantId']) &&
@@ -19,7 +21,36 @@ $allParamsExist = (
 
 if($id){
     if ($allParamsExist){
+        $timeValid = validateTime($req['time']);
+        $dateValid = validateDate($req['date']);
+        $peopleNumValid = validatePeopleNum(($req['peopleNum']));
 
+        if(!$timeValid){
+            echo json_encode([
+                'data' => null,
+                'succes' => false,
+                'errMessage' => 'time format is invalid: accepted time format is HH:MM'
+            ]);
+        } else if (!$dateValid){
+            echo json_encode([
+                'data' => null,
+                'succes' => false,
+                'errMessage' => 'date is invalid'
+            ]);
+
+        } else if (!$peopleNumValid){
+            echo json_encode([
+                'data' => null,
+                'succes' => false,
+                'errMessage' => 'People ammount format is invalid'
+            ]);
+        } else {
+            echo json_encode([
+                'data' => null,
+                'succes' => true,
+                'errMessage' => ''
+            ]);
+        }
     } else {
         echo json_encode([
             'data' => null,
