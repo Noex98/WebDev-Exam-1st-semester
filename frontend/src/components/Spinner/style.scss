@@ -1,6 +1,8 @@
 .components__spinner {
     background: var(--loader-background-color);
     text-align: center;
+    position:relative;
+    height:50px;
 
     div {
         border: 5px solid rgba(180, 180, 180, 0.5);
@@ -38,4 +40,4 @@
     100% {
       transform: rotate(360deg);
     }
-  }
+}

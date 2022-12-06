@@ -10,13 +10,17 @@
             align-items: center;
             gap: 30px;
 
+            label{
+                width:70%;
+            }
+
             input {
                 background: none;
                 border: 1px solid white;
                 padding:10px;
                 border-radius: 15px;
                 margin-top: 5px;
-
+                width: 100%;
             }
             input[type="time"]::-webkit-calendar-picker-indicator,
             input[type="date"]::-webkit-calendar-picker-indicator {

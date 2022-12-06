@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { CtaButton, Popup } from '../../../../components'
+import { CtaButton, Popup, Spinner } from '../../../../components'
 import { ReactComponent as PeopleSvg } from '../../../../assets/icons/people.svg'
 import { ReactComponent as CalenderSvg} from '../../../../assets/icons/calender.svg'
 import { ReactComponent as ClockSvg} from '../../../../assets/icons/clock.svg'
@@ -7,6 +7,7 @@ import { ReactComponent as TextBoxSvg } from '../../../../assets/icons/textBox.s
 import './style.scss'
 import { apiService } from '../../../../service/apiService'
 import { getCurrentTime, getCurrentDate } from './utils';
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
     restaurantId: number
@@ -15,6 +16,7 @@ type Props = {
 
 export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
     
+    const navigate = useNavigate();
     const [popupOpen, setPopupOpen] = useState(false);
     const [peopleNum, setPeopleNum] = useState(1);
     const [date, setDate] = useState(getCurrentDate());
@@ -22,6 +24,8 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
     const [comment, setComment] = useState("");
     
     const [popupPage, setPopupPage] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [errMessage, setErrMessage] = useState("")
 
     const closePopupHandler = () => {
         setPopupOpen(false);
@@ -36,20 +40,31 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
     }
 
     const submitHandler = () => {
+        setLoading(true)
         apiService.createReservation(
             restaurantId,
             peopleNum,
             date,
             time,
             comment
-        )
+        ).then(res => {
+            setLoading(false)
+            if(res.succes){
+                navigate('/reservations')
+            }else {
+
+            }
+        })
     }
 
     return (
         <div className='components__createBookingBtn'>
             <CtaButton onClick={() => setPopupOpen(true)} color="positive">Make reservation</CtaButton>
             <Popup open={popupOpen} closePopup={closePopupHandler}>
-                {popupPage === 1 && (
+                {loading && (
+                    <Spinner />
+                )}
+                {popupPage === 1 && !loading && (
                     <form className='popupForm'>
                         <div className='formItem'>
                             <PeopleSvg />
@@ -90,7 +105,7 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
                         <CtaButton onClick={e => nextPageHandler(e)} color='positive'>Confirm</CtaButton>
                     </form>
                 )}
-                {popupPage === 2 && (
+                {popupPage === 2 && !loading && (
                     <div className='popupConfirm'>
                         <p>
                             Are you sure you want to send a reservation to {restaurantName}? <br />

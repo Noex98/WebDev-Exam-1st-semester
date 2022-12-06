@@ -149,10 +149,10 @@ class UserService
         $this->mySQL->query($q);
     }
 
-    function createReservation($id, $restaurantId, $comment, $peopleNum, $time, $date, )
+    function createReservation($id, $restaurantId, $comment, $peopleNum, $time, $date)
     {
-        $q = "INSERT INTO reservations ( userId, restaurantId, comment, peopleNum, status, time, date, )
-        VALUES ('$id', '$restaurantId', '$comment', '$peopleNum', 'accepted', '$time', '$date')";
+        $q = "INSERT INTO reservations ( userId, restaurantId, comment, peopleNum, status, time, date)
+        VALUES ('$id', '$restaurantId', '$comment', '$peopleNum', 'accepted', '$time', '$date');";
         $res = $this->mySQL->query($q);
         return $res ? true : false;
     }
