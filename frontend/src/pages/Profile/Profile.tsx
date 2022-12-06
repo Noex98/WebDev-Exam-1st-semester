@@ -31,10 +31,6 @@ export const Profile = ({ user, setUser }: Props) => {
         });
     }
 
-    useEffect(() => {
-        console.log(user);
-        
-    }, [])
     
     return (
         <>
