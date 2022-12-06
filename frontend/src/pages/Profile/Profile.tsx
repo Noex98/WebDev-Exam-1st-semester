@@ -31,7 +31,7 @@ export const Profile = ({ user, setUser }: Props) => {
         });
     }
 
-
+    
     return (
         <>
             <div className='pages__profile'>

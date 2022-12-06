@@ -188,7 +188,7 @@ export class apiService {
     static editUser = async(
         key: string, 
         value: string | number
-    ) => {
+    ): Promise<IRes<null>> => {
         const url = '/api/editUser'
         const res = await fetch (url, {
             method: "POST",
