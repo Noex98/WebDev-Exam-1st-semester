@@ -20,6 +20,8 @@ export const Restaurant = () => {
             apiService.getRestaurant(id).then(res => {
                 if (res.succes) {
                     setRestaurant(res.data)
+                    console.log(restaurant);
+                    
                 }
                 setLoading(false)
             })
@@ -52,9 +54,11 @@ export const Restaurant = () => {
                     <h2>{restaurant.name}</h2>
                     <ArrowSvg opacity='0' />
                 </div>
-                <div>
+                <div className='textContainer'>
                     <h3>Description</h3>
-                    <p>{restaurant.description}</p>
+                    <p className='desc'>{restaurant.description}</p>
+                    <br />
+                    <p>{restaurant.address}</p>
                 </div>
                 <div className='infoContainer'>
                     <div className='timeContainer'>

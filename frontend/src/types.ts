@@ -22,6 +22,7 @@ export interface IRestaurant {
     description: string
     distance: number
     price: number
+    address: string
 }
 
 export interface IMenuItem {

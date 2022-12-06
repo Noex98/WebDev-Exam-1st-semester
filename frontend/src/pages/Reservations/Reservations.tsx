@@ -14,8 +14,6 @@ export const Reservations = () => {
         apiService.getReservations().then(res => {
             if (res.succes) {
                 setReservations(res.data);
-                console.log(res.data);
-
             }
             setLoading(false);
         })
