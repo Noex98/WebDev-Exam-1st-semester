@@ -45,11 +45,29 @@ if($id){
                 'errMessage' => 'People ammount format is invalid'
             ]);
         } else {
-            echo json_encode([
-                'data' => null,
-                'succes' => true,
-                'errMessage' => ''
-            ]);
+
+            $succes = $userService->createReservation(
+                $id,
+                $req['restaurantId'],
+                $req['comment'],
+                $req['peopleNum'],
+                $req['time'],
+                $req['date']
+            );
+
+            if ($succes){
+                echo json_encode([
+                    'data' => null,
+                    'succes' => true,
+                    'errMessage' => ''
+                ]);
+            } else {
+                echo json_encode([
+                    'data' => null,
+                    'succes' => false,
+                    'errMessage' => 'Error'
+                ]);
+            }
         }
     } else {
         echo json_encode([

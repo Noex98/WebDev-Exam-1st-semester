@@ -6,6 +6,7 @@ import { ReactComponent as ClockSvg} from '../../../../assets/icons/clock.svg'
 import { ReactComponent as TextBoxSvg } from '../../../../assets/icons/textBox.svg'
 import './style.scss'
 import { apiService } from '../../../../service/apiService'
+import { getCurrentTime, getCurrentDate } from './utils';
 
 type Props = {
     restaurantId: number
@@ -14,13 +15,12 @@ type Props = {
 
 export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
     
-    const d = new Date();
     const [popupOpen, setPopupOpen] = useState(false);
     const [peopleNum, setPeopleNum] = useState(1);
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
+    const [date, setDate] = useState(getCurrentDate());
+    const [time, setTime] = useState(getCurrentTime());
     const [comment, setComment] = useState("");
-
+    
     const [popupPage, setPopupPage] = useState(1);
 
     const closePopupHandler = () => {
@@ -34,14 +34,6 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
         e.preventDefault();
         setPopupPage(2);
     }
-
-    console.log({
-        peopleNum: peopleNum,
-        date: date,
-        time: time,
-        comment: comment
-    });
-    
 
     const submitHandler = () => {
         apiService.createReservation(
@@ -63,7 +55,7 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
                             <PeopleSvg />
                             <label>
                                 <div>Number of people</div>
-                                <input onChange={e => setPeopleNum(parseInt(e.target.value))} type="number" />
+                                <input value={peopleNum} onChange={e => setPeopleNum(parseInt(e.target.value))} type="number" />
                             </label>
                         </div>
                         <div className='formItem'>
@@ -72,6 +64,7 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
                                 <div>Date</div>
                                 <input 
                                     type="date" 
+                                    value={date}
                                     onChange={e => setDate(e.target.value)}
                                 />
                             </label>
@@ -82,6 +75,7 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
                                 <div>Time</div>
                                 <input 
                                     type="time"
+                                    value={time}
                                     onChange={e => setTime(e.target.value)}
                                 />
                             </label>
