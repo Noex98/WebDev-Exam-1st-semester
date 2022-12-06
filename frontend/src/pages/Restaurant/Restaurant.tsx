@@ -58,7 +58,7 @@ export const Restaurant = () => {
                 </div>
                 <div className='infoContainer'>
                     <div className='timeContainer'>
-                        <ClockSvg /> {restaurant.openTime} - {restaurant.closeTime}
+                        <ClockSvg /> {restaurant.openTime.slice(0, -3)} - {restaurant.closeTime.slice(0, -3)}
                     </div>
                     <PriceTag priceScore={restaurant.price} />
                 </div>
