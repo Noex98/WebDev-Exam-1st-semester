@@ -21,7 +21,9 @@ class UserService
         return $output;
     }
 
-    function editUser(int $id, $key, $value) {
+   
+    function editUser(int $id, $key, $value)
+    {
         $q = "UPDATE users SET '$key' = '$value' WHERE id = '$id'";
         $res = $this->mySQL->query($q);
         return $res ? true : false;
@@ -108,7 +110,7 @@ class UserService
 
 
     function deleteUser($id)
-    {        
+    {
         $q = "DELETE FROM users WHERE id='$id';";
         $res = $this->mySQL->query($q);
         if (!$res) {
@@ -121,4 +123,23 @@ class UserService
         }
         return $res;
     }
+
+    function getReservations($userId)
+    {
+        $q = "SELECT * FROM reservations WHERE userId = '$userId';";
+        $res = $this->mySQL->query($q);
+        $reservations = [];
+        while ($row = mysqli_fetch_array($res)) {
+            $reservations[] = $row;
+        }
+        return $reservations;
+    }
+
+
+    function deleteReservation($id)
+    {
+        $q = "DELETE FROM reservations WHERE id = '$id';";
+        $this->mySQL->query($q);
+    }
 }
+

@@ -1,0 +1,12 @@
+.components__reservation {
+    .reservation__header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background: #232B3E;
+    }
+    .header__status{
+        text-align: center;
+        background-color: #051334;
+    }
+}

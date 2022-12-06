@@ -111,8 +111,55 @@ export class apiService {
         return await res.json();
     }
 
+    static createReservation = async(
+        restaurantId: number,
+        peopleNum: number,
+        date: any,
+        time: any,
+        comment: string
+    ): Promise<IRes<null>> => {
+        const url = '/api/createReservation'
+        const res = await fetch(url, {
+            method: 'POST', 
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                restaurantId: restaurantId,
+                date: date,
+                time: time,
+                comment: comment,
+                peopleNum: peopleNum
+            })
+        })
+        return await res.json();
+    }
+
     
-    static deleteUser = async(): Promise<IRes<null>> => {
+
+     /**
+     * @return true if success
+     */
+    static deleteReservation = async(): Promise<boolean> => {
+        const url = '/api/deleteReservation'
+        const res = await fetch(url, {
+            method: 'POST', 
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        return await res.json().then(res => {
+            return res.succes;
+        });
+    }
+
+    /**
+     * @return true if success
+     */
+
+    static deleteUser = async(): Promise<boolean> => {
         const url = '/api/deleteUser'
         const res = await fetch(url, {
             method: 'POST', 
@@ -121,7 +168,9 @@ export class apiService {
                 'Content-Type': 'application/json'
             }
         })
-        return await res.json();
+        return await res.json().then(res => {
+            return res.succes;
+        });
     }
 
     static logout = async (): Promise<IRes<null>> => {
@@ -146,8 +195,7 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
+            }, body: JSON.stringify({
                 key: key,
                 value: value
             })

@@ -15,20 +15,27 @@ $allParamsExist = doesParamsExist($req);
 $isKeyValid = isKeyValid($req['key']);
 
 if($id){
-    if(!$allParamsExist) {
+    if($allParamsExist) {
+        if($isKeyValid) {
+            echo json_encode([
+                'data' => $userService->editUser($id, $req['key'], $req['value']),
+                'succes' => true,
+                'errMessage' => ''
+            ]);
+        } else {
+            echo json_encode([
+                'data' => null,
+                'succes' => false,
+                'errMessage' => 'Invalid request: Key isnt valid'
+            ]);
+        }
+    } else {
         echo json_encode([
             'data' => null,
             'succes' => false,
             'errMessage' => 'Invalid request: please fill out all params'
         ]);
-    }  else {
-        $userService->editUser($id, $req['key'], $req['value']);
-        echo json_encode([
-            'data' => null,
-            'succes' => true,
-            'errMessage' => '',
-        ]);
-    }
+    };
 } else {
     echo json_encode([
         'data' => null,
@@ -36,10 +43,3 @@ if($id){
         'errMessage' => 'Invalid request. User not logged in.',
     ]);
 }
-
-/* else if (!$isKeyValid) {
-    echo json_encode([
-        'data' => null,
-        'succes' => false,
-        'errMessage' => 'Invalid request: key is not valid, key must be name, email or phoneNumber'
-    ]); */
