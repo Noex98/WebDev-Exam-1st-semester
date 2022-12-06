@@ -13,6 +13,7 @@
   }
 
   .header__info {
+    min-width: 200px;
     svg {
       width: 20px;
     }
@@ -61,10 +62,11 @@
     }
   }
   .reservation__img {
-    max-height: 200px;
+    max-height: 150px;
     position: relative;
     overflow: hidden;
-    border-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     img {
       width: 100%;
     }
