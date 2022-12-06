@@ -151,7 +151,7 @@ class UserService
 
     function createReservation($id, $restaurantId, $comment, $peopleNum, $time, $date, )
     {
-        $q = "INSERT INTO reservations (userId, userId, restaurantId, comment, peopleNum, status, date, time, )
+        $q = "INSERT INTO reservations ( userId, restaurantId, comment, peopleNum, status, time, date, )
         VALUES ('$id', '$restaurantId', $comment, '$peopleNum', 'accepted', '$time', '$date')";
         $res = $this->mySQL->query($q);
         if (!$res) {
