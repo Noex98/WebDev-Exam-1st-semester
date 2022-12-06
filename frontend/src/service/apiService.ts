@@ -1,4 +1,4 @@
-import { ICategory, IRes, IRestaurant, IRestaurantFull, IUser } from "../types";
+import { ICategory, IRes, IReservation, IRestaurant, IRestaurantFull, IUser } from "../types";
 
 export class apiService {
 
@@ -136,6 +136,18 @@ export class apiService {
         return await res.json();
     }
 
+    static getReservations = async(): Promise<IRes<IReservation[]>> =>{
+        const url = '/api/reservations'
+        const res = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    return await res.json();
+
+    }
     
 
      /**
