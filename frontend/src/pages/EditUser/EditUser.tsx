@@ -19,6 +19,7 @@ export const EditUser = ({ user, setUser }: Props) => {
   const [newValue, setNewValue] = useState<string | number>("");
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [errMessage, setErrMessage] = useState<string>("")
 
   let placeholder = ""
   let label = ""
@@ -48,15 +49,16 @@ export const EditUser = ({ user, setUser }: Props) => {
         })
         setLoading(false)
         navigate('/profile')
+      } else {setErrMessage(res.errMessage);
+        setLoading(false)
       }
     })
   }
 
-  if (loading) { 
-    return <Spinner/>
-  } 
+
 
   return (
+    loading ? <div><Spinner /> <Nav /></div> :
     <div>
       <div className='pages__editUser'>
         <div className='editUser__header'>
@@ -67,6 +69,7 @@ export const EditUser = ({ user, setUser }: Props) => {
         </div>
         <h3>{label}</h3>
         <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} placeholder={placeholder}></TextInput>
+        <p>{errMessage}</p>
         <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
       </div>
       <Nav />
