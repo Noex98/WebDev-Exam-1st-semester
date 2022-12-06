@@ -43,10 +43,14 @@ export const Reservation = ({ reservation, setReservations }: Props) => {
                 <div className="header__info">
                     <h3>{restaurantName}</h3>
                     <div className='flex-row'>
-                        <People />
-                        {peopleNum}
-                        <Time />
-                        {time}
+                        <div>
+                            <People />
+                            {peopleNum}
+                        </div>
+                        <div>
+                            <Time />
+                            {time}
+                        </div>
                     </div>
                     <div>
                         <Calender />
@@ -59,9 +63,8 @@ export const Reservation = ({ reservation, setReservations }: Props) => {
                 </div>
             </div>
             <div className="reservation__img" >
-                <img src={image} alt="image of restaurant" />
-                {image}
-                <CtaButton color='negative'>Cancel</CtaButton>
+                <img src={image} alt="Resturant" />
+                <CtaButton onClick={deleteReservation} color='negative'>Cancel</CtaButton>
             </div>
         </div >
     )
