@@ -20,19 +20,24 @@ a:focus:not(:focus-visible){
     outline:none;
 }
 
-html, body, #root {
-    height: 100%;
+html {
+    background:rgb(71, 71, 71);
 }
 
+
 body {
+    margin:0 auto;
     background: rgb(2,9,28);
     background: linear-gradient(90deg, rgba(2,9,28,1) 0%, rgba(3,12,33,1) 50%, rgba(2,9,28,1) 100%);
     font-family: 'Inter', sans-serif;
     padding: 25px;
     color:white;
+    position:relative;
+    max-width: 500px;
 }
 
 #root {
+    min-height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
 }

@@ -13,6 +13,9 @@ export const Nav = () => {
     return (
         <div className='components__nav'>
             <nav>
+                <div className="navWrap">
+
+                
                 <NavLink to="/profile"
                     className={({ isActive }) =>
                         isActive ? activeClassName : undefined
@@ -32,7 +35,7 @@ export const Nav = () => {
                 }>
                     <Reservations height="36px" width="36px" />
                 </NavLink>
-
+                </div>
             </nav>
             <div className='spaceReserve'></div>
         </div>

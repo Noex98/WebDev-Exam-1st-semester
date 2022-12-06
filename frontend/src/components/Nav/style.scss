@@ -1,17 +1,22 @@
 .components__nav {
     nav {
         position: fixed;
-        align-items: center;
         bottom: 15px;
         left: 15px;
         right: 15px;
-        display: flex;
-        justify-content: space-between;
-        border-radius: 15px;
-        padding: 0 20px;
-        height: 76px;
-        background-color: white;
-        color: black;
+
+        .navWrap {
+            margin:0 auto;
+            max-width: 470px;
+            color: black;
+            background-color: white;
+            height: 76px;
+            border-radius: 15px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
         .underline{
             border-bottom: 1px solid #07163F;
