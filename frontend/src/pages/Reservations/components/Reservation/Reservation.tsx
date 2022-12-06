@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect } from 'react'
+import React, { SetStateAction } from 'react'
 import { CtaButton } from '../../../../components'
 import { ReactComponent as People } from '../../../../assets/icons/people.svg'
 import { ReactComponent as Time } from '../../../../assets/icons/clock.svg'
@@ -27,10 +27,18 @@ export const Reservation = ({ reservation, setReservations }: Props) => {
         status
     } = reservation
 
-    const deleteReservation = (id: number) => {
+    const deleteReservation = () => {
         apiService.deleteReservation(id).then(succes => {
             if (succes) {
-                setReservations(prev => prev ? prev.filter(reservation => reservation.id !== reservation.id) : null);
+                setReservations(prev => {
+                    if(prev === null){
+                        return null
+                    }
+                    const index = prev.indexOf(reservation)
+                    const output = [...prev];
+                    output.splice(index, 1)
+                    return [...output];
+                });
             }
         });
     }
@@ -64,7 +72,7 @@ export const Reservation = ({ reservation, setReservations }: Props) => {
             </div>
             <div className="reservation__img" >
                 <img src={image} alt="Resturant" />
-                <CtaButton onClick={() => deleteReservation(id)} color='negative'>Cancel</CtaButton>
+                <CtaButton onClick={deleteReservation} color='negative'>Cancel</CtaButton>
             </div>
         </div >
     )

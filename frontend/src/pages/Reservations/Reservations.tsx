@@ -40,9 +40,7 @@ export const Reservations = () => {
         <>
             <div>Reservations</div>
             {reservations && reservations.map((reservation, index) => (
-                
                 <Reservation reservation={reservation} key={index} setReservations={setReservations}/>
-
             ))}
            
             <Nav />
