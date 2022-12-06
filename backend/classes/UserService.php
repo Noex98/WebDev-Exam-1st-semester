@@ -141,5 +141,16 @@ class UserService
         $q = "DELETE FROM reservations WHERE id = '$id';";
         $this->mySQL->query($q);
     }
+
+    function createReservation($id, $restaurantId, $comment, $peopleNum, $time, $date, )
+    {
+        $q = "INSERT INTO reservations (userId, userId, restaurantId, comment, peopleNum, status, date, time, )
+        VALUES ('$id', '$restaurantId', $comment, '$peopleNum', 'accepted', '$time', '$date')";
+        $res = $this->mySQL->query($q);
+        if (!$res) {
+            return false;
+        }
+        return $res;
+    }
 }
 
