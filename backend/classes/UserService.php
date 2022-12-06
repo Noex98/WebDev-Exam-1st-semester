@@ -126,17 +126,23 @@ class UserService
 
     function getReservations($userId)
     {
-        $q = "SELECT 
-        reservations.*,
+        $q = "SELECT
+        reservations.id,
+        reservations.restaurantId,
+        reservations.time,
+        reservations.peopleNum,
+        reservations.date,
+        reservations.comment,
+        reservations.status,
         restaurants.name AS restaurantName,
-        restaurants.image AS restaurantImage
+        restaurants.image AS image
         FROM reservations
         JOIN restaurants
         ON reservations.RestaurantId = restaurants.id 
         WHERE reservations.userId = '$userId';";
         $res = $this->mySQL->query($q);
         $reservations = [];
-        while ($row = mysqli_fetch_array($res)) {
+        while ($row = mysqli_fetch_assoc($res)) {
             $reservations[] = $row;
         }
         return $reservations;

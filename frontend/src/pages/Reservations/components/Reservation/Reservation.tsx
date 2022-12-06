@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react'
+import React, { SetStateAction, useEffect } from 'react'
 import { CtaButton } from '../../../../components'
 import { ReactComponent as People } from '../../../../assets/icons/people.svg'
 import { ReactComponent as Time } from '../../../../assets/icons/clock.svg'
@@ -14,12 +14,11 @@ import { apiService } from '../../../../service/apiService'
 
 type Props = {
     reservation: IReservation,
-    setReservation: React.Dispatch<SetStateAction<IReservation | null>>
-
+    setReservations: React.Dispatch<SetStateAction<IReservation[] | null>>
 }
-export const Reservation = ({ reservation, setReservation }: Props) => {
-    const { 
-        id, 
+export const Reservation = ({ reservation, setReservations }: Props) => {
+    const {
+        id,
         restaurantName,
         peopleNum,
         time,
@@ -27,40 +26,43 @@ export const Reservation = ({ reservation, setReservation }: Props) => {
         image,
         status
     } = reservation
-    
+
     const deleteReservation = () => {
         apiService.deleteReservation().then(succes => {
             if (succes) {
-                setReservation(null);
+                setReservations(prev => prev ? prev.filter(reservation => reservation.id !== reservation.id) : null);
             }
         });
     }
 
+
+
     return (
-    <div className='components__reservation'>
-        <div className='reservation__header'>
-            <div className="header__info">
-               <h3>{restaurantName}</h3> 
-               <div className='flex-row'>
-                    <People/> 
-                    {peopleNum}
-                    <Time />
-                    {time}
-                </div>    
-                <div>
-                    <Calender/>
-                    {date}
+        <div className='components__reservation'>
+            <div className='reservation__header'>
+                <div className="header__info">
+                    <h3>{restaurantName}</h3>
+                    <div className='flex-row'>
+                        <People />
+                        {peopleNum}
+                        <Time />
+                        {time}
+                    </div>
+                    <div>
+                        <Calender />
+                        {date}
+                    </div>
+                </div>
+                <div className="header__status">
+                    {status === "accepted" ? <Accepted /> : status === "declined" ? <Cancelled /> : status === "pending"}
+                    <h3>{status}</h3>
                 </div>
             </div>
-            <div className="header__status">
-                {status === "accepted" ? <Accepted/> : status === "declined" ? <Cancelled /> : status === "pending"}
-                <h3>{status}</h3>
+            <div className="reservation__img" >
+                <img src={image} alt="image of restaurant" />
+                {image}
+                <CtaButton color='negative'>Cancel</CtaButton>
             </div>
-        </div>
-        <div className="reservation__img">
-            <img src={image} alt="image of restaurant" />
-            <CtaButton color='negative'>Cancel</CtaButton>
-        </div>
-    </div >
-  )
+        </div >
+    )
 }
