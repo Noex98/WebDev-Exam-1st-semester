@@ -7,24 +7,33 @@ include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 
 $req = getJsonBody();
 
+
 $userService = new UserService();
 $authService = new AuthService();
-
 $userId = $authService->authenticate();
-$reservationId = $req['id'];
+
+
 
 
 if ($userId) {
-    $userService->deleteReservation($reservationId);
-    echo json_encode([
-        'data' => null,
-        'succes' => true,
-        'errMessage' => '',
-    ]);
+    if (isset($req['id'])) {
+        $userService->deleteReservation($req['id']);
+        echo json_encode([
+            'data' => null,
+            'succes' => true,
+            'errMessage' => '',
+        ]);
+    } else {
+        echo json_encode([
+            'data' => null,
+            'succes' => false,
+            'errMessage' => 'Invalid request. Id not set'
+        ]);
+    }
 } else {
     echo json_encode([
         'data' => null,
         'succes' => false,
-        'errMessage' => 'not logged in'
+        'errMessage' => 'User not logged in',
     ]);
 }

@@ -27,8 +27,8 @@ export const Reservation = ({ reservation, setReservations }: Props) => {
         status
     } = reservation
 
-    const deleteReservation = () => {
-        apiService.deleteReservation().then(succes => {
+    const deleteReservation = (id: number) => {
+        apiService.deleteReservation(id).then(succes => {
             if (succes) {
                 setReservations(prev => prev ? prev.filter(reservation => reservation.id !== reservation.id) : null);
             }
@@ -64,7 +64,7 @@ export const Reservation = ({ reservation, setReservations }: Props) => {
             </div>
             <div className="reservation__img" >
                 <img src={image} alt="Resturant" />
-                <CtaButton onClick={deleteReservation} color='negative'>Cancel</CtaButton>
+                <CtaButton onClick={() => deleteReservation(id)} color='negative'>Cancel</CtaButton>
             </div>
         </div >
     )

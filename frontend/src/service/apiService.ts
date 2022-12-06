@@ -153,14 +153,17 @@ export class apiService {
      /**
      * @return true if success
      */
-    static deleteReservation = async(): Promise<boolean> => {
+    static deleteReservation = async(id: number): Promise<boolean> => {
         const url = '/api/deleteReservation'
         const res = await fetch(url, {
             method: 'POST', 
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            }, 
+            body: JSON.stringify({
+                id: id
+            })
         })
         return await res.json().then(res => {
             return res.succes;
