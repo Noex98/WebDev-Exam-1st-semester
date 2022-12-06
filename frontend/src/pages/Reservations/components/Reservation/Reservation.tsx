@@ -9,6 +9,7 @@ import { IReservation } from '../../../../types';
 
 import './style.scss'
 import { apiService } from '../../../../service/apiService'
+import { url } from 'inspector'
 
 
 
@@ -36,36 +37,37 @@ export const Reservation = ({ reservation, setReservations }: Props) => {
     }
 
 
-
-    return (
-        <div className='components__reservation'>
-            <div className='reservation__header'>
-                <div className="header__info">
-                    <h3>{restaurantName}</h3>
-                    <div className='flex-row'>
-                        <div>
-                            <People />
-                            {peopleNum}
-                        </div>
-                        <div>
-                            <Time />
-                            {time}
-                        </div>
+return (
+    <div className='components__reservation'>
+        <div className='reservation__header'>
+            <div className="header__info">
+                <p className='title'>{restaurantName}</p>
+                <div className='flex-row'>
+                    <div>
+                        <People />
+                        <p>{peopleNum}</p>
                     </div>
                     <div>
-                        <Calender />
-                        {date}
+                        <Time />
+                        <p>{time}</p>
                     </div>
                 </div>
-                <div className="header__status">
-                    {status === "accepted" ? <Accepted /> : status === "declined" ? <Cancelled /> : status === "pending"}
-                    <h3>{status}</h3>
+                <div className='align-self'>
+                    <Calender />
+                    <p>{date}</p>
                 </div>
             </div>
-            <div className="reservation__img" >
-                <img src={image} alt="Resturant" />
-                <CtaButton onClick={deleteReservation} color='negative'>Cancel</CtaButton>
+            <div className="header__status">
+
+                {status === "accepted" ? <Accepted /> : status === "declined" ? <Cancelled /> : status === "pending"}
+                <p>{status}</p>
             </div>
-        </div >
-    )
+        </div>
+        <div className="reservation__img" >
+            <img src={image} alt="Resturant" />
+            <CtaButton onClick={deleteReservation} color='negative'>Cancel</CtaButton>
+        </div>
+    </div >
+)
 }
+

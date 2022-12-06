@@ -3,7 +3,7 @@ import { Nav, Spinner } from '../../components';
 import { Reservation } from './components/Reservation';
 import { apiService } from '../../service/apiService';
 import { IReservation } from '../../types';
-
+import './style.scss'
 
 export const Reservations = () => {
 
@@ -13,16 +13,16 @@ export const Reservations = () => {
     useEffect(() => {
         apiService.getReservations().then(res => {
             if (res.succes) {
-                setReservations(res.data);   
+                setReservations(res.data);
                 console.log(res.data);
-                             
+
             }
             setLoading(false);
         })
     }, [setReservations, setLoading])
 
-    if(loading){
-        return ( 
+    if (loading) {
+        return (
             <Spinner />
         )
     }
@@ -38,14 +38,16 @@ export const Reservations = () => {
 
     return (
         <>
-            <div>Reservations</div>
-            {reservations && reservations.map((reservation, index) => (
-                
-                <Reservation reservation={reservation} key={index} setReservations={setReservations}/>
+            <div className='pages__reservations'>
+                <h2>Your Reservations</h2>
+                {reservations && reservations.map((reservation, index) => (
 
-            ))}
-           
-            <Nav />
+                    <Reservation reservation={reservation} key={index} setReservations={setReservations} />
+
+                ))}
+
+                <Nav />
+            </div>
         </>
     )
 }
