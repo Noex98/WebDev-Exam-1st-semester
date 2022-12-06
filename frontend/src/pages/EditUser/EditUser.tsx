@@ -29,13 +29,13 @@ export const EditUser = ({ user, setUser }: Props) => {
   }
   let placeholder = ""
   switch (thisSetting) {
-    case "Name":
+    case "name":
       placeholder = user.name
       break;
-    case "Email":
+    case "email":
       placeholder = user.email
       break;
-    case "Phone Number":
+    case "phoneNumber":
       placeholder = "" + user.phoneNumber
       break;
   }
@@ -49,8 +49,8 @@ export const EditUser = ({ user, setUser }: Props) => {
           <h2>Profile</h2>
         </div>
         <h3>{thisSetting}</h3>
-        <TextInput placeholder={placeholder}></TextInput>
-        <CtaButton color="positive">Save Changes</CtaButton>
+        <TextInput onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setNewValue (e.target.value)}} placeholder={placeholder}></TextInput>
+        <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
       </div>
       <Nav />
     </div>
