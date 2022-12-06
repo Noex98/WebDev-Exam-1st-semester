@@ -7,9 +7,9 @@ include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
 $authService = new AuthService;
 $userService = new UserService;
 
-
 $id = $authService->authenticate();
 $req = getJsonBody();
+
 
 $allParamsExist = doesParamsExist($req);
 $isKeyValid = isKeyValid($req['key']);
@@ -40,8 +40,6 @@ if($id){
     echo json_encode([
         'data' => null,
         'succes' => false,
-        'errMessage' => 'Not logged in'
+        'errMessage' => 'Invalid request. User not logged in.',
     ]);
 }
-
-?>

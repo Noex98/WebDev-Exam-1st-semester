@@ -21,7 +21,7 @@ class UserService
         return $output;
     }
 
-   
+
     function editUser(int $id, $key, $value)
     {
         $q = "UPDATE users SET '$key' = '$value' WHERE id = '$id'";
@@ -126,7 +126,14 @@ class UserService
 
     function getReservations($userId)
     {
-        $q = "SELECT * FROM reservations WHERE userId = '$userId';";
+        $q = "SELECT 
+        reservations.*,
+        restaurants.name AS restaurantName,
+        restaurants.image AS restaurantImage
+        FROM reservations
+        JOIN restaurants
+        ON reservations.RestaurantId = restaurants.id 
+        WHERE reservations.userId = '$userId';";
         $res = $this->mySQL->query($q);
         $reservations = [];
         while ($row = mysqli_fetch_array($res)) {
@@ -141,5 +148,15 @@ class UserService
         $q = "DELETE FROM reservations WHERE id = '$id';";
         $this->mySQL->query($q);
     }
-}
 
+    function createReservation($id, $restaurantId, $comment, $peopleNum, $time, $date, )
+    {
+        $q = "INSERT INTO reservations (userId, userId, restaurantId, comment, peopleNum, status, date, time, )
+        VALUES ('$id', '$restaurantId', $comment, '$peopleNum', 'accepted', '$time', '$date')";
+        $res = $this->mySQL->query($q);
+        if (!$res) {
+            return false;
+        }
+        return $res;
+    }
+}
