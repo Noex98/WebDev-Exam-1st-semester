@@ -1,27 +1,26 @@
-import React, { SetStateAction } from 'react'
-import { Nav } from '../../components'
-import { Reservation } from './components/Reservation'
+import React, { SetStateAction, useEffect, useState } from 'react';
+import { Nav, Spinner } from '../../components';
+import { Reservation } from './components/Reservation';
 import { apiService } from '../../service/apiService';
 import { IReservation } from '../../types';
 
 
 export const Reservations = () => {
 
-    /*
+    const [reservations, setReservations] = useState<IReservation[] | null>(null);
 
-    const deleteReservation = () => {
-        apiService.deleteReservation().then(succes => {
-            if (succes) {
-                setReservation(null);
-            }
-        });
+    if(!reservations){
+        return ( 
+            <Spinner />
+        )
     }
+
     return (
         <>
             <div>Reservations</div>
-            <Reservation reservation={reservation} />
+           
             <Nav />
         </>
-    )*/
+    )
     return <></>
 }

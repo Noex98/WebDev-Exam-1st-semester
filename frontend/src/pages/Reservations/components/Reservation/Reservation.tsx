@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SetStateAction } from 'react'
 import { CtaButton } from '../../../../components'
 import { ReactComponent as People } from '../../../../assets/icons/people.svg'
 import { ReactComponent as Time } from '../../../../assets/icons/clock.svg'
@@ -8,14 +8,16 @@ import { ReactComponent as Cancelled } from '../../../../assets/icons/cross.svg'
 import { IReservation } from '../../../../types';
 
 import './style.scss'
+import { apiService } from '../../../../service/apiService'
 
 
 
 type Props = {
     reservation: IReservation,
+    setReservation: React.Dispatch<SetStateAction<IReservation | null>>
 
 }
-export const Reservation = ({ reservation }: Props) => {
+export const Reservation = ({ reservation, setReservation }: Props) => {
     const { 
         id, 
         restaurantName,
@@ -26,6 +28,14 @@ export const Reservation = ({ reservation }: Props) => {
         status
     } = reservation
     
+    const deleteReservation = () => {
+        apiService.deleteReservation().then(succes => {
+            if (succes) {
+                setReservation(null);
+            }
+        });
+    }
+
     return (
     <div className='components__reservation'>
         <div className='reservation__header'>
@@ -48,6 +58,7 @@ export const Reservation = ({ reservation }: Props) => {
             </div>
         </div>
         <div className="reservation__img">
+            <img src={image} alt="image of restaurant" />
             <CtaButton color='negative'>Cancel</CtaButton>
         </div>
     </div >
