@@ -17,7 +17,6 @@ export const Filter = ({ setSearchString, sortBy, setSortBy, maxDistance, setMax
     const maxDistanceChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMaxDistance(parseInt(e.target.value));
         localStorage.setItem('maxDistance', e.target.value);
-        console.log(localStorage)
     }
 
     return (
