@@ -26,3 +26,11 @@ SELECT restaurants.id,
         INNER JOIN `menuItems`
         ON menuItems.`resturantId` = restaurants.id 
         WHERE restaurants.id = 3;
+
+CREATE TABLE test (
+    id INT
+);
+
+SELECT * FROM restaurants WHERE id = '0'; DROP TABLE test/*'; */;
+
+UPDATE users SET name = '' WHERE id = '2';
