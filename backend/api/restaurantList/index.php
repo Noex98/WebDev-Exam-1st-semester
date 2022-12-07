@@ -12,6 +12,7 @@ $allParamsIsSet = (
     isset($req['searchString']) &&
     isset($req['sortBy'])
 );
+
 if ($allParamsIsSet){
 
     $userService = new UserService();

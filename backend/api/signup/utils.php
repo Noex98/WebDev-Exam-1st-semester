@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
 function doesParamsExist($req): bool {
-    return (!empty($req['name']) &&
+    return (
+        !empty($req['name']) &&
         !empty($req['phoneNumber']) &&
         !empty($req['email']) &&
         !empty($req['password'])

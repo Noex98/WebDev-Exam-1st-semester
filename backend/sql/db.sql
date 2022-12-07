@@ -30,7 +30,11 @@ SELECT restaurants.id,
 CREATE TABLE test (
     id INT
 );
-
-SELECT * FROM restaurants WHERE id = '0'; DROP TABLE test/*'; */;
-
 UPDATE users SET name = '' WHERE id = '2';
+
+/*
+INSERT INTO restaurants 
+    (name, email, image, phoneNumber, price, openTime, closeTime, description, latitude, longtitude, adress)
+VALUES
+    (test, test, test, 1, 4, '17:00:00', '21:00:00')
+*/

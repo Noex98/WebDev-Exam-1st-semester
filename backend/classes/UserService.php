@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 include_once($_SERVER['DOCUMENT_ROOT'] . "/classes/Database.php");
 
 class UserService

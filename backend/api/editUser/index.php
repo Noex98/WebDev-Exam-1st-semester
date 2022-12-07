@@ -10,12 +10,13 @@ $userService = new UserService;
 $id = $authService->authenticate();
 $req = getJsonBody();
 
-
 $allParamsExist = doesParamsExist($req);
-$isKeyValid = isKeyValid($req['key']);
 
 if($id){
     if($allParamsExist) {
+
+        $isKeyValid = isKeyValid($req['key']);
+
         if($isKeyValid) {
             echo json_encode([
                 'data' => $userService->editUser($id, $req['key'], $req['value']),
