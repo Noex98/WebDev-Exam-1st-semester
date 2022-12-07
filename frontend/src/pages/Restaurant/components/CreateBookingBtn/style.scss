@@ -7,11 +7,16 @@
 
         .formItem {
             display:flex;
-            align-items: center;
+            align-items:flex-end;
             gap: 30px;
+
 
             label{
                 width:70%;
+            }
+
+            svg {
+                margin-bottom: 10px;
             }
 
             input {

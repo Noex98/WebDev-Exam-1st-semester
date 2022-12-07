@@ -67,7 +67,7 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
                 {popupPage === 1 && !loading && (
                     <form className='popupForm'>
                         <div className='formItem'>
-                            <PeopleSvg />
+                            <PeopleSvg width="25px" height="25px" />
                             <label>
                                 <div>Number of people</div>
                                 <input value={peopleNum} onChange={e => setPeopleNum(parseInt(e.target.value))} type="number" />
@@ -97,7 +97,7 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
                             </label>
                         </div>
                         <div className='formItem'>
-                            <TextBoxSvg />
+                            <TextBoxSvg width="25px" height="25px" />
                             <label>
                                 <div>Comment</div>
                                 <input onChange={e => setComment(e.target.value)} type="text" />
