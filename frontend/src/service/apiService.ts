@@ -6,7 +6,7 @@ export class apiService {
         email: string, 
         password: string
     ): Promise<IRes<IUser>> => {
-        const url = '/api//login'
+        const url = '/api//login/'
         const res = await fetch(url, {
             method: "POST",
             credentials: "include",
@@ -22,7 +22,7 @@ export class apiService {
     }
 
     static continueSession = async (): Promise<IRes<IUser>> => {
-        const url = '/api/continueSession'
+        const url = '/api/continueSession/'
         const res = await fetch(url, {
             method: "POST",
             credentials: "include",
@@ -40,7 +40,7 @@ export class apiService {
         email: string,
         password: string,
     ): Promise<IRes<null>> => {
-        const url = '/api/signup'
+        const url = '/api/signup/'
         const res = await fetch(url, {
             method: "POST",
             credentials: "include",
@@ -65,7 +65,7 @@ export class apiService {
         searchString: string,
         sortBy: "price" | "distance"
     ): Promise<IRes<IRestaurant[]>> => {
-        const url = '/api/restaurantList'
+        const url = '/api/restaurantList/'
         const res = await fetch(url, {
             method: "POST",
             credentials: "include",
@@ -85,7 +85,7 @@ export class apiService {
     }
 
     static getCategories = async(): Promise<IRes<ICategory[]>> => {
-        const url = '/api/categories'
+        const url = '/api/categories/'
         const res = await fetch(url, {
         method: "POST",
         credentials: "include",
@@ -98,7 +98,7 @@ export class apiService {
     }
 
     static getRestaurant = async(id: string): Promise<IRes<IRestaurantFull>> => {
-        const url = '/api/restaurant'
+        const url = '/api/restaurant/'
         const res = await fetch(url, {
             method: 'POST', 
             credentials: 'include',
@@ -118,7 +118,7 @@ export class apiService {
         time: any,
         comment: string
     ): Promise<IRes<null>> => {
-        const url = '/api/createReservation'
+        const url = '/api/createReservation/'
         const res = await fetch(url, {
             method: 'POST', 
             credentials: 'include',
@@ -137,7 +137,7 @@ export class apiService {
     }
 
     static getReservations = async(): Promise<IRes<IReservation[]>> =>{
-        const url = '/api/reservations'
+        const url = '/api/reservations/'
         const res = await fetch(url, {
         method: "POST",
         credentials: "include",
@@ -154,7 +154,7 @@ export class apiService {
      * @return true if success
      */
     static deleteReservation = async(id: number): Promise<boolean> => {
-        const url = '/api/deleteReservation'
+        const url = '/api/deleteReservation/'
         const res = await fetch(url, {
             method: 'POST', 
             credentials: 'include',
@@ -175,7 +175,7 @@ export class apiService {
      */
 
     static deleteUser = async(): Promise<boolean> => {
-        const url = '/api/deleteUser'
+        const url = '/api/deleteUser/'
         const res = await fetch(url, {
             method: 'POST', 
             credentials: 'include',
@@ -189,7 +189,7 @@ export class apiService {
     }
 
     static logout = async (): Promise<IRes<null>> => {
-        const url = '/api/logout'
+        const url = '/api/logout/'
         const res = await fetch(url, {
             method: "POST",
             credentials: "include",
@@ -204,7 +204,7 @@ export class apiService {
         key: string, 
         value: string | number
     ): Promise<IRes<null>> => {
-        const url = '/api/editUser'
+        const url = '/api/editUser/'
         const res = await fetch (url, {
             method: "POST",
             credentials: "include",
