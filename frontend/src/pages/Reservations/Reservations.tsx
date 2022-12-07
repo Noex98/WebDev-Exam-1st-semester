@@ -21,7 +21,10 @@ export const Reservations = () => {
 
     if (loading) {
         return (
-            <Spinner />
+            <>
+                <Spinner />
+                <Nav />
+            </>
         )
     }
 

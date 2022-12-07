@@ -17,7 +17,7 @@ export const Explore = () => {
     const [latitude, setLatitude] = useState<number | null>(null);
     const [searchString, setSearchString] = useState<string>("");
     const [sortBy, setSortBy] = useState<"distance" | "price">("distance");
-    const [maxDistance, setMaxDistance] = useState<number>(accesLocalStorage('maxDistance'));
+    const [maxDistance, setMaxDistance] = useState<number>(accesLocalStorage('maxDistance') ? accesLocalStorage('maxDistance') : 100);
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
 
     console.log(accesLocalStorage('maxDistance'));
