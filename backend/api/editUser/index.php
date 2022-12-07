@@ -12,7 +12,7 @@ $req = getJsonBody();
 
 $allParamsExist = doesParamsExist($req);
 
-if($id){
+if($id !== -1){
     if($allParamsExist) {
 
         $isKeyValid = isKeyValid($req['key']);

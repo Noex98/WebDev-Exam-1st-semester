@@ -7,7 +7,7 @@ $userService = new UserService();
 
 $id = $authService->authenticate();
 
-if($id){
+if($id !== -1){
     $reservations = $userService->getReservations($id);
     echo json_encode([
         'data' => $reservations,

@@ -35,7 +35,7 @@ class AuthService {
         session_regenerate_id(true);
     }
 
-    function authorize(string $email, string $password): int | false {
+    function authorize(string $email, string $password): int {
         $q = "SELECT * FROM users WHERE email = '$email'";
         $res = $this->mySQL->query($q);
         $user = $res->fetch_object();
@@ -46,16 +46,16 @@ class AuthService {
             //to do? clean up code. fetch variable instead of object
             $userPassword = $res->fetch_object();
             $loginSucces = password_verify($password, $userPassword->password);
-            return $loginSucces ? intval($user->id) : false;
+            return $loginSucces ? intval($user->id) : -1;
         } else {
             return false;
         }
     }
 
-    function authenticate(): int | false {
+    function authenticate(): int {
         if (!session_id()) {
             session_start();
         }
-        return isset($_SESSION['authToken']) ? intval($_SESSION['authToken']) : false;
+        return isset($_SESSION['authToken']) ? intval($_SESSION['authToken']) : -1;
     }
 }

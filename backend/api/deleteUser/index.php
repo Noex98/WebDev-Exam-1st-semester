@@ -9,7 +9,7 @@ $id = $authService->authenticate();
 
 //menu
 
-if ($id) {
+if ($id !== -1) {
     $deleteUser = $userService->deleteUser($id);
     if ($deleteUser) {
         echo json_encode([
