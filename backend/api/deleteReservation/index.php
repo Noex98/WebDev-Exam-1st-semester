@@ -1,19 +1,12 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 
 $req = getJsonBody();
-
-
 $userService = new UserService();
 $authService = new AuthService();
 $userId = $authService->authenticate();
-
-
-
 
 if ($userId) {
     if (isset($req['id'])) {

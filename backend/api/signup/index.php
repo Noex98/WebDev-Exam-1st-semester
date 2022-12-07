@@ -1,5 +1,4 @@
 <?php declare(strict_types=1);
-
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/api/signup/utils.php');

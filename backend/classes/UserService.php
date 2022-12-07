@@ -1,19 +1,14 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 include_once($_SERVER['DOCUMENT_ROOT'] . "/classes/Database.php");
 
-class UserService
-{
+class UserService {
     private $mySQL;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->mySQL = new Database;
     }
 
-    function getUser(int $id)
-    {
+    function getUser(int $id){
         $q = "SELECT * FROM users WHERE id = '$id'";
         $res = $this->mySQL->query($q);
         $output = mysqli_fetch_assoc($res);
@@ -22,8 +17,7 @@ class UserService
     }
 
 
-    function editUser(int $id, $key, $value)
-    {
+    function editUser(int $id, $key, $value){
         $q = "UPDATE users SET $key = '$value' WHERE id = '$id'";
         $res = $this->mySQL->query($q);
         return $res ? true : false;
@@ -79,8 +73,7 @@ class UserService
         return $output;
     }
 
-    function getCategories()
-    {
+    function getCategories(){
         $q = 'SELECT * FROM categories';
         $res = $this->mySQL->query($q);
         $categories = [];
@@ -90,8 +83,7 @@ class UserService
         return $categories;
     }
 
-    function getRestaurant($id)
-    {
+    function getRestaurant($id){
         $q = "SELECT * FROM restaurants WHERE id = '$id';";
         $res = $this->mySQL->query($q);
         $restaurant = mysqli_fetch_assoc($res);
@@ -109,8 +101,7 @@ class UserService
     }
 
 
-    function deleteUser($id)
-    {
+    function deleteUser($id){
         $q = "DELETE FROM users WHERE id='$id';";
         $res = $this->mySQL->query($q);
         if (!$res) {
@@ -124,8 +115,7 @@ class UserService
         return $res;
     }
 
-    function getReservations($userId)
-    {
+    function getReservations($userId){
         $q = "SELECT
         reservations.id,
         reservations.restaurantId,
@@ -149,14 +139,12 @@ class UserService
     }
 
 
-    function deleteReservation($id)
-    {
+    function deleteReservation($id){
         $q = "DELETE FROM reservations WHERE id = '$id';";
         $this->mySQL->query($q);
     }
 
-    function createReservation($id, $restaurantId, $comment, $peopleNum, $time, $date)
-    {
+    function createReservation($id, $restaurantId, $comment, $peopleNum, $time, $date){
         $q = "INSERT INTO reservations ( userId, restaurantId, comment, peopleNum, status, time, date)
         VALUES ('$id', '$restaurantId', '$comment', '$peopleNum', 'accepted', '$time', '$date');";
         $res = $this->mySQL->query($q);

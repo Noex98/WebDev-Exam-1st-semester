@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Nav, Spinner } from '../../components'
 import { apiService } from '../../service/apiService';
 import { IRestaurant } from '../../types';
+import { accesLocalStorage } from '../../utils';
 import { Location, Filter, Restaurant } from './components'
 import { Categories } from './components/Categories';
 import './style.scss';
@@ -16,9 +17,8 @@ export const Explore = () => {
     const [latitude, setLatitude] = useState<number | null>(null);
     const [searchString, setSearchString] = useState<string>("");
     const [sortBy, setSortBy] = useState<"distance" | "price">("distance");
-    const [maxDistance, setMaxDistance] = useState<number>(100);
+    const [maxDistance, setMaxDistance] = useState<number>(accesLocalStorage('maxDistance'));
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
-
 
     useEffect(() => {
             if(latitude && longtitude){
@@ -50,7 +50,6 @@ export const Explore = () => {
                 />
                 <div className='line'></div>
                 <Filter
-                    searchString={searchString}
                     sortBy={sortBy}
                     maxDistance={maxDistance}
                     setSearchString={setSearchString}

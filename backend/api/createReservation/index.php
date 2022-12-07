@@ -10,7 +10,6 @@ $userService = new UserService();
 
 $id = $authService->authenticate();
 
-
 $allParamsExist = (
     isset($req['restaurantId']) &&
     isset($req['date']) &&

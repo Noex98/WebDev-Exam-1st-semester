@@ -3,9 +3,7 @@ import { ReactComponent as FilterIcon } from '../../../../assets/icons/filter.sv
 import { TextInput, Popup } from '../../../../components'
 import './style.scss';
 
-
 type Props = {
-    searchString: string,
     setSearchString: React.Dispatch<React.SetStateAction<string>>,
     sortBy: "distance" | "price",
     setSortBy: React.Dispatch<React.SetStateAction<"distance" | "price">>,
@@ -13,9 +11,13 @@ type Props = {
     setMaxDistance: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const Filter = ({ searchString, setSearchString, sortBy, setSortBy, maxDistance, setMaxDistance }: Props) => {
+export const Filter = ({ setSearchString, sortBy, setSortBy, maxDistance, setMaxDistance }: Props) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+    const maxDistanceChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setMaxDistance(parseInt(e.target.value));
+        localStorage.setItem('maxDistance', e.target.value);
+    }
 
     return (
         <div className='components__Filter'>
@@ -30,7 +32,7 @@ export const Filter = ({ searchString, setSearchString, sortBy, setSortBy, maxDi
 
                     <p>Max distance: {maxDistance} km</p>
                     <br></br>
-                    <input type="range" min="1" max="200" value={maxDistance} onChange={e => setMaxDistance(parseInt(e.target.value))} />
+                    <input type="range" min="1" max="200" value={maxDistance} onChange={e => maxDistanceChangeHandler(e)} />
                 </div>
             </Popup>
         </div>

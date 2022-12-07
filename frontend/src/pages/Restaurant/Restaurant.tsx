@@ -20,8 +20,6 @@ export const Restaurant = () => {
             apiService.getRestaurant(id).then(res => {
                 if (res.succes) {
                     setRestaurant(res.data)
-                    console.log(restaurant);
-                    
                 }
                 setLoading(false)
             })
