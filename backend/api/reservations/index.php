@@ -5,10 +5,10 @@ include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 $authService = new AuthService();
 $userService = new UserService();
 
-$userId = $authService->authenticate();
+$id = $authService->authenticate();
 
 if($id){
-    $reservations = $userService->getReservations($userId);
+    $reservations = $userService->getReservations($id);
     echo json_encode([
         'data' => $reservations,
         'succes' => true,
