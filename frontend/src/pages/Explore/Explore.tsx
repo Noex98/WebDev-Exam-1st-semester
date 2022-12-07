@@ -21,6 +21,9 @@ export const Explore = () => {
     const [maxDistance, setMaxDistance] = useState<number>(accesLocalStorage('maxDistance'));
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
 
+    console.log(accesLocalStorage('maxDistance'));
+    
+
     useEffect(() => {
         if (latitude && longtitude) {
             setIsloading(true);

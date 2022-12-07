@@ -8,7 +8,7 @@
 
     $id = $authService->authenticate();
 
-    if($id){
+    if($id !== -1){
         echo json_encode([
             'data' => $userService->getUser($id),
             'succes' => true,

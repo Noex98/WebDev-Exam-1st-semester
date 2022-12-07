@@ -8,7 +8,7 @@ $userService = new UserService();
 $authService = new AuthService();
 $userId = $authService->authenticate();
 
-if ($userId) {
+if ($userId !== -1) {
     if (isset($req['id'])) {
         $userService->deleteReservation($req['id']);
         echo json_encode([

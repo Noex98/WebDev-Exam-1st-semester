@@ -18,7 +18,7 @@ $allParamsExist = (
     isset($req['peopleNum'])
 );
 
-if($id){
+if($id !== -1){
     if ($allParamsExist){
         $timeValid = validateTime($req['time']);
         $dateValid = validateDate($req['date']);
