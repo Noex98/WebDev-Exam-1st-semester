@@ -5,6 +5,7 @@ import { IRestaurant } from '../../types';
 import { accesLocalStorage } from '../../utils';
 import { Location, Filter, Restaurant } from './components'
 import { Categories } from './components/Categories';
+import { ReactComponent as Search } from '../../assets/icons/search.svg'
 import './style.scss';
 
 export const Explore = () => {
@@ -21,22 +22,22 @@ export const Explore = () => {
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
 
     useEffect(() => {
-            if(latitude && longtitude){
-                setIsloading(true);
-                apiService.getRestaurantList(
-                    latitude,
-                    longtitude,
-                    maxDistance,
-                    selectedCategories,
-                    searchString,
-                    sortBy
-                ).then(res => {
-                    if (res.succes){
-                        setRestaurants(res.data)
-                    }
-                    setIsloading(false)
-                })
-            }
+        if (latitude && longtitude) {
+            setIsloading(true);
+            apiService.getRestaurantList(
+                latitude,
+                longtitude,
+                maxDistance,
+                selectedCategories,
+                searchString,
+                sortBy
+            ).then(res => {
+                if (res.succes) {
+                    setRestaurants(res.data)
+                }
+                setIsloading(false)
+            })
+        }
     }, [longtitude, latitude, searchString, sortBy, maxDistance, selectedCategories])
 
     return (
@@ -46,7 +47,7 @@ export const Explore = () => {
                     longtitude={longtitude}
                     latitude={latitude}
                     setLongtitude={setLongtitude}
-                    setLatitude={setLatitude} 
+                    setLatitude={setLatitude}
                 />
                 <div className='line'></div>
                 <Filter
@@ -54,10 +55,10 @@ export const Explore = () => {
                     maxDistance={maxDistance}
                     setSearchString={setSearchString}
                     setSortBy={setSortBy}
-                    setMaxDistance={setMaxDistance} 
+                    setMaxDistance={setMaxDistance}
                 />
 
-                <Categories 
+                <Categories
                     selectedCategories={selectedCategories}
                     setSelectedCategories={setSelctedCategories}
                 />
@@ -65,21 +66,35 @@ export const Explore = () => {
                 <div className='line'></div>
 
                 {isLoading && (
-                    <Spinner type='block'/>
+                    <Spinner type='block' />
                 )}
 
                 {!isLoading && restaurants.length === 0 && (
-                    <div>No results</div>
-                )}
-
-                {!isLoading && restaurants.length !== 0 && (
-                    <div className="restaurantContainer">
-                        {restaurants.map((restaurant, index) => (
-                            <Restaurant key={index} restaurant={restaurant}/>
-                        ))}
+                    <div className='no-results'>
+                        <Search />
+                        <h2>No results</h2>
+                        <div>
+                            <p>Sorry we could not find a matching restaurant, please
+                                <span style={{
+                                    fontWeight: '650',
+                                }}> change search criteria </span> and
+                                try again!
+                            </p>
+                        </div>
                     </div>
-                )}
-            </div>
+                )
+                }
+
+                {
+                    !isLoading && restaurants.length !== 0 && (
+                        <div className="restaurantContainer">
+                            {restaurants.map((restaurant, index) => (
+                                <Restaurant key={index} restaurant={restaurant} />
+                            ))}
+                        </div>
+                    )
+                }
+            </div >
             <Nav />
         </>
     )

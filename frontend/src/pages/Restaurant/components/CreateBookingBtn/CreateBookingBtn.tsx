@@ -22,7 +22,7 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
     const [date, setDate] = useState(getCurrentDate());
     const [time, setTime] = useState(getCurrentTime());
     const [comment, setComment] = useState("");
-    
+    const currentDate = getCurrentDate();
     const [popupPage, setPopupPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [errMessage, setErrMessage] = useState("")
@@ -80,6 +80,7 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
                                 <input 
                                     type="date" 
                                     value={date}
+                                    min={currentDate}
                                     onChange={e => setDate(e.target.value)}
                                 />
                             </label>
