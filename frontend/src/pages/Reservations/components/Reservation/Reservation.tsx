@@ -1,5 +1,5 @@
-import React, { SetStateAction } from 'react'
-import { CtaButton } from '../../../../components'
+import React, { SetStateAction, useState } from 'react'
+import { CtaButton, Popup } from '../../../../components'
 import { ReactComponent as People } from '../../../../assets/icons/people.svg'
 import { ReactComponent as Time } from '../../../../assets/icons/clock.svg'
 import { ReactComponent as Calender } from '../../../../assets/icons/calender.svg'
@@ -27,6 +27,7 @@ export const Reservation = ({ reservation, setReservations }: Props) => {
         image,
         status
     } = reservation
+    const [popupOpen, setPopupOpen] = useState(false);
 
     const deleteReservation = () => {
         apiService.deleteReservation(id).then(succes => {
@@ -73,8 +74,18 @@ return (
         </div>
         <div className="reservation__img" >
             <img src={image} alt="Resturant" />
-            <CtaButton onClick={deleteReservation} color='negative'>Cancel</CtaButton>
+            <CtaButton onClick={() => setPopupOpen(true)} color='negative'>Cancel</CtaButton>
         </div>
+        <Popup open={popupOpen} closePopup={() => setPopupOpen(false)}>
+                        <div className='popupContent'>
+                            <p> Are you sure you want to cancel your reservation? <br /><br />
+                                Once this is done, it can't be undone again.</p>
+                            <div className='flex'>
+                                <CtaButton color='negative' onClick={() => deleteReservation()}>Confirm</CtaButton>
+                                <CtaButton color='neutral' onClick={() => setPopupOpen(false)}>Cancel</CtaButton>
+                            </div>
+                        </div>
+                    </Popup>
     </div >
 )
 }

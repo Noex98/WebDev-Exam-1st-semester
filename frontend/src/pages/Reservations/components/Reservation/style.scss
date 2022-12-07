@@ -76,11 +76,22 @@
       right: 0px;
       margin: auto;
     }
+    button {
+      width: 40%;
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+    }
   }
-  button {
-    width: 40%;
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
+
+  .content--visible{
+    p{margin-bottom: 10px;}
+    .flex{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
   }
+
 }
