@@ -7,14 +7,20 @@
 
         .formItem {
             display:flex;
-            align-items: center;
+            align-items:flex-end;
             gap: 30px;
+
 
             label{
                 width:70%;
             }
 
+            svg {
+                margin-bottom: 10px;
+            }
+
             input {
+                text-align: left;
                 background: none;
                 border: 1px solid white;
                 padding:10px;
@@ -24,11 +30,9 @@
             }
             input[type="time"]::-webkit-calendar-picker-indicator,
             input[type="date"]::-webkit-calendar-picker-indicator {
-                filter: invert(100%);
+                display: none;
+                appearance: none;
             }
         }
-
-        
     }
-
 }
