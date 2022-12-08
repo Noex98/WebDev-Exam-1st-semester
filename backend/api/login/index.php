@@ -24,7 +24,7 @@ if(!$requestValid){
         $req['password'],
     );
 
-    if(!$id){
+    if($id == -1){
         echo json_encode([
             'data' => null,
             'succes' => false,
