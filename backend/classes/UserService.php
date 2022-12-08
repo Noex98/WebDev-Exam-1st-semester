@@ -8,17 +8,20 @@ class UserService {
         $this->mySQL = new Database;
     }
 
-    function getUser(int $id){
-        $q = "SELECT * FROM users WHERE id = '$id'";
+    function getUser($userId){
+        $q = "SELECT * FROM users WHERE id = '$userId'";
         $res = $this->mySQL->query($q);
         $output = mysqli_fetch_assoc($res);
 
         return $output;
     }
 
+    function editUser($userId, $key, $value){
 
-    function editUser(int $id, $key, $value){
-        $q = "UPDATE users SET $key = '$value' WHERE id = '$id'";
+        $SAFE_key = $this->mySQL->real_escape_string($key);
+        $SAFE_value = $this->mySQL->real_escape_string($value);
+
+        $q = "UPDATE users SET $SAFE_key = '$SAFE_value' WHERE id = '$userId'";
         $res = $this->mySQL->query($q);
         return $res ? true : false;
     }
@@ -37,16 +40,22 @@ class UserService {
         string $searchString,
         string $sortBy
     ) {
+        $SAFE_latitude = (float) $latitude;
+        $SAFE_longtitude = (float) $longtitude;
+        $SAFE_maxDistance = (float) $maxDistance;
+        $SAFE_categories = $categories; //TBD
+        $SAFE_searchString = $this->mySQL->real_escape_string($searchString);
+        $SAFE_sortBy = $this->mySQL->real_escape_string($sortBy);
 
         // Triangulation stuff is from: https://stackoverflow.com/questions/2234204/find-nearest-latitude-longitude-with-an-sql-query
         $q = "SELECT DISTINCT restaurants.*,
         (
            6371 *
-           acos(cos(radians($latitude)) *
+           acos(cos(radians($SAFE_latitude)) *
            cos(radians(latitude)) *
            cos(radians(longtitude) -
-           radians($longtitude)) +
-           sin(radians($latitude)) *
+           radians($SAFE_longtitude)) +
+           sin(radians($SAFE_latitude)) *
            sin(radians(latitude )))
         ) AS distance
         FROM restaurants " .
@@ -57,9 +66,9 @@ class UserService {
                 WHERE categoryId IN (" . implode(",", array_map('intval', $categories)) . ") "
                 : " "
             ) .
-            "HAVING distance < $maxDistance " .
-            (!!strlen($searchString) ? "AND name LIKE '%$searchString%' " : "") .
-            "ORDER BY $sortBy ASC;";
+            "HAVING distance < $SAFE_maxDistance " .
+            (!!strlen($searchString) ? "AND name LIKE '%$SAFE_searchString%' " : "") .
+            "ORDER BY $SAFE_sortBy ASC;";
 
         $res = $this->mySQL->query($q);
         $output = [];
@@ -83,14 +92,17 @@ class UserService {
         return $categories;
     }
 
-    function getRestaurant($id){
-        $q = "SELECT * FROM restaurants WHERE id = '$id';";
+    function getRestaurant($restaurantId){
+
+        $SAFE_restaurantId = (int) $restaurantId;
+
+        $q = "SELECT * FROM restaurants WHERE id = '$SAFE_restaurantId';";
         $res = $this->mySQL->query($q);
         $restaurant = mysqli_fetch_assoc($res);
         if (!$restaurant) {
             return false;
         }
-        $q = "SELECT * from menuItems where resturantId = '$id';";
+        $q = "SELECT * from menuItems where resturantId = '$SAFE_restaurantId';";
         $res = $this->mySQL->query($q);
         $menuItems = [];
         while ($row = mysqli_fetch_array($res)) {
@@ -101,13 +113,13 @@ class UserService {
     }
 
 
-    function deleteUser($id){
-        $q = "DELETE FROM users WHERE id='$id';";
+    function deleteUser($userId){
+        $q = "DELETE FROM users WHERE id='$userId';";
         $res = $this->mySQL->query($q);
         if (!$res) {
             return false;
         }
-        $q = "DELETE FROM userPrivate WHERE id='$id';";
+        $q = "DELETE FROM userPrivate WHERE id='$userId';";
         $res = $this->mySQL->query($q);
         if (!$res) {
             return false;
@@ -139,14 +151,28 @@ class UserService {
     }
 
 
-    function deleteReservation($id){
-        $q = "DELETE FROM reservations WHERE id = '$id';";
+    function deleteReservation($userId, $reservationId){
+
+        $SAFE_reservationId = (int) $reservationId;
+
+        $q = "DELETE FROM reservations WHERE id = '$SAFE_reservationId' AND userId = '$userId';";
         $this->mySQL->query($q);
     }
 
     function createReservation($id, $restaurantId, $comment, $peopleNum, $time, $date){
-        $q = "INSERT INTO reservations ( userId, restaurantId, comment, peopleNum, status, time, date)
-        VALUES ('$id', '$restaurantId', '$comment', '$peopleNum', 'accepted', '$time', '$date');";
+        
+        $SAFE_restaurantId = (int) $restaurantId;
+        $SAFE_comment = $this->mySQL->real_escape_string($comment);
+        $SAFE_peopleNum = (int) $peopleNum;
+        $SAFE_time = $this->mySQL->real_escape_string($time);
+        $SAFE_date = $this->mySQL->real_escape_string($date);
+
+        $q = 
+        "INSERT INTO reservations 
+            ( userId, restaurantId, comment, peopleNum, status, time, date)
+        VALUES 
+            ('$id', '$SAFE_restaurantId', '$SAFE_comment', '$SAFE_peopleNum', 'accepted', '$SAFE_time', '$SAFE_date');";
+
         $res = $this->mySQL->query($q);
         return $res ? true : false;
     }

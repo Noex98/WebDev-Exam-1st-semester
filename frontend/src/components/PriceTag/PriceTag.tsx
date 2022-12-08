@@ -5,6 +5,11 @@ type Props = {
     priceScore: number
 }
 
+/**
+ * Inserts dollar signs.
+ * Max pricscore is 4.
+ */
+
 export const PriceTag = ({priceScore}: Props) => {
 
     const dollarSigns = []
