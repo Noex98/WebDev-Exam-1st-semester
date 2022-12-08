@@ -85,8 +85,7 @@ export const Explore = () => {
                             </p>
                         </div>
                     </div>
-                )
-                }
+                )}
 
                 {
                     !isLoading && restaurants.length !== 0 && (

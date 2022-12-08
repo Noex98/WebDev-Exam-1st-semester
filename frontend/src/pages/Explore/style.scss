@@ -8,15 +8,19 @@
     }
 
     .restaurantContainer {
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
     }
     .no-results {
         svg{width: 50px;}
         text-align: center;
-        
+    }
 
+    @media (min-width: 375px) {
+        .restaurantContainer {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 }
+
