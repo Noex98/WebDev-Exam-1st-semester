@@ -17,8 +17,7 @@
     }
     > .content {
         position: fixed;
-        left: 0;
-        right: 0;
+        width:100%;
         bottom: 0;
         padding:25px;
         background-color: #030C21;
@@ -26,6 +25,11 @@
         transform: translateY(100%);
         transition: 250ms;
         z-index: 1000;
+        
+        //Presentation purpose
+        margin-left:-25px;
+        max-width: 500px; 
+        left: center;
 
         > .closeBtn {
             display: block;
