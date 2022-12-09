@@ -1,23 +1,10 @@
 <?php declare(strict_types=1);
 
-    include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
-    include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 
-    $authService = new AuthService;
-    $userService = new UserService;
+$id = ApiService::require_authenticated();
 
-    $id = $authService->authenticate();
-
-    if($id !== -1){
-        echo json_encode([
-            'data' => $userService->getUser($id),
-            'succes' => true,
-            'errMessage' => ''
-        ]);
-    } else {
-        echo json_encode([
-            'data' => null,
-            'succes' => false,
-            'errMessage' => 'Not logged in'
-        ]);
-    }
+$userService = new UserService;
+$data = $userService->getUser($id);
+echo json_encode($data);
