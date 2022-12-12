@@ -17,12 +17,12 @@ export const Restaurant = () => {
 
     useEffect(() => {
         if (id) {
-            apiService.getRestaurant(id).then(res => {
-                if (res.succes) {
-                    setRestaurant(res.data)
-                }
-                setLoading(false)
-            })
+            apiService.getRestaurant(id)
+                .then(res => {
+                    setRestaurant(res)
+                })
+                .catch(err => console.log(err))
+                .finally(() => setLoading(false))
         }
     }, [id, setRestaurant, setLoading])
 

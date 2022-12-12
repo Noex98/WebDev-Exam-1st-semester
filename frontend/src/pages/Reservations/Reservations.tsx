@@ -11,12 +11,10 @@ export const Reservations = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        apiService.getReservations().then(res => {
-            if (res.succes) {
-                setReservations(res.data);
-            }
-            setLoading(false);
-        })
+        apiService.getReservations()
+            .then(res => setReservations(res))
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
     }, [setReservations, setLoading])
 
     if (loading) {

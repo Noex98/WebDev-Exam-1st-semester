@@ -1,23 +1,8 @@
 <?php declare(strict_types=1);
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 
-$authService = new AuthService();
+$id = ApiService::require_authenticated();
+
 $userService = new UserService();
-
-$id = $authService->authenticate();
-
-if($id !== -1){
-    $reservations = $userService->getReservations($id);
-    echo json_encode([
-        'data' => $reservations,
-        'succes' => true,
-        'errMessage' => '',
-    ]);
-} else {
-    echo json_encode([
-        'data' => null,
-        'succes' => false,
-        'errMessage' => 'Not logged in',
-    ]);
-}
+echo json_encode($userService->getReservations($id));

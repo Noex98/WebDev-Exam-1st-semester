@@ -5,7 +5,7 @@ export class apiService {
     static login = async (
         email: string, 
         password: string
-    ): Promise<IRes<IUser>> => {
+    ): Promise<IUser> => {
         const url = '/api//login/'
         const res = await fetch(url, {
             method: "POST",
@@ -18,10 +18,11 @@ export class apiService {
                 password: password
             })
         })
-        return await res.json();
+        if(res.ok) return await res.json();
+        throw await res.text();
     }
 
-    static continueSession = async (): Promise<IRes<IUser>> => {
+    static continueSession = async (): Promise<IUser> => {
         const url = '/api/continueSession/'
         const res = await fetch(url, {
             method: "POST",
@@ -31,7 +32,9 @@ export class apiService {
                 'Accept': 'Application/json'
             }
         })
-        return await res.json();
+
+        if(res.ok) return await res.json();
+        throw await res.text();
     }
 
     static signup = async (
@@ -64,7 +67,7 @@ export class apiService {
         categories: number[],
         searchString: string,
         sortBy: "price" | "distance"
-    ): Promise<IRes<IRestaurant[]>> => {
+    ): Promise<IRestaurant[]> => {
         const url = '/api/restaurantList/'
         const res = await fetch(url, {
             method: "POST",
@@ -81,23 +84,24 @@ export class apiService {
                 sortBy: sortBy
             })
         })
-        return await res.json();
+        if(res.ok) return await res.json();
+        throw await res.text();
     }
 
-    static getCategories = async(): Promise<IRes<ICategory[]>> => {
+    static getCategories = async(): Promise<ICategory[]> => {
         const url = '/api/categories/'
         const res = await fetch(url, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    return await res.json();
-
+            method: "POST",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if(res.ok) return await res.json();
+        throw await res.text();
     }
 
-    static getRestaurant = async(id: string): Promise<IRes<IRestaurantFull>> => {
+    static getRestaurant = async(id: string): Promise<IRestaurantFull> => {
         const url = '/api/restaurant/'
         const res = await fetch(url, {
             method: 'POST', 
@@ -108,7 +112,8 @@ export class apiService {
                 id: id
             })
         })
-        return await res.json();
+        if(res.ok) return await res.json();
+        throw await res.text();
     }
 
     static createReservation = async(
@@ -117,7 +122,7 @@ export class apiService {
         date: any,
         time: any,
         comment: string
-    ): Promise<IRes<null>> => {
+    ): Promise<boolean> => {
         const url = '/api/createReservation/'
         const res = await fetch(url, {
             method: 'POST', 
@@ -133,27 +138,24 @@ export class apiService {
                 peopleNum: peopleNum
             })
         })
-        return await res.json();
+        if(res.ok) return true;
+        throw await res.text();
     }
 
-    static getReservations = async(): Promise<IRes<IReservation[]>> =>{
+    static getReservations = async(): Promise<IReservation[]> =>{
         const url = '/api/reservations/'
         const res = await fetch(url, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    return await res.json();
-
+            method: "POST",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if(res.ok) return await res.json();
+        throw await res.text();
     }
-    
 
-     /**
-     * @return true if success
-     */
-    static deleteReservation = async(id: number): Promise<boolean> => {
+    static deleteReservation = async(id: number): Promise<null> => {
         const url = '/api/deleteReservation/'
         const res = await fetch(url, {
             method: 'POST', 
@@ -165,9 +167,9 @@ export class apiService {
                 id: id
             })
         })
-        return await res.json().then(res => {
-            return res.succes;
-        });
+
+        if(res.ok) return null;
+        throw await res.text();
     }
 
     /**
@@ -183,12 +185,11 @@ export class apiService {
                 'Content-Type': 'application/json'
             }
         })
-        return await res.json().then(res => {
-            return res.succes;
-        });
+        if(res.ok) return true;
+        throw await res.text();
     }
 
-    static logout = async (): Promise<IRes<null>> => {
+    static logout = async (): Promise<null> => {
         const url = '/api/logout/'
         const res = await fetch(url, {
             method: "POST",
@@ -197,7 +198,7 @@ export class apiService {
                 'Content-Type': 'application/json'
             },
         })
-        return await res.json();
+        return null;
     }
     
     static editUser = async(

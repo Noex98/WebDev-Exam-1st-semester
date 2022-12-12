@@ -20,12 +20,14 @@ function App() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        apiService.continueSession().then(res =>{
-            if(res.succes){
-                setUser(res.data);
-            }
-            setLoading(false);
-        })
+        apiService.continueSession()
+            .then(res => {
+                setUser(res);
+            })
+            .catch(res=> console.log(res))
+            .finally(() => {
+                setLoading(false);
+            })
     }, [])
     
     if (loading){

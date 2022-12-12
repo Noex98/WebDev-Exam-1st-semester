@@ -1,33 +1,13 @@
 <?php declare(strict_types=1);
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
+
+$userId = ApiService::require_authenticated();
 
 $userService = new UserService();
-$authService = new AuthService();
+$deleteUser = $userService->deleteUser($id);
 
-$id = $authService->authenticate();
-
-//menu
-
-if ($id !== -1) {
-    $deleteUser = $userService->deleteUser($id);
-    if ($deleteUser) {
-        echo json_encode([
-            'data' => null,
-            'succes' => true,
-            'errMessage' => '',
-        ]);
-    } else {
-        echo json_encode([
-            'data' => null,
-            'succes' => false,
-            'errMessage' => 'Invalid request. User does not exist',
-        ]);
-    }
-} else {
-    echo json_encode([
-        'data' => null,
-        'succes' => false,
-        'errMessage' => 'Invalid request. User not logged in.',
-    ]);
+if (!$deleteUser) {
+    http_response_code(500);
+    exit('Invalid request. User does not exist');
 }

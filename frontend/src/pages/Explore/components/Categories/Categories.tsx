@@ -12,11 +12,10 @@ type Props = {
 export const Categories = ({ selectedCategories, setSelectedCategories }: Props) => {
     const [categories, setCategories] = useState<ICategory[] | null>(null)
     useEffect(() => {
-        apiService.getCategories().then(res => {
-            if (res.succes) {
-                setCategories(res.data)
-            }
-        })
+        apiService.getCategories()
+            .then(res => {
+                setCategories(res)
+            })
     }, [])
 
     const clickHandler = (id: number) => {

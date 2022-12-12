@@ -1,41 +1,26 @@
 <?php declare(strict_types=1);
-include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
 
-$req = getJsonBody();
+$req = ApiService::getJsonBody();
 
-$allParamsIsSet = (
-    isset($req['latitude']) &&
-    isset($req['longtitude']) &&
-    isset($req['maxDistance']) &&
-    isset($req['categories']) &&
-    isset($req['searchString']) &&
-    isset($req['sortBy'])
+ApiService::require_existingParams($req, [
+    'latitude',
+    'longtitude',
+    'maxDistance',
+    'categories',
+    'searchString',
+    'sortBy'
+]);
+
+$userService = new UserService();
+$data = $userService->getRestaurantList(
+    floatval($req['latitude']),
+    floatval($req['longtitude']),
+    floatval($req['maxDistance']),
+    $req['categories'],
+    $req['searchString'],
+    $req['sortBy'],
 );
 
-if ($allParamsIsSet){
-
-    $userService = new UserService();
-    $data = $userService->getRestaurantList(
-        floatval($req['latitude']),
-        floatval($req['longtitude']),
-        floatval($req['maxDistance']),
-        $req['categories'],
-        $req['searchString'],
-        $req['sortBy'],
-    );
-    
-    echo json_encode([
-        'data' => $data,
-        'succes' => true,
-        'errMessage' => '',
-    ]);
-
-} else {
-    echo json_encode([
-        'data' => null,
-        'succes' => false,
-        'errMessage' => 'Invalid request: Must set all variabels'
-    ]);
-}
-
+echo json_encode($data);

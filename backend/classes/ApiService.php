@@ -11,7 +11,7 @@ class ApiService {
         $authService = new AuthService;
         $id = $authService->authenticate();
 
-        if($id == -1){
+        if($id === -1){
             http_response_code(401);
             exit('Must be logged in to acces this resource');
         }

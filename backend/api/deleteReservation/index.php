@@ -1,32 +1,10 @@
 <?php declare(strict_types=1);
-include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 
-$req = getJsonBody();
+$req = ApiService::getJsonBody();
+$userId = ApiService::require_authenticated();
+ApiService::require_existingParams($req, ['id']);
+
 $userService = new UserService();
-$authService = new AuthService();
-$userId = $authService->authenticate();
-
-if ($userId !== -1) {
-    if (isset($req['id'])) {
-        $userService->deleteReservation($userId, $req['id']);
-        echo json_encode([
-            'data' => null,
-            'succes' => true,
-            'errMessage' => '',
-        ]);
-    } else {
-        echo json_encode([
-            'data' => null,
-            'succes' => false,
-            'errMessage' => 'Invalid request. Id not set'
-        ]);
-    }
-} else {
-    echo json_encode([
-        'data' => null,
-        'succes' => false,
-        'errMessage' => 'User not logged in',
-    ]);
-}
+$userService->deleteReservation($userId, $req['id']);

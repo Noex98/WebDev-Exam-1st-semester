@@ -1,9 +1,14 @@
 <?php declare(strict_types=1);
-
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
 
-$id = ApiService::require_authenticated();
+$authService = new AuthService;
+$id = $authService->authenticate();
+
+if($id === -1){
+    http_response_code(401);
+    exit('Session not authenticated');
+}
 
 $userService = new UserService;
 $data = $userService->getUser($id);

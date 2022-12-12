@@ -32,14 +32,12 @@ export const Login = ({setUser}: Props) => {
 
     function submitHandler(e: React.FormEvent){
         e.preventDefault();
-        apiService.login(email, password).then(res => {
-            if(res.succes){
-                    setUser(res.data);
-                    navigate('/Explore');
-            } else {
-                setErrMessage(res.errMessage);
-            }
-        });
+        apiService.login(email, password)
+            .then(res => {
+                setUser(res);
+                navigate('/Explore');
+            })
+            .catch(err => setErrMessage(err));
     }
 
     return (

@@ -10,7 +10,6 @@ export interface IUser {
     phoneNumber: number
 }
 
-//menu
 export interface IRestaurant {
     id: number
     name: string
@@ -44,11 +43,9 @@ export interface ICategory {
 export interface IFilter {
     longtitude: number,
     latitude: number,
-
     searchString: string,
     sortBy: "distance" | "price",
     maxDistance: number,
-
     categories: number[]
 }
 

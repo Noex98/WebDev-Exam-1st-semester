@@ -49,12 +49,9 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
             comment
         ).then(res => {
             setLoading(false)
-            if(res.succes){
-                navigate('/reservations')
-            }else {
-
-            }
+            navigate('/reservations')
         })
+        .catch(err => console.log(err))
     }
 
     return (

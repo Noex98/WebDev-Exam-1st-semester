@@ -21,9 +21,6 @@ export const Explore = () => {
     const [maxDistance, setMaxDistance] = useState<number>(accesLocalStorage('maxDistance') ? accesLocalStorage('maxDistance') : 100);
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
 
-    console.log(accesLocalStorage('maxDistance'));
-    
-
     useEffect(() => {
         if (latitude && longtitude) {
             setIsloading(true);
@@ -34,12 +31,10 @@ export const Explore = () => {
                 selectedCategories,
                 searchString,
                 sortBy
-            ).then(res => {
-                if (res.succes) {
-                    setRestaurants(res.data)
-                }
-                setIsloading(false)
-            })
+            )
+            .then(res => setRestaurants(res))
+            .catch(err => console.log(err))
+            .finally(() => setIsloading(false))
         }
     }, [longtitude, latitude, searchString, sortBy, maxDistance, selectedCategories])
 

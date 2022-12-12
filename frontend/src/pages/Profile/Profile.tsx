@@ -3,7 +3,7 @@ import { IUser } from '../../types';
 import { apiService } from '../../service/apiService';
 import { SetStateAction, useState } from 'react';
 import { CtaButton, Nav, Popup } from '../../components';
-import { Setting } from './components/Setting';
+import { Setting } from './components';
 import { Link } from "react-router-dom"
 
 
@@ -20,7 +20,6 @@ export const Profile = ({ user, setUser }: Props) => {
     const logoutHandler = () => {
         apiService.logout()
         setUser(null);
-
     }
 
     const deleteUser = () => {
