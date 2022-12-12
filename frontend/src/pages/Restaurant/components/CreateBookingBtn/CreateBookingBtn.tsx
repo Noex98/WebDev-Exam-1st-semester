@@ -48,8 +48,10 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
             time,
             comment
         ).then(res => {
-            setLoading(false)
-            navigate('/reservations')
+            closePopupHandler();
+            setTimeout(() => {
+                navigate('/reservations')
+            }, 250)
         })
         .catch(err => console.log(err))
     }

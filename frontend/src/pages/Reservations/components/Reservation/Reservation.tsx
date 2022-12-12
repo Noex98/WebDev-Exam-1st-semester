@@ -46,8 +46,8 @@ export const Reservation = ({ reservation, setReservations }: Props) => {
             })
             .catch(err => console.log(err))
             .finally(() => {
-                setLoading(false)
                 setPopupOpen(false)
+                setLoading(false)
             })
     }
 

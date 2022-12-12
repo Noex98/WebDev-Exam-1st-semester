@@ -35,11 +35,12 @@
   }
   .buttonContainer {
     position: sticky;
+    z-index: 100;
     top: 57px;
     margin: 0px -25px;
+    background-color: rgb(2, 9, 28);
     padding: 25px;
     text-align: center;
-    background-color: rgb(2, 9, 28);
     button{
       width: 75%;
     }
