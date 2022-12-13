@@ -1,46 +1,26 @@
 <?php declare(strict_types=1);
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/api/editUser/utils.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 
-$authService = new AuthService;
-$userService = new UserService;
+$req = ApiService::getJsonBody();
+$id = ApiService::require_authenticated();
 
-$id = $authService->authenticate();
-$req = getJsonBody();
+ApiService::require_existingParams($req, [
+    'key',
+    'value'
+]);
 
-$allParamsExist = doesParamsExist($req);
-
-if($id !== -1){
-    if($allParamsExist) {
-
-        $isKeyValid = isKeyValid($req['key']);
-
-        if($isKeyValid) {
-            echo json_encode([
-                'data' => $userService->editUser($id, $req['key'], $req['value']),
-                'succes' => true,
-                'errMessage' => ''
-            ]);
-        } else {
-            echo json_encode([
-                'data' => null,
-                'succes' => false,
-                'errMessage' => 'Invalid request: Key isnt valid'
-            ]);
-        }
-    } else {
-        echo json_encode([
-            'data' => null,
-            'succes' => false,
-            'errMessage' => 'Invalid request: please fill out all params'
-        ]);
-    };
-} else {
-    echo json_encode([
-        'data' => null,
-        'succes' => false,
-        'errMessage' => 'Invalid request. User not logged in.',
-    ]);
+switch ($req['key']) {
+    case 'name':
+        ApiService::require_validName($req['value']);
+    case 'email':
+        ApiService::require_validEmail($req['value']);
+    case 'phoneNumber':
+        ApiService::require_validPhoneNUmber($req['value']);
+    default:
+        http_response_code(400);
+        exit('Invalid request: Key isnt valid');
 }
+
+$userService = new UserService;
+echo json_encode($userService->editUser($id, $req['key'], $req['value']));

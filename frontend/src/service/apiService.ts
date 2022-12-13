@@ -1,4 +1,4 @@
-import { ICategory, IRes, IReservation, IRestaurant, IRestaurantFull, IUser } from "../types";
+import { ICategory, IReservation, IRestaurant, IRestaurantFull, IUser } from "../types";
 
 export class apiService {
 
@@ -42,7 +42,7 @@ export class apiService {
         phoneNumber: string,
         email: string,
         password: string,
-    ): Promise<IRes<null>> => {
+    ): Promise<boolean> => {
         const url = '/api/signup/'
         const res = await fetch(url, {
             method: "POST",
@@ -57,7 +57,8 @@ export class apiService {
                 password: password,
             })
         })
-        return await res.json();
+        if(res.ok) return true;
+        throw await res.text();
     }
 
     static getRestaurantList = async(
@@ -172,10 +173,6 @@ export class apiService {
         throw await res.text();
     }
 
-    /**
-     * @return true if success
-     */
-
     static deleteUser = async(): Promise<boolean> => {
         const url = '/api/deleteUser/'
         const res = await fetch(url, {
@@ -204,7 +201,7 @@ export class apiService {
     static editUser = async(
         key: string, 
         value: string | number
-    ): Promise<IRes<null>> => {
+    ): Promise<boolean> => {
         const url = '/api/editUser/'
         const res = await fetch (url, {
             method: "POST",
@@ -216,6 +213,7 @@ export class apiService {
                 value: value
             })
         })
-        return await res.json()
+        if(res.ok) return true;
+        throw await res.text();
     }
 }

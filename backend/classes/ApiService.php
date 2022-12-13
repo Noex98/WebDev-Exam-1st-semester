@@ -45,4 +45,36 @@ class ApiService {
         }
     }
 
+    static function require_validName(string $name){
+        $nameValid = strlen($name) > 1;
+        if(!$nameValid){
+            http_response_code(400);
+            exit('Invalid name format. Name must be at least 2 characters.');
+        }
+    }
+
+    static function require_validEmail(string $email){
+        $emailValid = !!filter_var($email, FILTER_VALIDATE_EMAIL);
+        if(!$emailValid){
+            http_response_code(400);
+            exit('Invalid email address format.');
+        }
+    }
+
+    static function require_validPassword(string $password){
+        $passwordValid = !!preg_match('~[0-9]+~', $password) && strlen($password) > 5;
+        if(!$passwordValid){
+            http_response_code(400);
+            exit('Invalid password. Password must include at least 6 characters and must include at least one number.');
+        }
+    }
+
+    static function require_validPhoneNUmber(string $phoneNumber, int $digits = 8){
+        $phoneNumberValid = !!preg_match('/^[0-9]{' . $digits . '}\z/', $phoneNumber);
+        if(!$phoneNumberValid){
+            http_response_code(400);
+            exit('Invalid phonenumber format. Must be 8 digits.');
+        }
+    }
+
 }

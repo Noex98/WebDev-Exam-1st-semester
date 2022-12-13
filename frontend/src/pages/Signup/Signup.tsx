@@ -45,13 +45,10 @@ export const Signup = () => {
         }
 
         apiService.signup(data.name, data.phoneNumber, data.email, data.password)
-            .then((res) => {
-                if (res.succes === false) {
-                    setError(res.errMessage);
-                } else {
-                    navigate('/login');
-                }
+            .then(() => {
+                navigate('/login');
             })
+            .catch(err => setError(err))
     }
 
     return (

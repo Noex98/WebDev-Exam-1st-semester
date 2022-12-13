@@ -1,9 +1,3 @@
-export interface IRes<T> {
-    succes: boolean,
-    errMessage: string,
-    data: T
-}
-
 export interface IUser {
     name: string,
     email: string,
