@@ -1,5 +1,5 @@
 import './style.scss'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { IUser } from '../../types';
 import { SetStateAction, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -15,36 +15,35 @@ type Props = {
 
 export const EditUser = ({ user, setUser }: Props) => {
     const location = useLocation();
-    const key = location.state;
-    const [newValue, setNewValue] = useState<string | number>("");
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const key = location.state;
+    const [value, setValue] = useState<string | number>("");
+    const [label, setLabel] = useState("");
+    const [loading, setLoading] = useState(false);
     const [errMessage, setErrMessage] = useState("")
 
-    let currentValue = ""
-    let label = ""
-    switch (key) {
-        case "name":
-            currentValue = user.name
-            label = "Name"
-            break;
-        case "email":
-            currentValue = user.email
-            label = "Email"
-            break;
-        case "phoneNumber":
-            currentValue = "" + user.phoneNumber
-            label = "Phone Number"
-            break;
-        default:
-            return <></>
-    }
+    useEffect(() => {
+        switch (key) {
+            case "name":
+                setValue(user.name)
+                setLabel('Name')
+                break;
+            case "email":
+                setValue(user.email)
+                setLabel('Email')
+                break;
+            case "phoneNumber":
+                setValue(user.phoneNumber)
+                setLabel('Phone Number')
+                break;
+        }
+    }, [key])
 
     const setNewUserData = () => {
         setLoading(true)
-        apiService.editUser(key, newValue)
+        apiService.editUser(key, value)
             .then(() => {
-                setUser(prev => prev ? {...prev, [key]: newValue} : null)
+                setUser(prev => prev ? {...prev, [key]: value} : null)
                 navigate('/profile')
             })
             .catch(err => setErrMessage(err))
@@ -62,7 +61,7 @@ export const EditUser = ({ user, setUser }: Props) => {
                     <h2>Profile</h2>
                 </div>
                 <h3>{label}</h3>
-                <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} defaultValue={currentValue} placeholder={currentValue}></TextInput>
+                <TextInput onChange={e => setValue(e.currentTarget.value)} defaultValue={value} placeholder={""+value}></TextInput>
                 <p>{errMessage}</p>
                 <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
             </div>
