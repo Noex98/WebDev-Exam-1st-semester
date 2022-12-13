@@ -5,6 +5,7 @@ import { IRestaurant } from '../../types';
 import { accesLocalStorage } from '../../utils';
 import { Location, Filter, Restaurant } from './components'
 import { Categories } from './components/Categories';
+import { useGeolocated } from 'react-geolocated';
 import { ReactComponent as Search } from '../../assets/icons/search.svg'
 import './style.scss';
 
@@ -20,6 +21,14 @@ export const Explore = () => {
     const [sortBy, setSortBy] = useState<"distance" | "price">("distance");
     const [maxDistance, setMaxDistance] = useState<number>(accesLocalStorage('maxDistance') ? accesLocalStorage('maxDistance') : 100);
     const [selectedCategories, setSelctedCategories] = useState<number[]>([]);
+    //Geolocation
+    const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+        useGeolocated({
+            positionOptions: {
+                enableHighAccuracy: false,
+            },
+            userDecisionTimeout: 5000,
+        });
 
     useEffect(() => {
         if (latitude && longtitude) {
@@ -32,13 +41,23 @@ export const Explore = () => {
                 searchString,
                 sortBy
             )
-            .then(res => setRestaurants(res))
-            .catch(err => console.log(err))
-            .finally(() => setIsloading(false))
+                .then(res => setRestaurants(res))
+                .catch(err => console.log(err))
+                .finally(() => setIsloading(false))
         }
     }, [longtitude, latitude, searchString, sortBy, maxDistance, selectedCategories])
 
-    return (
+    return !isGeolocationAvailable ? (
+        <>
+        <div>Your browser does not support Geolocation</div>
+        <Nav />
+        </>
+    ) : !isGeolocationEnabled ? (
+        <>
+        <div>Can't acces your location, please allow location sharing on your device!</div>
+        <Nav />
+        </>
+    ) : (
         <>
             <div className="pages__explore">
                 <Location
@@ -46,6 +65,7 @@ export const Explore = () => {
                     latitude={latitude}
                     setLongtitude={setLongtitude}
                     setLatitude={setLatitude}
+                    coords={coords}
                 />
                 <div className='line'></div>
                 <Filter
