@@ -14,65 +14,61 @@ type Props = {
 }
 
 export const EditUser = ({ user, setUser }: Props) => {
-  const location = useLocation();
-  const key = location.state;
-  const [newValue, setNewValue] = useState<string | number>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const navigate = useNavigate();
-  const [errMessage, setErrMessage] = useState<string>("")
+    const location = useLocation();
+    const key = location.state;
+    const [newValue, setNewValue] = useState<string | number>("");
+    const [loading, setLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
+    const [errMessage, setErrMessage] = useState<string>("")
 
-  let placeholder = ""
-  let label = ""
-  switch (key) {
-    case "name":
-      placeholder = user.name
-      label = "Name"
-      break;
-    case "email":
-      placeholder = user.email
-      label = "Email"
-      break;
-    case "phoneNumber":
-      placeholder = "" + user.phoneNumber
-      label = "Phone Number"
-      break;
-      default:
-    return <></>
-  }
+    let placeholder = ""
+    let label = ""
+    switch (key) {
+        case "name":
+        placeholder = user.name
+        label = "Name"
+        break;
+        case "email":
+        placeholder = user.email
+        label = "Email"
+        break;
+        case "phoneNumber":
+        placeholder = "" + user.phoneNumber
+        label = "Phone Number"
+        break;
+        default:
+        return <></>
+    }
 
-  const setNewUserData = () => {
-    setLoading(true)
-    apiService.editUser(key, newValue).then(res => {
-      if (res.succes) {
-        setUser(prev => {  
-          return prev ? {...prev, [key]: newValue} : null
-        })
-        setLoading(false)
-        navigate('/profile')
-      } else {setErrMessage(res.errMessage);
-        setLoading(false)
-      }
-    })
-  }
+    const setNewUserData = () => {
+        setLoading(true)
+        apiService.editUser(key, newValue)
+            .then(() => {
+                setUser(prev => prev ? {...prev, [key]: newValue} : null)
+                navigate('/profile')
+            })
+            .catch(err => setErrMessage(err))
+            .finally(() => setLoading(false))
+    }
 
 
 
-  return (
-    loading ? <div><Spinner /> <Nav /></div> :
-    <div>
-      <div className='pages__editUser'>
-        <div className='editUser__header'>
-          <Link to="/profile">
-          <ArrowSvg />
-          </Link>
-          <h2>Profile</h2>
+    return (
+        loading ? <div><Spinner /> <Nav /></div> :
+        <div>
+        <div className='pages__editUser'>
+            <div className='editUser__header'>
+            <Link to="/profile">
+            <ArrowSvg />
+            </Link>
+            <h2>Profile</h2>
+            </div>
+            <h3>{label}</h3>
+            <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} placeholder={placeholder}></TextInput>
+            <p>{errMessage}</p>
+            <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
         </div>
-        <h3>{label}</h3>
-        <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} placeholder={placeholder}></TextInput>
-        <p>{errMessage}</p>
-        <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
-      </div>
-      <Nav />
-    </div>
-  )
+        <Nav />
+        </div>
+    )
 }

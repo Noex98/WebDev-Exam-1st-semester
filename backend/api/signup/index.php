@@ -1,79 +1,54 @@
 <?php declare(strict_types=1);
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/AuthService.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/utils/getJsonBody.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/api/signup/utils.php');
 
-$req = getJsonBody();
+$req = ApiService::getJsonBody();
 
 $allParamsExist = doesParamsExist($req);
 
-if (!$allParamsExist) {
-    echo json_encode([
-        'data' => null,
-        'succes' => false,
-        'errMessage' => 'Invalid request: Must fill all fields'
-    ]);
-} else {
-    $passwordVaild = isPasswordValid($req['password']);
-    $emailValid = isEmailValid($req['email']);
-    $phoneNumberValid = isPhoneNumberValid($req['phoneNumber']);
-    $nameValid = isNameValid($req['name']);
+ApiService::require_existingParams($req, [
+    'name',
+    'phoneNumber',
+    'email',
+    'password'
+]);
 
-    if (!$passwordVaild) {
-        echo json_encode([
-            'data' => null,
-            'succes' => false,
-            'errMessage' => 'Invalid password. Password must include at least 6 characters and must include at least one number.'
-        ]);
-    } else if (!$emailValid) {
-        echo json_encode([
-            'data' => null,
-            'succes' => false,
-            'errMessage' => 'Invalid email address format.'
-        ]);
-    } else if (!$phoneNumberValid) {
-        echo json_encode([
-            'data' => null,
-            'succes' => false,
-            'errMessage' => 'Invalid phonenumber format. Must be 8 digits.'
-        ]);
-    } else if (!$nameValid) {
-        echo json_encode([
-            'data' => null,
-            'succes' => false,
-            'errMessage' => 'Invalid name format. Name cannot contain numbers or special characters and must be at least 2 characters.'
-        ]);
-    } else {
+$passwordVaild = isPasswordValid($req['password']);
+$emailValid = isEmailValid($req['email']);
+$phoneNumberValid = isPhoneNumberValid($req['phoneNumber']);
+$nameValid = isNameValid($req['name']);
 
-        $authService = new AuthService();
-        $userExist = $authService->doesUserExist($req['email']);
+if (!$passwordVaild) {
+    http_response_code(400);
+    exit('Invalid password. Password must include at least 6 characters and must include at least one number.');
+} else if (!$emailValid) {
+    http_response_code(400);
+    exit('Invalid email address format.');
+} else if (!$phoneNumberValid) {
+    http_response_code(400);
+    exit('Invalid phonenumber format. Must be 8 digits.');
+} else if (!$nameValid) {
+    http_response_code(400);
+    exit('Invalid name format. Name cannot contain numbers or special characters and must be at least 2 characters.');
+}
 
-        if($userExist){
-            echo json_encode([
-                'data' => null,
-                'succes' => false,
-                'errMessage' => 'User already exists'
-            ]);
-        } else {
-            $success = $authService->registerUser(
-                $req['name'],
-                $req['email'],
-                $req['phoneNumber'],
-                $req['password'],
-            );
-            if ($success) {
-                echo json_encode([
-                    'data' => null,
-                    'succes' => true,
-                    'errMessage' => ''
-                ]);
-            } else {
-                echo json_encode([
-                    'data' => null,
-                    'succes' => false,
-                    'errMessage' => 'An unknown error occured'
-                ]);
-            }
-        }
-    }
+$authService = new AuthService();
+$userExist = $authService->doesUserExist($req['email']);
+
+if($userExist){
+    http_response_code(400);
+    exit('User already exists');
+}
+
+$success = $authService->registerUser(
+    $req['name'],
+    $req['email'],
+    $req['phoneNumber'],
+    $req['password'],
+);
+
+if (!$success) {
+    http_response_code(500);
+    exit('An unknown error occured');
 }
