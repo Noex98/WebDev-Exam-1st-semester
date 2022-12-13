@@ -13,10 +13,13 @@ ApiService::require_existingParams($req, [
 switch ($req['key']) {
     case 'name':
         ApiService::require_validName($req['value']);
+        break;
     case 'email':
         ApiService::require_validEmail($req['value']);
+        break;
     case 'phoneNumber':
         ApiService::require_validPhoneNUmber($req['value']);
+        break;
     default:
         http_response_code(400);
         exit('Invalid request: Key isnt valid');

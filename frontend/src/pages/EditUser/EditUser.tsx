@@ -1,7 +1,7 @@
 import './style.scss'
 import React from 'react'
 import { IUser } from '../../types';
-import { SetStateAction, useEffect, useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Nav, TextInput, CtaButton, Spinner } from '../../components';
 import { apiService } from '../../service/apiService';
