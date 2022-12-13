@@ -1,4 +1,4 @@
-import { ICategory, IRes, IReservation, IRestaurant, IRestaurantFull, IUser } from "../types";
+import { ICategory, IReservation, IRestaurant, IRestaurantFull, IUser } from "../types";
 
 export class apiService {
 

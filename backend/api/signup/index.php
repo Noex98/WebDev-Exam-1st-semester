@@ -14,24 +14,10 @@ ApiService::require_existingParams($req, [
     'password'
 ]);
 
-$passwordVaild = isPasswordValid($req['password']);
-$emailValid = isEmailValid($req['email']);
-$phoneNumberValid = isPhoneNumberValid($req['phoneNumber']);
-$nameValid = isNameValid($req['name']);
-
-if (!$passwordVaild) {
-    http_response_code(400);
-    exit('Invalid password. Password must include at least 6 characters and must include at least one number.');
-} else if (!$emailValid) {
-    http_response_code(400);
-    exit('Invalid email address format.');
-} else if (!$phoneNumberValid) {
-    http_response_code(400);
-    exit('Invalid phonenumber format. Must be 8 digits.');
-} else if (!$nameValid) {
-    http_response_code(400);
-    exit('Invalid name format. Name cannot contain numbers or special characters and must be at least 2 characters.');
-}
+ApiService::require_validEmail($req['email']);
+ApiService::require_validPassword($req['password']);
+ApiService::require_validName($req['name']);
+ApiService::require_validPhoneNUmber($req['phoneNumber']);
 
 $authService = new AuthService();
 $userExist = $authService->doesUserExist($req['email']);
