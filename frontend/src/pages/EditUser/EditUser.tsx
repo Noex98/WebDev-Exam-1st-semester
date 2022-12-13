@@ -1,7 +1,7 @@
 import './style.scss'
 import React from 'react'
 import { IUser } from '../../types';
-import { SetStateAction, useEffect, useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Nav, TextInput, CtaButton, Spinner } from '../../components';
 import { apiService } from '../../service/apiService';
@@ -68,7 +68,7 @@ export const EditUser = ({ user, setUser }: Props) => {
           <h2>Profile</h2>
         </div>
         <h3>{label}</h3>
-        <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} placeholder={placeholder}></TextInput>
+        <TextInput  onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} placeholder={placeholder}></TextInput>
         <p>{errMessage}</p>
         <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
       </div>
