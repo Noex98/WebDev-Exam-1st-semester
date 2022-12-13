@@ -25,19 +25,19 @@ export const EditUser = ({ user, setUser }: Props) => {
     let label = ""
     switch (key) {
         case "name":
-        placeholder = user.name
-        label = "Name"
-        break;
+            placeholder = user.name
+            label = "Name"
+            break;
         case "email":
-        placeholder = user.email
-        label = "Email"
-        break;
+            placeholder = user.email
+            label = "Email"
+            break;
         case "phoneNumber":
-        placeholder = "" + user.phoneNumber
-        label = "Phone Number"
-        break;
+            placeholder = "" + user.phoneNumber
+            label = "Phone Number"
+            break;
         default:
-        return <></>
+            return <></>
     }
 
     const setNewUserData = () => {
@@ -56,19 +56,19 @@ export const EditUser = ({ user, setUser }: Props) => {
     return (
         loading ? <div><Spinner /> <Nav /></div> :
         <div>
-        <div className='pages__editUser'>
-            <div className='editUser__header'>
-            <Link to="/profile">
-            <ArrowSvg />
-            </Link>
-            <h2>Profile</h2>
+            <div className='pages__editUser'>
+                <div className='editUser__header'>
+                    <Link to="/profile">
+                    <ArrowSvg />
+                    </Link>
+                    <h2>Profile</h2>
+                </div>
+                <h3>{label}</h3>
+                <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} placeholder={placeholder}></TextInput>
+                <p>{errMessage}</p>
+                <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
             </div>
-            <h3>{label}</h3>
-            <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} placeholder={placeholder}></TextInput>
-            <p>{errMessage}</p>
-            <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
-        </div>
-        <Nav />
+            <Nav />
         </div>
     )
 }

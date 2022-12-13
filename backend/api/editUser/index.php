@@ -1,6 +1,5 @@
 <?php declare(strict_types=1);
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
-include($_SERVER['DOCUMENT_ROOT'] . '/api/editUser/utils.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 
 $req = ApiService::getJsonBody();
@@ -11,11 +10,16 @@ ApiService::require_existingParams($req, [
     'value'
 ]);
 
-$isKeyValid = isKeyValid($req['key']);
-
-if(!$isKeyValid) {
-    http_response_code(400);
-    exit('Invalid request: Key isnt valid');
+switch ($req['key']) {
+    case 'name':
+        ApiService::require_validName($req['value']);
+    case 'email':
+        ApiService::require_validEmail($req['value']);
+    case 'phoneNumber':
+        ApiService::require_validPhoneNUmber($req['value']);
+    default:
+        http_response_code(400);
+        exit('Invalid request: Key isnt valid');
 }
 
 $userService = new UserService;
