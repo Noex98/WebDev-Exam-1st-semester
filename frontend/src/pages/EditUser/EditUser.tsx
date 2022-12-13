@@ -17,9 +17,9 @@ export const EditUser = ({ user, setUser }: Props) => {
     const location = useLocation();
     const key = location.state;
     const [newValue, setNewValue] = useState<string | number>("");
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const [errMessage, setErrMessage] = useState<string>("")
+    const [errMessage, setErrMessage] = useState("")
 
     let placeholder = ""
     let label = ""
@@ -50,8 +50,6 @@ export const EditUser = ({ user, setUser }: Props) => {
             .catch(err => setErrMessage(err))
             .finally(() => setLoading(false))
     }
-
-
 
     return (
         loading ? <div><Spinner /> <Nav /></div> :
