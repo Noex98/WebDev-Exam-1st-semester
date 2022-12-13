@@ -21,19 +21,19 @@ export const EditUser = ({ user, setUser }: Props) => {
     const navigate = useNavigate();
     const [errMessage, setErrMessage] = useState("")
 
-    let placeholder = ""
+    let currentValue = ""
     let label = ""
     switch (key) {
         case "name":
-            placeholder = user.name
+            currentValue = user.name
             label = "Name"
             break;
         case "email":
-            placeholder = user.email
+            currentValue = user.email
             label = "Email"
             break;
         case "phoneNumber":
-            placeholder = "" + user.phoneNumber
+            currentValue = "" + user.phoneNumber
             label = "Phone Number"
             break;
         default:
@@ -62,7 +62,7 @@ export const EditUser = ({ user, setUser }: Props) => {
                     <h2>Profile</h2>
                 </div>
                 <h3>{label}</h3>
-                <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} placeholder={placeholder}></TextInput>
+                <TextInput onChange={(e: React.FormEvent<HTMLInputElement>) => {setNewValue(e.currentTarget.value)}} defaultValue={currentValue} placeholder={currentValue}></TextInput>
                 <p>{errMessage}</p>
                 <CtaButton onClick={setNewUserData} color="positive">Save Changes</CtaButton>
             </div>
