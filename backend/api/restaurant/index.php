@@ -2,6 +2,7 @@
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
 
+ApiService::require_xCsrfToken();
 $req = ApiService::getJsonBody();
 ApiService::require_existingParams($req, ['id']);
 

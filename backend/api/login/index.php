@@ -21,8 +21,8 @@ if($id == -1){
     exit('Unknown email and/or password.');
 }
 
-if(!session_id()){
-    session_start();
+if(!isset($_SESSION)) { 
+    session_start(); 
 }
 $_SESSION['authToken'] = $id;
 

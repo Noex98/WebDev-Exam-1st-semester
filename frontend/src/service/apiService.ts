@@ -2,6 +2,16 @@ import { ICategory, IReservation, IRestaurant, IRestaurantFull, IUser } from "..
 
 export class apiService {
 
+    static xCsrfToken = '';
+
+    static getCsrfToken = async() => {
+        const url = 'api/csrf/'
+        const res = await fetch(url, {
+            credentials: "include",
+        })
+        this.xCsrfToken = await res.text();
+    }
+
     static login = async (
         email: string, 
         password: string
@@ -11,7 +21,8 @@ export class apiService {
             method: "POST",
             credentials: "include",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             },
             body: JSON.stringify({
                 email: email,
@@ -29,7 +40,8 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'Application/json'
+                'Accept': 'Application/json',
+                'x-csrf-token': this.xCsrfToken
             }
         })
 
@@ -48,7 +60,8 @@ export class apiService {
             method: "POST",
             credentials: "include",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             },
             body: JSON.stringify({
                 name: name,
@@ -74,7 +87,8 @@ export class apiService {
             method: "POST",
             credentials: "include",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             },
             body: JSON.stringify({
                 latitude: latitude,
@@ -95,7 +109,8 @@ export class apiService {
             method: "POST",
             credentials: "include",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             }
         })
         if(res.ok) return await res.json();
@@ -129,7 +144,8 @@ export class apiService {
             method: 'POST', 
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             },
             body: JSON.stringify({
                 restaurantId: restaurantId,
@@ -149,7 +165,8 @@ export class apiService {
             method: "POST",
             credentials: "include",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             }
         })
         if(res.ok) return await res.json();
@@ -162,7 +179,8 @@ export class apiService {
             method: 'POST', 
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             }, 
             body: JSON.stringify({
                 id: id
@@ -179,7 +197,8 @@ export class apiService {
             method: 'POST', 
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             }
         })
         if(res.ok) return true;
@@ -188,11 +207,12 @@ export class apiService {
 
     static logout = async (): Promise<null> => {
         const url = '/api/logout/'
-        const res = await fetch(url, {
+        await fetch(url, {
             method: "POST",
             credentials: "include",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             },
         })
         return null;
@@ -207,7 +227,8 @@ export class apiService {
             method: "POST",
             credentials: "include",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             }, body: JSON.stringify({
                 key: key,
                 value: value

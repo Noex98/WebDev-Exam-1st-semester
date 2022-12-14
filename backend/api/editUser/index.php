@@ -4,6 +4,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 
 $req = ApiService::getJsonBody();
 $id = ApiService::require_authenticated();
+ApiService::require_xCsrfToken();
 
 ApiService::require_existingParams($req, [
     'key',

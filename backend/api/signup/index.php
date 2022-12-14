@@ -4,6 +4,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/api/signup/utils.php');
 
 $req = ApiService::getJsonBody();
+ApiService::require_xCsrfToken();
 
 $allParamsExist = doesParamsExist($req);
 

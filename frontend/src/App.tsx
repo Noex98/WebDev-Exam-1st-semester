@@ -16,19 +16,26 @@ import { IUser } from './types';
 import { Spinner } from './components';
 
 function App() {
+    const [csrfTokenInitialized, setCsrfTokenInitialized] = useState(false);
     const [user, setUser] = useState<IUser | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        apiService.continueSession()
-            .then(res => {
-                setUser(res);
-            })
-            .catch(res=> console.log(res))
-            .finally(() => {
-                setLoading(false);
-            })
+        apiService.getCsrfToken().then(() => setCsrfTokenInitialized(true));
     }, [])
+
+    useEffect(() => {
+        if(csrfTokenInitialized){
+            apiService.continueSession()
+                .then(res => {
+                    setUser(res);
+                })
+                .catch(res=> console.log(res))
+                .finally(() => {
+                    setLoading(false);
+                })
+        }
+    }, [csrfTokenInitialized])
     
     if (loading){
         return (<Spinner/>)

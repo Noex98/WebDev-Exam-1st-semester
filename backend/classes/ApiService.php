@@ -7,6 +7,21 @@ class ApiService {
         return json_decode(file_get_contents('php://input'), true);
     }
 
+    static function require_xCsrfToken(){
+        if(!isset($_SESSION)) { 
+            session_start(); 
+        }
+        $headers = getallheaders();
+        if(
+            !isset($headers['x-csrf-token']) ||
+            !isset($_SESSION['x-csrf-token']) ||
+            $headers['x-csrf-token'] !== $_SESSION['x-csrf-token']
+        ){
+            http_response_code(400);
+            exit('No matching csrf token');
+        }
+    }
+
     static function require_authenticated(){
         $authService = new AuthService;
         $id = $authService->authenticate();

@@ -3,6 +3,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
 
 $req = ApiService::getJsonBody();
+ApiService::require_xCsrfToken();
 
 ApiService::require_existingParams($req, [
     'latitude',

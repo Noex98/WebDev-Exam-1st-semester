@@ -3,6 +3,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserService.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/classes/ApiService.php');
 
 $userId = ApiService::require_authenticated();
+ApiService::require_xCsrfToken();
 
 $userService = new UserService();
 $deleteUser = $userService->deleteUser($id);

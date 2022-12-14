@@ -28,7 +28,9 @@ class AuthService {
     }
 
     function logout(): void {
-        session_start() ;
+        if(!isset($_SESSION)) { 
+            session_start(); 
+        }
         session_unset();
         session_destroy();
     }
@@ -51,8 +53,8 @@ class AuthService {
     }
 
     function authenticate(): int {
-        if (!session_id()) {
-            session_start();
+        if(!isset($_SESSION)) { 
+            session_start(); 
         }
         return isset($_SESSION['authToken']) ? intval($_SESSION['authToken']) : -1;
     }
