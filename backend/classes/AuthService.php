@@ -28,10 +28,9 @@ class AuthService {
     }
 
     function logout(): void {
-        if(session_id()){
-            session_unset();
-            session_destroy();
-        }
+        session_start() ;
+        session_unset();
+        session_destroy();
     }
 
     function authorize(string $email, string $password): int {
