@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { CtaButton, Popup, Spinner } from '../../../../components'
 import { ReactComponent as PeopleSvg } from '../../../../assets/icons/people.svg'
 import { ReactComponent as CalenderSvg} from '../../../../assets/icons/calender.svg'
@@ -25,7 +25,6 @@ export const CreateBookingBtn = ({restaurantId, restaurantName}: Props) => {
     const currentDate = getCurrentDate();
     const [popupPage, setPopupPage] = useState(1);
     const [loading, setLoading] = useState(false);
-    const [errMessage, setErrMessage] = useState("")
 
     const closePopupHandler = () => {
         setPopupOpen(false);

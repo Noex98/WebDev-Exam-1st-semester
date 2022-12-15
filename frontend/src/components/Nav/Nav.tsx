@@ -1,7 +1,5 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './style.scss';
-import { useState } from 'react';
 import { ReactComponent as Profile } from '../../assets/icons/profile.svg';
 import { ReactComponent as Reservations } from '../../assets/icons/reservations.svg';
 import { ReactComponent as Logo } from '../../assets/icons/logo.svg';

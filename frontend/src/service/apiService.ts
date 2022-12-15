@@ -22,7 +22,7 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             },
             body: JSON.stringify({
                 email: email,
@@ -41,7 +41,7 @@ export class apiService {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'Application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             }
         })
 
@@ -61,7 +61,7 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             },
             body: JSON.stringify({
                 name: name,
@@ -88,7 +88,7 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             },
             body: JSON.stringify({
                 latitude: latitude,
@@ -110,7 +110,7 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             }
         })
         if(res.ok) return await res.json();
@@ -124,7 +124,7 @@ export class apiService {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             },  body: JSON.stringify({
                 id: id
             })
@@ -146,7 +146,7 @@ export class apiService {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             },
             body: JSON.stringify({
                 restaurantId: restaurantId,
@@ -167,7 +167,7 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             }
         })
         if(res.ok) return await res.json();
@@ -181,7 +181,7 @@ export class apiService {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             }, 
             body: JSON.stringify({
                 id: id
@@ -199,7 +199,7 @@ export class apiService {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             }
         })
         if(res.ok) return true;
@@ -213,7 +213,7 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             },
         })
         return null;
@@ -229,7 +229,7 @@ export class apiService {
             credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
-                'x-csrf-token': this.xCsrfToken
+                'X-Csrf-Token': this.xCsrfToken
             }, body: JSON.stringify({
                 key: key,
                 value: value

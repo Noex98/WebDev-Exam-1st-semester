@@ -9,14 +9,12 @@ import { IReservation } from '../../../../types';
 
 import './style.scss'
 import { apiService } from '../../../../service/apiService'
-import { url } from 'inspector'
-
-
 
 type Props = {
     reservation: IReservation,
     setReservations: React.Dispatch<SetStateAction<IReservation[] | null>>
 }
+
 export const Reservation = ({ reservation, setReservations }: Props) => {
     const {
         id,

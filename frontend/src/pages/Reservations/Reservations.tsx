@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Nav, Spinner } from '../../components';
 import { Reservation } from './components/Reservation';
 import { apiService } from '../../service/apiService';

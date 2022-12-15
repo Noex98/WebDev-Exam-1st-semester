@@ -37,7 +37,7 @@ export const EditUser = ({ user, setUser }: Props) => {
                 setLabel('Phone Number')
                 break;
         }
-    }, [key])
+    }, [key, user])
 
     const setNewUserData = () => {
         setLoading(true)

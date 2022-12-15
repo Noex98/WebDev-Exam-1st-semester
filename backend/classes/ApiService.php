@@ -13,9 +13,9 @@ class ApiService {
         }
         $headers = getallheaders();
         if(
-            !isset($headers['x-csrf-token']) ||
+            !isset($headers['X-Csrf-Token']) ||
             !isset($_SESSION['x-csrf-token']) ||
-            $headers['x-csrf-token'] !== $_SESSION['x-csrf-token']
+            $headers['X-Csrf-Token'] !== $_SESSION['x-csrf-token']
         ){
             http_response_code(400);
             exit('No matching csrf token');
