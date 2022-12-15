@@ -123,7 +123,8 @@ export class apiService {
             method: 'POST', 
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-csrf-token': this.xCsrfToken
             },  body: JSON.stringify({
                 id: id
             })
